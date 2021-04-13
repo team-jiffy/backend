@@ -1,15 +1,11 @@
 package com.jiffydelivery.jiffy.Entity.Response.Ticket;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
+@AllArgsConstructor
 public class TicketResponse {
-    public String Status;
-    public String Message;
+    private String Status;
+    private String Message;
 }

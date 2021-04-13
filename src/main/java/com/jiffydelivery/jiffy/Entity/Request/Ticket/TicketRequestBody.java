@@ -13,5 +13,5 @@ public class TicketRequestBody {
     public String Name;
     public String Email;
     public String Phone;
-    public String Cotnent;
+    public String Content;
 }
