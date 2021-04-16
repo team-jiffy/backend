@@ -6,16 +6,13 @@ import com.jiffydelivery.jiffy.Entity.ModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Reco;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.UnfinishedOrder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderController {
 
     @PutMapping("/order/createOrder")
-    public NewOrderResponse createOrder(@RequestParam NewOrderRequest newOrderRequest) {
+    public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest) {
         System.out.println(newOrderRequest.toString());
         // TODO: return related service API with newOrderRequest as param
         return new NewOrderResponse(new Order("label", null, null, "12345", null, "drone", "13:30", true,
@@ -23,7 +20,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/getAllOrders")
-    public AllOrdersResponse getAllOrders(@RequestParam AllOrdersRequest allOrdersRequest) {
+    public AllOrdersResponse getAllOrders(@RequestBody AllOrdersRequest allOrdersRequest) {
         System.out.println(allOrdersRequest.toString());
         // TODO: return related service API with allOrdersRequest as param
         return new AllOrdersResponse(new BriefOrder[]{new BriefOrder("123", "hayley", "zev", "Apr 11",
@@ -33,7 +30,7 @@ public class OrderController {
     }
 
     @GetMapping("/order/getOrderHistory")
-    public OrderHistoryResponse getOrderHistory(@RequestParam OrderHistoryRequest orderHistoryRequest) {
+    public OrderHistoryResponse getOrderHistory(@RequestBody OrderHistoryRequest orderHistoryRequest) {
         System.out.println(orderHistoryRequest.toString());
         // TODO: return related service API with orderHistoryRequest as param
         return new OrderHistoryResponse(new Order("label", null, null, "12345", null, "drone",
@@ -42,14 +39,14 @@ public class OrderController {
     }
 
     @GetMapping("/order/getReco")
-    public RecoResponse getReco(@RequestParam RecoRequest recoRequest) {
+    public RecoResponse getReco(@RequestBody RecoRequest recoRequest) {
         System.out.println(recoRequest.toString());
         // TODO: return related service API with recoRequest as param
         return new RecoResponse(new Reco[]{new Reco("drone", "$19.90", "13:30")});
     }
 
     @GetMapping("/order/nonFinishedOrder")
-    public NonFinishedOrderResponse getNonFinished(@RequestParam NonFinishedOrderRequest nonFinishedOrderRequest) {
+    public NonFinishedOrderResponse getNonFinished(@RequestBody NonFinishedOrderRequest nonFinishedOrderRequest) {
         System.out.println(nonFinishedOrderRequest.toString());
         // TODO: return related service API with nonFinishedOrderRequest as param
         return new NonFinishedOrderResponse(new UnfinishedOrder());
