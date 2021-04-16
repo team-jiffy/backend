@@ -1,8 +1,6 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Address;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Reco;
+import com.jiffydelivery.jiffy.Entity.ModelEntities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
@@ -24,6 +22,14 @@ public class OrderRepository {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
+
+            Contact senderContactId = order.getSenderContactId();
+            Contact recipientContactId = order.getRecipientContactId();
+            Card getPaymentCardId = order.getPaymentCardId();
+            Address pickupAddress = senderContactId.getAddress();
+            Address deliveryAddress = recipientContactId.getAddress();
+
+
             session.save(order);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -36,10 +42,9 @@ public class OrderRepository {
         }
     }
 
-    // get all orders
 //    public List<Order> getAllOrders(String UID) {
 //        Session session = null;
-//        Query query = session.createQuery("from Order");
+//        Query query = session.createQuery("from order");
 //        return query.list();
 //    }
 
@@ -60,7 +65,5 @@ public class OrderRepository {
         // TODO: get reco service API
         return res;
     }
-
-    // get unfinished order
 
 }

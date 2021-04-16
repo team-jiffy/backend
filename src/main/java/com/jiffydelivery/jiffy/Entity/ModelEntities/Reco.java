@@ -9,6 +9,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+
 public class Reco {
     private String ADVType;
     private String price;

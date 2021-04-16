@@ -5,7 +5,6 @@ import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Reco;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.UnfinishedOrder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -43,13 +42,6 @@ public class OrderController {
         System.out.println(recoRequest.toString());
         // TODO: return related service API with recoRequest as param
         return new RecoResponse(new Reco[]{new Reco("drone", "$19.90", "13:30")});
-    }
-
-    @GetMapping("/order/nonFinishedOrder")
-    public NonFinishedOrderResponse getNonFinished(@RequestBody NonFinishedOrderRequest nonFinishedOrderRequest) {
-        System.out.println(nonFinishedOrderRequest.toString());
-        // TODO: return related service API with nonFinishedOrderRequest as param
-        return new NonFinishedOrderResponse(new UnfinishedOrder());
     }
 
 }

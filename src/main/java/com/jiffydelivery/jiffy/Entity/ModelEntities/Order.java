@@ -1,25 +1,36 @@
 package com.jiffydelivery.jiffy.Entity.ModelEntities;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
+
+import javax.persistence.*;
+import java.io.Serializable;
 
 @Getter
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
-public class Order {
-    @JsonProperty
-    private final String orderLabel;
+@NoArgsConstructor
 
+@Entity
+@Table(name = "order")
+public class Order implements Serializable {
+
+    private static final long serialVersionUID = 3996866815386778109L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String orderLabel;
+
+    @ManyToOne
     private Contact senderContactId;
+
+    @ManyToOne
     private Contact recipientContactId;
 
     private String trackNumber;
 
-    private User buyerUserId;
+    @OneToOne(mappedBy = "customer")
+    private Customer buyerUserId;
 
     private String ADVType;
     private String ETA;
@@ -30,7 +41,11 @@ public class Order {
 
     private String packageInfo;
 
-    private int[] positions;
+    @OneToOne(mappedBy = "warehouse")
+    private WareHouse closestWareHouse;
 
+//    private int[] positions;
+
+    @OneToOne(mappedBy = "card")
     private Card paymentCardId;
 }
