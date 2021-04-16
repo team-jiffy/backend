@@ -25,10 +25,21 @@ public class OrderRepository {
 
             Contact senderContactId = order.getSenderContactId();
             Contact recipientContactId = order.getRecipientContactId();
-            Card getPaymentCardId = order.getPaymentCardId();
+            Card cardId = order.getPaymentCardId();
             Address pickupAddress = senderContactId.getAddress();
             Address deliveryAddress = recipientContactId.getAddress();
 
+            Contact senderContactIdExistsOrNot = session.get(Contact.class, senderContactId);
+            Contact recipientContactIdExistsOrNot = session.get(Contact.class, recipientContactId);
+            Card cardIdExistsOrNot = session.get(Card.class, cardId);
+            Address pickupAddressExistsOrNot = session.get(Address.class, pickupAddress);
+            Address deliveryAddressExistsOrNot = session.get(Address.class, deliveryAddress);
+
+            if (!senderContactIdExistsOrNot.equals(senderContactId)) session.save(senderContactId);
+            if (!recipientContactIdExistsOrNot.equals(recipientContactId)) session.save(recipientContactId);
+            if (!cardIdExistsOrNot.equals(cardId)) session.save(cardId);
+            if (!pickupAddressExistsOrNot.equals(pickupAddress)) session.save(pickupAddress);
+            if (!deliveryAddressExistsOrNot.equals(deliveryAddress)) session.save(deliveryAddress);
 
             session.save(order);
             session.getTransaction().commit();
@@ -42,11 +53,33 @@ public class OrderRepository {
         }
     }
 
-//    public List<Order> getAllOrders(String UID) {
-//        Session session = null;
-//        Query query = session.createQuery("from order");
-//        return query.list();
-//    }
+    public List<BriefOrder> getAllOrders(String UID) {
+        List<Order> orders = new ArrayList<>();
+        try (Session session = sessionFactory.openSession()) {
+            orders = session.createCriteria(Order.class).list();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        List<BriefOrder> result = new ArrayList<>();
+        for (Order order : orders) {
+            BriefOrder briefOrder = new BriefOrder(order.getTrackNumber(),
+                    order.getSenderContactId().getFirstName() + order.getSenderContactId().getLastName(),
+                    order.getRecipientContactId().getFirstName() + order.getRecipientContactId().getLastName(),
+                    order.getOrderDate(),
+                    order.getADVType(),
+                    order.getETA(),
+                    order.getStatus()
+            );
+            result.add(briefOrder);
+        }
+        return result;
+    }
+
+    //    public List<Order> getAllOrders(String UID) {
+    //        Session session = null;
+    //        Query query = session.createQuery("from order");
+    //        return query.list();
+    //    }
 
     // get order history by tracking number
     public Order getOrderHistory(String trackNumber) {
@@ -62,7 +95,7 @@ public class OrderRepository {
     // get reco
     public List<Reco> getReco(Address pickupAddress, Address senderAddress) {
         List<Reco> res = new ArrayList<>();
-        // TODO: get reco service API
+        // TODO: call reco service API
         return res;
     }
 

@@ -9,6 +9,7 @@ import javax.persistence.Table;
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 
 public class BriefOrder {
     private String trackNumber;
@@ -19,4 +20,5 @@ public class BriefOrder {
     private String ADVType;
     private String ETA;
     private String orderStatus;
+
 }
