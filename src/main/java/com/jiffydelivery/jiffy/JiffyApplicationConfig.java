@@ -15,7 +15,7 @@ public class JiffyApplicationConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("onlineShop.entity");
+        sessionFactory.setPackagesToScan("com.jiffydelivery.jiffy.Entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -23,7 +23,7 @@ public class JiffyApplicationConfig {
     @Bean(name = "dataSource")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://jiffydb.cm5giifmqrqj.us-east-2.rds.amazonaws.com/jiffyDB");
         dataSource.setUsername("admin");
         dataSource.setPassword("adminadmin");
@@ -33,7 +33,7 @@ public class JiffyApplicationConfig {
     private final Properties hibernateProperties() {
         Properties hibernateProperties = new Properties();
         hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "update");
-        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.HSQLDialect");
+        hibernateProperties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         hibernateProperties.setProperty("hibernate.show_sql", "true");
         return hibernateProperties;
     }
