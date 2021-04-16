@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@ToString
 public class NewOrderRequest {
     public String ADVType;
     public String orderDate;

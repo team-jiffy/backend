@@ -37,11 +37,11 @@ public class OrderRepository {
     }
 
     // get all orders
-    public List<Order> getAllOrders(String UID) {
-        Session session = null;
-        Query query = session.createQuery("from Order");
-        return query.list();
-    }
+//    public List<Order> getAllOrders(String UID) {
+//        Session session = null;
+//        Query query = session.createQuery("from Order");
+//        return query.list();
+//    }
 
     // get order history by tracking number
     public Order getOrderHistory(String trackNumber) {

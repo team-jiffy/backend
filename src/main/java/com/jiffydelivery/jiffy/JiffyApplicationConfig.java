@@ -15,7 +15,7 @@ public class JiffyApplicationConfig {
     public LocalSessionFactoryBean sessionFactory() {
         LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
         sessionFactory.setDataSource(dataSource());
-        sessionFactory.setPackagesToScan("onlineShop.entity");  // map
+        sessionFactory.setPackagesToScan("onlineShop.entity");
         sessionFactory.setHibernateProperties(hibernateProperties());
         return sessionFactory;
     }
@@ -23,10 +23,10 @@ public class JiffyApplicationConfig {
     @Bean(name = "dataSource")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://b70370f34eff47:faf2990c@us-cdbr-east-03.cleardb.com/heroku_da7d518d67cce0a?reconnect=true");
-        dataSource.setUsername("Admin");
-        dataSource.setPassword("heroku_da7d518");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://jiffydb.cm5giifmqrqj.us-east-2.rds.amazonaws.com/jiffyDB");
+        dataSource.setUsername("admin");
+        dataSource.setPassword("adminadmin");
         return dataSource;
     }
 
