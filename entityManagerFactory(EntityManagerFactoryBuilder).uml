@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>Persistence</ID>
+  <OriginalElement>JavaeeElement:/c4259d25/entityManagerFactory/jiffy/jpa/JPA/PersistenceModel</OriginalElement>
+  <nodes>
+    <node x="10.5" y="247.0">WareHouse#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/WareHouse.java</node>
+    <node x="791.5000000000001" y="104.0">AbstractAuditable#jar:///Users/Skaven/.m2/repository/org/springframework/data/spring-data-jpa/2.4.6/spring-data-jpa-2.4.6.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class</node>
+    <node x="1026.5" y="0.0">TicketDao#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DAO/TicketDao.java</node>
+    <node x="535.2500000000001" y="236.0">Customer#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Customer.java</node>
+    <node x="402.5510416666668" y="0.0">Contact#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Contact.java</node>
+    <node x="273.625" y="774.0">Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java</node>
+    <node x="133.2500000000001" y="516.0">ADV#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADV.java</node>
+    <node x="237.5" y="236.0">ADVSpec#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADVSpec.java</node>
+    <node x="31.59375" y="922.0">Address#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Address.java</node>
+    <node x="416.2500000000001" y="472.0">Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java</node>
+    <node x="485.6760416666668" y="1136.0">CreditCard#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/CreditCard.java</node>
+    <node x="938.2500000000001" y="12.0">null#null</node>
+    <node x="737.2500000000001" y="0.0">AbstractPersistable#jar:///Users/Skaven/.m2/repository/org/springframework/data/spring-data-jpa/2.4.6/spring-data-jpa-2.4.6.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java" target="CreditCard#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/CreditCard.java">
+      <point x="72.33333333333331" y="126.0" />
+      <point x="597.0833333333335" y="754.0" />
+      <point x="591.5093750000001" y="754.0" />
+      <point x="591.5093750000001" y="1111.0" />
+      <point x="569.1760416666668" y="1111.0" />
+      <point x="0.0" y="-93.0" />
+    </edge>
+    <edge source="ADV#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADV.java" target="WareHouse#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/WareHouse.java">
+      <point x="-65.75000000000006" y="-82.0" />
+      <point x="199.00000000000006" y="452.0" />
+      <point x="114.0" y="452.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java" target="Contact#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Contact.java">
+      <point x="0.0" y="-126.0" />
+      <point x="524.7500000000001" y="211.0" />
+      <point x="506.5510416666668" y="211.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java" target="ADV#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADV.java">
+      <point x="-58.875" y="-49.0" />
+      <point x="293.25" y="754.0" />
+      <point x="199.0000000000001" y="754.0" />
+      <point x="-65.75" y="82.0" />
+    </edge>
+    <edge source="CreditCard#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/CreditCard.java" target="Address#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Address.java">
+      <point x="-55.66666666666666" y="-93.0" />
+      <point x="513.5093750000001" y="1111.0" />
+      <point x="98.09375" y="1111.0" />
+      <point x="0.0" y="82.0" />
+    </edge>
+    <edge source="AbstractAuditable#jar:///Users/Skaven/.m2/repository/org/springframework/data/spring-data-jpa/2.4.6/spring-data-jpa-2.4.6.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class" target="null#null">
+      <point x="47.5" y="-38.0" />
+      <point x="934.0000000000001" y="79.0" />
+      <point x="945.2500000000001" y="79.0" />
+      <point x="0.0" y="15.0" />
+    </edge>
+    <edge source="Customer#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Customer.java" target="Contact#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Contact.java">
+      <point x="0.0" y="-93.0" />
+      <point x="613.7500000000001" y="211.0" />
+      <point x="575.8843750000001" y="211.0" />
+      <point x="69.33333333333331" y="93.0" />
+    </edge>
+    <edge source="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java" target="Customer#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Customer.java">
+      <point x="72.33333333333331" y="-126.0" />
+      <point x="597.0833333333335" y="452.0" />
+      <point x="574.5000000000001" y="452.0" />
+      <point x="-39.25" y="93.0" />
+    </edge>
+    <edge source="AbstractAuditable#jar:///Users/Skaven/.m2/repository/org/springframework/data/spring-data-jpa/2.4.6/spring-data-jpa-2.4.6.jar!/org/springframework/data/jpa/domain/AbstractAuditable.class" target="AbstractPersistable#jar:///Users/Skaven/.m2/repository/org/springframework/data/spring-data-jpa/2.4.6/spring-data-jpa-2.4.6.jar!/org/springframework/data/jpa/domain/AbstractPersistable.class">
+      <point x="-47.5" y="-38.0" />
+      <point x="839.0000000000001" y="79.0" />
+      <point x="827.7500000000001" y="79.0" />
+      <point x="0.0" y="27.0" />
+    </edge>
+    <edge source="ADV#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADV.java" target="ADVSpec#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADVSpec.java">
+      <point x="65.74999999999994" y="-82.0" />
+      <point x="330.50000000000006" y="452.0" />
+      <point x="332.5" y="452.0" />
+      <point x="0.0" y="93.0" />
+    </edge>
+    <edge source="Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java" target="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java">
+      <point x="19.625" y="-49.0" />
+      <point x="371.75" y="744.0" />
+      <point x="452.4166666666668" y="744.0" />
+      <point x="-72.33333333333333" y="126.0" />
+    </edge>
+    <edge source="Address#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Address.java" target="Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java">
+      <point x="44.333333333333314" y="-82.0" />
+      <point x="142.42708333333331" y="897.0" />
+      <point x="352.125" y="897.0" />
+      <point x="0.0" y="49.0" />
+    </edge>
+    <edge source="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java" target="WareHouse#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/WareHouse.java">
+      <point x="-72.33333333333331" y="-126.0" />
+      <point x="452.41666666666686" y="442.0" />
+      <point x="183.0" y="442.0" />
+      <point x="69.0" y="82.0" />
+    </edge>
+    <edge source="Order#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Order.java" target="Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java">
+      <point x="0.0" y="126.0" />
+      <point x="524.7500000000001" y="754.0" />
+      <point x="411.0" y="754.0" />
+      <point x="58.875" y="-49.0" />
+    </edge>
+    <edge source="Address#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Address.java" target="WareHouse#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/WareHouse.java">
+      <point x="0.0" y="-82.0" />
+      <point x="98.09375" y="897.0" />
+      <point x="66.76979166666666" y="897.0" />
+      <point x="66.76979166666666" y="452.0" />
+      <point x="45.0" y="452.0" />
+      <point x="-69.0" y="82.0" />
+    </edge>
+    <edge source="Customer#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Customer.java" target="CreditCard#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/CreditCard.java">
+      <point x="39.25" y="93.0" />
+      <point x="653.0000000000001" y="1111.0" />
+      <point x="624.8427083333335" y="1111.0" />
+      <point x="55.666666666666686" y="-93.0" />
+    </edge>
+    <edge source="Contact#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Contact.java" target="Address#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Address.java">
+      <point x="-69.33333333333331" y="93.0" />
+      <point x="437.21770833333346" y="211.0" />
+      <point x="0.0" y="211.0" />
+      <point x="0.0" y="897.0" />
+      <point x="53.760416666666686" y="897.0" />
+      <point x="-44.333333333333314" y="-82.0" />
+    </edge>
+    <edge source="ADV#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/ADV.java" target="Trip#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Trip.java">
+      <point x="65.74999999999994" y="82.0" />
+      <point x="330.50000000000006" y="754.0" />
+      <point x="332.5" y="754.0" />
+      <point x="-19.625" y="-49.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic Group" zoom="0.5977645305514158" x="525.1520717642034" y="751.9863306279369" />
+  <SelectedNodes>
+    <node>Contact#file:///Users/Skaven/Documents/jiffy/backend/src/main/java/com/jiffydelivery/jiffy/Entity/DBDAO/Contact.java</node>
+  </SelectedNodes>
+  <Categories>
+    <Category>Properties</Category>
+    <Category>Embeddables</Category>
+    <Category>Superclasses</Category>
+  </Categories>
+</Diagram>
+

@@ -17,7 +17,7 @@ public class User {
     private String firstName;
     private String phone;
     private String email;
-
+    private String password;
     private Contact defaultSender;
 
     private Contact defaultRecipient;

@@ -81,7 +81,7 @@ public class ContactRepository {
             ex.printStackTrace();
         }
         if (user != null) {
-        //   return user.getDefaultDeliver();
+            return user.getDefaultRecipient();
         }
         return null;
     }

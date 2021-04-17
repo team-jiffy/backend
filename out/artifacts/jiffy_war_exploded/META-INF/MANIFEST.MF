@@ -1,9 +1,0 @@
-Manifest-Version: 1.0
-Created-By: IntelliJ IDEA
-Built-By: yihan
-Build-Jdk: version 15.0.2
-Implementation-Title: jiffy
-Implementation-Version: 0.0.1-SNAPSHOT
-Implementation-Vendor-Id: com.jiffyDelivery
-Main-Class: ${start-class}
-
