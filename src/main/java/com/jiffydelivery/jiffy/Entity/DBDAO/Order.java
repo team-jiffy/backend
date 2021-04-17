@@ -4,18 +4,17 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 @Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
@@ -68,4 +67,5 @@ public class Order implements Serializable {
 
     @OneToMany(mappedBy = "order")
     private List<Trip> trip;
+
 }
