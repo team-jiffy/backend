@@ -6,8 +6,6 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @ToString
-@AllArgsConstructor
-@NoArgsConstructor
 public class UpdatePaymentResponse {
     private String status;
     private String message;
