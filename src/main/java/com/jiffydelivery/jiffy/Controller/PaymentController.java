@@ -18,7 +18,7 @@ import java.rmi.server.UID;
 public class PaymentController {
 
 //    @Autowired
-//    private PaymentService peymentService;
+//    private PaymentService paymentService;
 
     @PostMapping("/billing/createPayment")
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest) {
