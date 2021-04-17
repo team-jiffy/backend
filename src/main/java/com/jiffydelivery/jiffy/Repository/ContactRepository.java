@@ -1,8 +1,7 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Contact;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.User;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;

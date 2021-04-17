@@ -1,6 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.Request.OrderRequest;
 
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Contact;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import lombok.*;
 
 @Getter

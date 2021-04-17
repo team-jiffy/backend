@@ -1,4 +1,4 @@
-package com.jiffydelivery.jiffy.Entity.ModelEntities;
+package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
 import lombok.Getter;
 

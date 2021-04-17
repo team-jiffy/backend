@@ -1,9 +1,8 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.ModelEntities.*;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.*;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -29,17 +28,17 @@ public class OrderRepository {
             Address pickupAddress = senderContactId.getAddress();
             Address deliveryAddress = recipientContactId.getAddress();
 
-            Contact senderContactIdExistsOrNot = session.get(Contact.class, senderContactId);
-            Contact recipientContactIdExistsOrNot = session.get(Contact.class, recipientContactId);
-            Card cardIdExistsOrNot = session.get(Card.class, cardId);
-            Address pickupAddressExistsOrNot = session.get(Address.class, pickupAddress);
-            Address deliveryAddressExistsOrNot = session.get(Address.class, deliveryAddress);
+//            Contact senderContactIdExistsOrNot = session.get(Contact.class, senderContactId);
+//            Contact recipientContactIdExistsOrNot = session.get(Contact.class, recipientContactId);
+//            Card cardIdExistsOrNot = session.get(Card.class, cardId);
+//            Address pickupAddressExistsOrNot = session.get(Address.class, pickupAddress);
+//            Address deliveryAddressExistsOrNot = session.get(Address.class, deliveryAddress);
 
-            if (!senderContactIdExistsOrNot.equals(senderContactId)) session.save(senderContactId);
-            if (!recipientContactIdExistsOrNot.equals(recipientContactId)) session.save(recipientContactId);
-            if (!cardIdExistsOrNot.equals(cardId)) session.save(cardId);
-            if (!pickupAddressExistsOrNot.equals(pickupAddress)) session.save(pickupAddress);
-            if (!deliveryAddressExistsOrNot.equals(deliveryAddress)) session.save(deliveryAddress);
+//            if (!senderContactIdExistsOrNot.equals(senderContactId)) session.save(senderContactId);
+//            if (!recipientContactIdExistsOrNot.equals(recipientContactId)) session.save(recipientContactId);
+//            if (!cardIdExistsOrNot.equals(cardId)) session.save(cardId);
+//            if (!pickupAddressExistsOrNot.equals(pickupAddress)) session.save(pickupAddress);
+//            if (!deliveryAddressExistsOrNot.equals(deliveryAddress)) session.save(deliveryAddress);
 
             session.save(order);
             session.getTransaction().commit();
@@ -68,7 +67,7 @@ public class OrderRepository {
                     order.getOrderDate(),
                     order.getADVType(),
                     order.getETA(),
-                    order.getStatus()
+                    order.getOrderStatus()
             );
             result.add(briefOrder);
         }

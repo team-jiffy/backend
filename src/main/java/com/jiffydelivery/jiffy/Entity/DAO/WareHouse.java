@@ -1,6 +1,7 @@
-package com.jiffydelivery.jiffy.Entity.ModelEntities;
+package com.jiffydelivery.jiffy.Entity.DAO;
 
 
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
 import lombok.*;
 
 import javax.persistence.*;

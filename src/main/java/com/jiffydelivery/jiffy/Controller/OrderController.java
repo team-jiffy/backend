@@ -2,9 +2,9 @@ package com.jiffydelivery.jiffy.Controller;
 
 import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.*;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.BriefOrder;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Reco;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import org.springframework.web.bind.annotation.*;
 
 @RestController

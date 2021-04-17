@@ -1,7 +1,7 @@
 package com.jiffydelivery.jiffy.Entity.Request.ContactRequst;
 
 
-import com.jiffydelivery.jiffy.Entity.ModelEntities.Contact;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

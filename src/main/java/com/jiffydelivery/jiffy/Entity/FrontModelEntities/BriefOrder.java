@@ -1,4 +1,4 @@
-package com.jiffydelivery.jiffy.Entity.ModelEntities;
+package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
 import lombok.*;
 
@@ -7,6 +7,7 @@ import lombok.*;
 @EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 
 public class BriefOrder {
     private String trackNumber;
