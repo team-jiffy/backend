@@ -1,7 +1,8 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.DBDAO.Address;
-import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
+import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
+import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
+import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import org.hibernate.Session;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Repository
@@ -24,23 +27,6 @@ public class OrderRepository {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-//            Contact senderContactId = order.getSenderContactId();
-//            Contact recipientContactId = order.getRecipientContactId();
-//            Card cardId = order.getPaymentCardId();
-//            Address pickupAddress = senderContactId.getAddress();
-//            Address deliveryAddress = recipientContactId.getAddress();
-
-//            Contact senderContactIdExistsOrNot = session.get(Contact.class, senderContactId);
-//            Contact recipientContactIdExistsOrNot = session.get(Contact.class, recipientContactId);
-//            Card cardIdExistsOrNot = session.get(Card.class, cardId);
-//            Address pickupAddressExistsOrNot = session.get(Address.class, pickupAddress);
-//            Address deliveryAddressExistsOrNot = session.get(Address.class, deliveryAddress);
-
-//            if (!senderContactIdExistsOrNot.equals(senderContactId)) session.save(senderContactId);
-//            if (!recipientContactIdExistsOrNot.equals(recipientContactId)) session.save(recipientContactId);
-//            if (!cardIdExistsOrNot.equals(cardId)) session.save(cardId);
-//            if (!pickupAddressExistsOrNot.equals(pickupAddress)) session.save(pickupAddress);
-//            if (!deliveryAddressExistsOrNot.equals(deliveryAddress)) session.save(deliveryAddress);
             session.save(order);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -62,7 +48,7 @@ public class OrderRepository {
         }
         List<BriefOrder> result = new ArrayList<>();
         for (Order order : orders) {
-            BriefOrder briefOrder = extractOrder(order);
+            BriefOrder briefOrder = this.extractOrder(order);
             result.add(briefOrder);
         }
         return result;
@@ -102,6 +88,13 @@ public class OrderRepository {
         List<Reco> res = new ArrayList<>();
         // TODO: call reco service API
         return res;
+    }
+
+    public static void main(String[] args) {
+        OrderRepository o = new OrderRepository();
+        o.createOrder(new Order(123, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+                Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], new WareHouse(),
+                new CreditCard(), new Contact(), new Contact(), new Customer(), new ArrayList<Trip>()));
     }
 
 }

@@ -16,10 +16,9 @@ public class OrderController {
     OrderService orderService;
 
     @PutMapping("/order/createOrder")
-    public NewOrderResponse createOrder(@RequestBody com.jiffydelivery.jiffy.Entity.DBDAO.Order order) {
-//        System.out.println(newOrderRequest.toString());
-//        TODO: return related service API with newOrderRequest as param
-         orderService.createOrder(order);
+    public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest) {
+        System.out.println(newOrderRequest.toString());
+//      TODO: return related service API with newOrderRequest as param
         return new NewOrderResponse("200","OK",new Order("label", null, null, 1, null, "drone", "13:30", true,
                 "$19.90", "Apr 11", "on delivery", "small", null, null));
     }

@@ -10,7 +10,4 @@ public class OrderService {
     @Autowired
     OrderRepository orderRepository;
 
-    public void createOrder(Order order) {
-        orderRepository.createOrder(order);
-    }
 }
