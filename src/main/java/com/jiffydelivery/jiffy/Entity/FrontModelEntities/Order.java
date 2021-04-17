@@ -16,7 +16,7 @@ public class Order {
     private Contact senderContactId;
     private Contact recipientContactId;
 
-    private String trackNumber;
+    private int trackNumber;
 
     private User buyerUserId;
 

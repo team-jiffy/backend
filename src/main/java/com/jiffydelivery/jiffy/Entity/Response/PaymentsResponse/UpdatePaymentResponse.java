@@ -4,11 +4,10 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class AllPaymentsResponse {
+public class UpdatePaymentResponse {
     private String status;
     private String message;
-    private Card[] cards;
+    private Card card;
 }

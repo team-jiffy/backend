@@ -5,27 +5,38 @@ import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
+import com.jiffydelivery.jiffy.Service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class OrderController {
 
+    @Autowired
+    OrderService orderService;
+
     @PutMapping("/order/createOrder")
-    public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest) {
-        System.out.println(newOrderRequest.toString());
-        // TODO: return related service API with newOrderRequest as param
-        return new NewOrderResponse("200","OK",new Order("label", null, null, "12345", null, "drone", "13:30", true,
+    public NewOrderResponse createOrder(@RequestBody com.jiffydelivery.jiffy.Entity.DBDAO.Order order) {
+//        System.out.println(newOrderRequest.toString());
+//        TODO: return related service API with newOrderRequest as param
+         orderService.createOrder(order);
+        return new NewOrderResponse("200","OK",new Order("label", null, null, 1, null, "drone", "13:30", true,
                 "$19.90", "Apr 11", "on delivery", "small", null, null));
     }
 
     @GetMapping("/order/getAllOrders")
-    public AllOrdersResponse getAllOrders(@RequestParam(value="UID") String UID) {
+    public AllOrdersResponse getAllOrders(@RequestParam(value="UID", required = true, defaultValue = "unknown") String UID) {
         System.out.println("testRequestParam: " + UID);
         // TODO: return related service API with allOrdersRequest as param
-        return new AllOrdersResponse("200", "OK", new BriefOrder[]{new BriefOrder("123", "hayley", "zev", "Apr 11",
-                "robot",
-            "Apr 13",
-                "on process")});
+        return new AllOrdersResponse("200", "OK", new BriefOrder[]{new BriefOrder.BriefOrderBuilder()
+                .trackNumber(1)
+                .senderName("hayley")
+                .recipientName("zev")
+                .orderDate("Apr 11")
+                .ADVType("robot")
+                .orderDate("Apr 13")
+                .orderStatus("on process")
+                .build()});
     }
 
     @GetMapping("/order/getOrderHistory")
@@ -33,7 +44,7 @@ public class OrderController {
                                                 @RequestParam(value="UID", required = false) String UID) {
         System.out.println("testRequestParam: " + "trackNumber: " + trackNumber + "; " + "UID: " + UID);
         // TODO: return related service API with orderHistoryRequest as param
-        return new OrderHistoryResponse("200", "OK", new Order("label", null, null, "12345", null, "drone",
+        return new OrderHistoryResponse("200", "OK", new Order("label", null, null, 1, null, "drone",
                 "13:30", true,
                 "$19.90", "Apr 11", "on delivery", "small", null, null));
     }

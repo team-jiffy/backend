@@ -1,6 +1,4 @@
 package com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse;
-
-
 import lombok.*;
 
 @Getter

@@ -4,12 +4,21 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
+@Getter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 
 @Entity
 @Table(name = "Order_table")
