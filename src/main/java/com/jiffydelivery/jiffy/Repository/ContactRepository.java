@@ -1,5 +1,8 @@
-package Repository;
+package com.jiffydelivery.jiffy.Repository;
 
+import com.jiffydelivery.jiffy.Entity.ModelEntities.Contact;
+import com.jiffydelivery.jiffy.Entity.ModelEntities.Order;
+import com.jiffydelivery.jiffy.Entity.ModelEntities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +25,7 @@ public class ContactRepository {
             session.getTransaction().rollback();
         } finally {
             if (session != null) {
-                session.close;
+                session.close();
             }
         }
 
@@ -39,23 +42,23 @@ public class ContactRepository {
             session.getTransaction().rollback();
         } finally {
             if (session != null) {
-                session.close;
+                session.close();
             }
         }
     }
 
-    public Contact getRecipientContactByOrderId (String orderId) {
-        Order order = null;
-        try (Session session = sessionFactory.openSession()) {
-            order = session.get(Order.class, orderId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (order != null) {
-            return order.getRecipientContact();
-        }
-        return null;
-    }
+//    public Contact getRecipientContactByOrderId (String orderId) {
+//        Order order = null;
+//        try (Session session = sessionFactory.openSession()) {
+//            order = session.get(Order.class, orderId);
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//        }
+//        if (order != null) {
+//            return order.getRecipientContact();
+//        }
+//        return null;
+//    }
 
     public Contact getSenderContactByOrderId (String orderId) {
         Order order = null;
@@ -65,7 +68,7 @@ public class ContactRepository {
             ex.printStackTrace();
         }
         if (order != null) {
-            return order.getSenderContact();
+            return order.getSenderContactId();
         }
         return null;
     }
@@ -73,12 +76,12 @@ public class ContactRepository {
     public Contact getDefaultRecipientOfOneUser (String userId) {
         User user = null;
         try (Session session = sessionFactory.openSession()) {
-            user = session.get(user.class, userId);
+            user = session.get(User.class, userId);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
         if (user != null) {
-            return user.getDefaultRecipient();
+            return user.getDefaultDeliver();
         }
         return null;
     }
@@ -86,7 +89,7 @@ public class ContactRepository {
     public Contact getDefaultSenderOfOneUser (String userId) {
         User user = null;
         try (Session session = sessionFactory.openSession()) {
-            user = session.get(user.class, userId);
+            user = session.get(User.class, userId);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
