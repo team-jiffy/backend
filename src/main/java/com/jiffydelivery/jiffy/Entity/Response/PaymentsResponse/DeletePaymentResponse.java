@@ -3,15 +3,6 @@ import lombok.*;
 
 @Getter
 @Setter
-@AllArgsConstructor
-@EqualsAndHashCode
-@ToString
-
-
-import lombok.*;
-
-@Getter
-@Setter
 @ToString
 @EqualsAndHashCode
 @AllArgsConstructor
