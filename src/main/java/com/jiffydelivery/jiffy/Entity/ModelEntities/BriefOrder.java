@@ -2,9 +2,6 @@ package com.jiffydelivery.jiffy.Entity.ModelEntities;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
-
 @Getter
 @Setter
 @EqualsAndHashCode

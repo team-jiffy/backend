@@ -8,11 +8,11 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class NewOrderRequest {
-    public String ADVType;
-    public String orderDate;
-    public String cardId;
-    public boolean sameDay;
+    private String ADVType;
+    private String orderDate;
+    private String cardId;
+    private boolean sameDay;
 
-    public Contact senderContactId;
-    public Contact recipientContactId;
+    private Contact senderContactId;
+    private Contact recipientContactId;
 }

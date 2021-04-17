@@ -1,15 +1,15 @@
 package com.jiffydelivery.jiffy.Entity.Response.OrderResponse;
 
 import com.jiffydelivery.jiffy.Entity.ModelEntities.BriefOrder;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class AllOrdersResponse {
+    private String status;
+    private String message;
     private BriefOrder[] orders;
 }

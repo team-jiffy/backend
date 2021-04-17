@@ -7,6 +7,9 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@ToString
 public class NewOrderResponse {
+    private String status;
+    private String message;
     private Order order;
 }

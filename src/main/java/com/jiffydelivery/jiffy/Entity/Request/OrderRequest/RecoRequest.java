@@ -8,6 +8,7 @@ import lombok.*;
 @EqualsAndHashCode
 @ToString
 public class RecoRequest {
-    public Address pickupAddress;
-    public Address deliveryAddress;
+    private Address pickupAddress;
+    private Address deliveryAddress;
+    private int weight;
 }
