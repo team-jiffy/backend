@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class PaymentController {
 
 //    @Autowired
-//    private PaymentService peymentService;
+//    private PaymentService paymentService;
 
     @PutMapping
     public NewPaymentResponse createPayment(@RequestBody NewPaymentRequest newPaymentRequest) {
