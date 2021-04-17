@@ -2,6 +2,7 @@ package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -80,7 +81,7 @@ public class ContactRepository {
             ex.printStackTrace();
         }
         if (user != null) {
-            return user.getDefaultDeliver();
+        //   return user.getDefaultDeliver();
         }
         return null;
     }
