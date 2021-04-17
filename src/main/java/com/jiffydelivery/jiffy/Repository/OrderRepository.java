@@ -1,6 +1,9 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.*;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Address;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,12 +24,11 @@ public class OrderRepository {
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-
-            Contact senderContactId = order.getSenderContactId();
-            Contact recipientContactId = order.getRecipientContactId();
-            Card cardId = order.getPaymentCardId();
-            Address pickupAddress = senderContactId.getAddress();
-            Address deliveryAddress = recipientContactId.getAddress();
+//            Contact senderContactId = order.getSenderContactId();
+//            Contact recipientContactId = order.getRecipientContactId();
+//            Card cardId = order.getPaymentCardId();
+//            Address pickupAddress = senderContactId.getAddress();
+//            Address deliveryAddress = recipientContactId.getAddress();
 
 //            Contact senderContactIdExistsOrNot = session.get(Contact.class, senderContactId);
 //            Contact recipientContactIdExistsOrNot = session.get(Contact.class, recipientContactId);
@@ -39,7 +41,6 @@ public class OrderRepository {
 //            if (!cardIdExistsOrNot.equals(cardId)) session.save(cardId);
 //            if (!pickupAddressExistsOrNot.equals(pickupAddress)) session.save(pickupAddress);
 //            if (!deliveryAddressExistsOrNot.equals(deliveryAddress)) session.save(deliveryAddress);
-
             session.save(order);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -61,24 +62,29 @@ public class OrderRepository {
         }
         List<BriefOrder> result = new ArrayList<>();
         for (Order order : orders) {
-            BriefOrder briefOrder = new BriefOrder(order.getTrackNumber(),
-                    order.getSenderContactId().getFirstName() + order.getSenderContactId().getLastName(),
-                    order.getRecipientContactId().getFirstName() + order.getRecipientContactId().getLastName(),
-                    order.getOrderDate(),
-                    order.getADVType(),
-                    order.getETA(),
-                    order.getOrderStatus()
-            );
+            BriefOrder briefOrder = extractOrder(order);
             result.add(briefOrder);
         }
         return result;
     }
 
-    //    public List<Order> getAllOrders(String UID) {
-    //        Session session = null;
-    //        Query query = session.createQuery("from order");
-    //        return query.list();
-    //    }
+    private BriefOrder extractOrder(Order order) {
+        return new BriefOrder.BriefOrderBuilder()
+                .trackNumber(order.getId())
+                .senderName(order.getSenderContact().getFirstName() + order.getSenderContact().getLastName())
+                .recipientName(order.getRecipiantContact().getFirstName() + order.getRecipiantContact().getLastName())
+                .orderDate(order.getDeliverOrderDate().toString())
+                .ADVType(order.getADVType().toString())
+                .ETA(order.getDeliverTime().toString())
+                .orderStatus(order.getOrderStatus().toString())
+                .build();
+    }
+
+//        public List<Order> getAllOrders(String UID) {
+//            Session session = null;
+//            Query query = session.createQuery("from Order_table");
+//            return query.list();
+//        }
 
     // get order history by tracking number
     public Order getOrderHistory(String trackNumber) {
