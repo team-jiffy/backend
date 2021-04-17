@@ -10,6 +10,7 @@ import lombok.*;
 @ToString
 
 public class User {
+
     private String email;
     private String lastName;
     private Contact defaultSender;
@@ -18,9 +19,6 @@ public class User {
     private String phone;
     private String profilePictureURL;
     private Contact defaultRecipient;
-    private String password;
     private Address location;
 
-    public User(String e, String ln, Object defaultSender, String id, String fname, String phone, String url, Object defaultRecipient, Object password) {
-    }
 }
