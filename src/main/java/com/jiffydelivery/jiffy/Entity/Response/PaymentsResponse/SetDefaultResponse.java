@@ -1,4 +1,12 @@
 package com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
+import lombok.*;
+
+@Getter
+@Setter
+@AllArgsConstructor
+@EqualsAndHashCode
+@ToString
 
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
 import lombok.*;
