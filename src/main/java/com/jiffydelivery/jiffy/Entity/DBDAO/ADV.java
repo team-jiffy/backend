@@ -25,7 +25,7 @@ public class ADV implements Serializable {
     private WareHouse currentWarehouse;
 
     @ManyToOne
-    private ADVSpec advSpec;
+    private ADVSpec ADVSpec;
 
     @OneToMany(mappedBy = "ADV")
     private List<Trip> trip;

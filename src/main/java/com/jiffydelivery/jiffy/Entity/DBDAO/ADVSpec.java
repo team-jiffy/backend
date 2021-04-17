@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "ADV_Spec")
+@Table(name = "ADV_spec")
 public class ADVSpec implements Serializable {
     private static final long serialVersionUID = 7551999649936522523L;
 
@@ -24,6 +24,6 @@ public class ADVSpec implements Serializable {
     private int capacity;
     private double chargingSpeed;
 
-    @OneToMany(mappedBy = "advSpec")
+    @OneToMany(mappedBy = "ADVSpec")
     private List<ADV> ADV;
 }

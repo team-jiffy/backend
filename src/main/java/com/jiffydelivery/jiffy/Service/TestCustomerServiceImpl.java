@@ -12,11 +12,11 @@ public class TestCustomerServiceImpl implements TestCustomerRepository {
   private TestCustomerRepository testCustomerRepository;
 
 
-  @Autowired
-  public TestCustomerServiceImpl(TestCustomerRepository testCustomerRepository){
-    this.testCustomerRepository = testCustomerRepository;
+//  @Autowired
+//  public TestCustomerServiceImpl(TestCustomerRepository testCustomerRepository){
+//    this.testCustomerRepository = testCustomerRepository;
 
-  }
+//  }
 //  @Override
 //  public LoginResponse loginVerify(String email, String password) {
 //    LoginResponse loginResponse = new LoginResponse();
