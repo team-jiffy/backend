@@ -25,57 +25,57 @@ public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
 
-  public LoginResponse loginVerify (String email, String password){
-    LoginResponse loginResponse = new LoginResponse();
-    Customer
-        user = null;
-    try (Session session = sessionFactory.openSession()) {
-      //// TODO: 4/17/21
-      user = session.get(Customer
-          .class,email);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
-    if(user!= null && user.getPassword() == password){
-      loginResponse.setMessage("user verify success.");
-      loginResponse.setCustomer
-          (user);
-      loginResponse.setStatus("200");
-      return loginResponse;
-
-    }
-    else return null;
-  }
-
-
-  public LogoutResponse logoutVerify (String UID){
-    LogoutResponse logoutResponse = new LogoutResponse();
-    Customer
-        user = null;
-    try (Session session = sessionFactory.openSession()) {
-      //// TODO: 4/17/21
-      user = session.get(Customer
-          .class,UID);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
-    //// TODO: 4/17/21 怎么知道logout了 是token? 还是什么
-    if(user!= null){
-      logoutResponse.setMessage("logout success.");
-
-      logoutResponse.setStatus("200");
-
-
-    }
-    else {
-      logoutResponse.setMessage("logout fail.");
-
-      logoutResponse.setStatus("401");
-
-    }
-    return logoutResponse;
-
-  }
+//  public LoginResponse loginVerify (String email, String password){
+//    LoginResponse loginResponse = new LoginResponse();
+//    Customer
+//        user = null;
+//    try (Session session = sessionFactory.openSession()) {
+//      //// TODO: 4/17/21
+//      user = session.get(Customer
+//          .class,email);
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+//    if(user!= null && user.getPassword() == password){
+//      loginResponse.setMessage("user verify success.");
+//      loginResponse.setCustomer
+//          (user);
+//      loginResponse.setStatus("200");
+//      return loginResponse;
+//
+//    }
+//    else return null;
+//  }
+//
+//
+//  public LogoutResponse logoutVerify (String UID){
+//    LogoutResponse logoutResponse = new LogoutResponse();
+//    Customer
+//        user = null;
+//    try (Session session = sessionFactory.openSession()) {
+//      //// TODO: 4/17/21
+//      user = session.get(Customer
+//          .class,UID);
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+//    //// TODO: 4/17/21 怎么知道logout了 是token? 还是什么
+//    if(user!= null){
+//      logoutResponse.setMessage("logout success.");
+//
+//      logoutResponse.setStatus("200");
+//
+//
+//    }
+//    else {
+//      logoutResponse.setMessage("logout fail.");
+//
+//      logoutResponse.setStatus("401");
+//
+//    }
+//    return logoutResponse;
+//
+//  }
 //create customer
   public CreateCustomerResponse createCustomer (CreateCustomerRequest createCustomerRequest){
     Session session = null;
@@ -175,18 +175,24 @@ public class CustomerRepository {
 
     try {
       session = sessionFactory.openSession();
-      user = session.get(Customer
-          .class,updatedCustomer
-          .getId());
-      if(user == null ){
+//      user = session.get(Customer
+//          .class,updatedCustomer
+//          .getId());
+      if(updatedCustomer == null ){
         updateCustomerResponse.setMessage("user not found");
         updateCustomerResponse.setStatus("404");
 
       } else {
-        user = updatedCustomer;
+        //user = updatedCustomer;
         session.beginTransaction();
-        session.update(user
-        );
+        try{ session.saveOrUpdate(updatedCustomer
+        );}
+        catch (Exception ex){
+          ex.printStackTrace();
+          updateCustomerResponse.setMessage("fail");
+        }
+//        session.update(updatedCustomer
+//        );
         session.getTransaction().commit();
       }
     } catch (Exception ex) {
@@ -213,9 +219,10 @@ public class CustomerRepository {
     // 1. Test for customer creation
     // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
     // test.createCustomer(createCustomerRequest);
-    // 2. test for customer update
-    // Customer testCustomer = new Customer(5,"update@email.com","oldpass","admin","updatefirst","updateLast","update phone",null,null,null);
-    // test.updateCustomer(testCustomer);
+//     2. test for customer update
+     Customer testCustomer = new Customer(5,"xxxxx","oldpass","admin","updatefirst","updateLast","update phone",
+         null,null,null);
+     test.updateCustomer(testCustomer);
     // 3. test for getting customer profile
     // String log = test.getCustomerProfile(3).getCustomer().toString();
     // System.out.println(log);

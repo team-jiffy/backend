@@ -12,11 +12,27 @@ public class Customer implements Serializable {
     private static final long serialVersionUID = 7551999649936522523L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     private String email;
     private String password;
+
+    private String authorities;
+    private String firstName;
+    private String lastName;
+    private String phone;
+
+
+    @OneToMany(mappedBy = "customer")
+    private List<CreditCard> creditCard;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Contact> contact;
+
+    @OneToMany(mappedBy = "customer")
+    private List<Order> order;
+
 
     public Customer() {
 
@@ -106,20 +122,6 @@ public class Customer implements Serializable {
         this.order = order;
     }
 
-    private String authorities;
-    private String firstName;
-    private String lastName;
-    private String phone;
-
-
-    @OneToMany(mappedBy = "customer")
-    private List<CreditCard> creditCard;
-
-    @OneToMany(mappedBy = "customer")
-    private List<Contact> contact;
-
-    @OneToMany(mappedBy = "customer")
-    private List<Order> order;
 
     public Customer(int id, String email, String password, String authorities,
         String firstName, String lastName, String phone,
