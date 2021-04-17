@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Service;
 
 
+import com.jiffydelivery.jiffy.Entity.DAO.TicketDao;
 import com.jiffydelivery.jiffy.Entity.Request.TicketRequest.TicketRequestBody;
 import com.jiffydelivery.jiffy.Repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +12,8 @@ public class TicketService {
     @Autowired
     TicketRepository ticketRepository;
 
-    public void createTicket(TicketRequestBody ticketRequestBody) {
-        ticketRepository.createTicket(ticketRequestBody);
+    public void createTicket(TicketDao ticket) {
+        ticketRepository.createTicket(ticket);
     }
 
 }

@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Controller;
 
 
+import com.jiffydelivery.jiffy.Entity.DAO.TicketDao;
 import com.jiffydelivery.jiffy.Entity.Request.TicketRequest.TicketRequestBody;
 import com.jiffydelivery.jiffy.Entity.Response.TicketResponse.TicketResponse;
 import com.jiffydelivery.jiffy.Service.TicketService;
@@ -14,9 +15,9 @@ public class TicketController {
     @Autowired TicketService ticketService;
 
     @PostMapping("/assist/createTicket")
-    public TicketResponse createTicket (@RequestBody TicketRequestBody ticketRequestBody) {
-        ticketService.createTicket(ticketRequestBody);
-        return new TicketResponse("true","yuqixiao");
+    public String createTicket (@RequestBody TicketDao ticket) {
+        ticketService.createTicket(ticket);
+        return "Request Processed";
     }
 
 }
