@@ -11,10 +11,9 @@ import lombok.*;
 @EqualsAndHashCode
 public class ADVRobot {
     private int ADVID;
-    private TripType tripType;
     private Coordinates position;
     private int capacity;
-    private double batterStatus;
+    private double batteryStatus;
     private Error error;
     private Coordinates pendingAddress;
     private Trip trip;

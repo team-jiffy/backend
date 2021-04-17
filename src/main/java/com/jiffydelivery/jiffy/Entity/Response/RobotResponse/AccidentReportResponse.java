@@ -12,6 +12,4 @@ import lombok.*;
 @EqualsAndHashCode
 public class AccidentReportResponse {
     private int InstructionID;
-    private Trip trip;
-
 }

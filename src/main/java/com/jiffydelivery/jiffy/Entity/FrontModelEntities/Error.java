@@ -13,5 +13,5 @@ import java.util.Date;
 public class Error {
     private int errorCode;
     private String Message;
-    private Date Time;
+    private String Time;
 }

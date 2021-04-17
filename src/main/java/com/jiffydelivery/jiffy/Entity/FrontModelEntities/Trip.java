@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
 
+import com.jiffydelivery.jiffy.Entity.Constance.TripType;
 import lombok.*;
 
 @Getter
@@ -10,7 +11,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class Trip {
-    private String type;
+    private TripType type;
     private Coordinates coordinates;
     private String code;
 }

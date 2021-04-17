@@ -1,5 +1,8 @@
 package com.jiffydelivery.jiffy.Controller;
 
+import com.jiffydelivery.jiffy.Entity.Constance.TripType;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Trip;
 import com.jiffydelivery.jiffy.Entity.Request.RobotRequest.AccidentReportRequest;
 import com.jiffydelivery.jiffy.Entity.Request.RobotRequest.ProgressReportRequest;
 import com.jiffydelivery.jiffy.Entity.Response.RobotResponse.AccidentReportResponse;
@@ -10,16 +13,19 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class RobotController {
-    @PostMapping("/Robot/AccidentReport")
+    @PostMapping("/robot/accidentReport")
     public AccidentReportResponse accidentReport(
             @RequestBody AccidentReportRequest request){
-        return new AccidentReportResponse();
-
+        System.out.println(request);
+        return new AccidentReportResponse(12);
     }
 
-    @PostMapping("/Robot/ProgressReport")
+    @PostMapping("/robot/progressReport")
     public ProgressReportResponse progressReportResponse(
             @RequestBody ProgressReportRequest request) {
-        return new ProgressReportResponse();
+        System.out.println(request.toString());
+        return new ProgressReportResponse(new Trip(TripType.outside,
+                new Coordinates("32","65","75"),
+                "343"));
     }
 }
