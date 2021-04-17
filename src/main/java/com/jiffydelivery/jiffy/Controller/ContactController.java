@@ -42,7 +42,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/getContact", method = RequestMethod.GET)
-    public GetAddressResponse getAddress(@RequestParam(value="UID") String ContactID) {
+    public GetAddressResponse getAddress(@RequestParam String ContactID) {
         System.out.println("testRequestParam: " + ContactID);
         return new GetAddressResponse("id");
     }
