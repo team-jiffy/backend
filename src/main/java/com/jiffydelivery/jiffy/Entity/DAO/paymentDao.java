@@ -10,14 +10,14 @@ public class paymentDao {
     @Autowired
     private SessionFactory sessionFactory;
 
-    public List<Payment> getAllPayments() {
-        List<Payment> payments = new ArrayList<>();
-        try (Session session = sessionFactory.openSession()) {
-            payments = session.createCriteria(Payment.class).list();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return payments;
-    }
+//    public List<Payment> getAllPayments() {
+//        List<Payment> payments = new ArrayList<>();
+//        try (Session session = sessionFactory.openSession()) {
+//            payments = session.createCriteria(Payment.class).list();
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        return payments;
+//    }
 }
