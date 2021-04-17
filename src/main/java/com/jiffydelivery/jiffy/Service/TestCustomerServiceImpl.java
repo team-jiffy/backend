@@ -17,25 +17,25 @@ public class TestCustomerServiceImpl implements TestCustomerRepository {
     this.testCustomerRepository = testCustomerRepository;
 
   }
-  @Override
-  public LoginResponse loginVerify(String email, String password) {
-    LoginResponse loginResponse = new LoginResponse();
+//  @Override
+//  public LoginResponse loginVerify(String email, String password) {
+//    LoginResponse loginResponse = new LoginResponse();
+//
+//
+//  }
 
-
-  }
-
-  @Override
-  public LoginResponse login(String email, String password) {
-
-
-    Optional<User> user = Optional.of(new User());
-    if(user.isPresent()){
-
-
-    }
-
-    //return Optional.empty();
-  }
+//  @Override
+////  public LoginResponse login(String email, String password) {
+////
+////
+////    Optional<User> user = Optional.of(new User());
+////    if(user.isPresent()){
+////
+////
+////    }
+////
+////    //return Optional.empty();
+////  }
 
   @Override
   public <S extends User> S save(S s) {
@@ -93,4 +93,8 @@ public class TestCustomerServiceImpl implements TestCustomerRepository {
   }
 
 
+  @Override
+  public LoginResponse loginVerify(String email, String password) {
+    return null;
+  }
 }
