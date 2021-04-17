@@ -6,7 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CustomerRepository extends CrudRepository<User, Long> {
+public interface TestCustomerRepository extends CrudRepository<User, Long> {
   //Optional<User> findByEmailAndPassword(String email, String password);
   public LoginResponse loginVerify (String email, String password);
 

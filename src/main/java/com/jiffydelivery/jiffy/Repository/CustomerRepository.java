@@ -7,6 +7,7 @@ import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerRespo
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LogoutResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdateCustomerResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdatePasswordResponse;
 import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TestCustomerRepository {
+public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
 
@@ -93,6 +94,60 @@ public class TestCustomerRepository {
     return createCustomerResponse;
   }
 
+  public UpdatePasswordResponse createCustomer (String UID, String password){
+    Session session = null;
+    UpdatePasswordResponse updatePasswordResponse = new UpdatePasswordResponse();
+    User user= null;
+
+    try {
+      session = sessionFactory.openSession();
+      user = session.get(User.class,UID);
+      if(user == null ){
+        updatePasswordResponse.setMessage("user not found");
+        updatePasswordResponse.setStatus("404");
+
+      }
+      user.setPassword(password);
+      session.beginTransaction();
+      session.save(user);
+      session.getTransaction().commit();
+    } catch (Exception ex) {
+      ex.printStackTrace();
+      session.getTransaction().rollback();
+      updatePasswordResponse.setMessage("fail");
+    } finally {
+      if (session != null) {
+        session.close();
+      }
+    }
+    updatePasswordResponse.setMessage("update success");
+    updatePasswordResponse.setStatus("200");
+
+    return updatePasswordResponse;
+  }
+
+  public GetCustomerResponse getCustomerProfile (String UID){
+    GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
+    User user = null;
+    try (Session session = sessionFactory.openSession()) {
+      user = session.get(User.class,UID);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+    if(user!= null){
+      getCustomerResponse.setMessage("get user success.");
+      getCustomerResponse.setUser(user);
+      getCustomerResponse.setStatus("200");
+
+
+    }
+    else{
+      getCustomerResponse.setMessage("get user fail.");
+      getCustomerResponse.setStatus("404");
+
+    }
+    return getCustomerResponse;
+  }
   public UpdateCustomerResponse createCustomer (User updatedUser){
     Session session = null;
     UpdateCustomerResponse updateCustomerResponse = new UpdateCustomerResponse();
@@ -123,28 +178,4 @@ public class TestCustomerRepository {
     updateCustomerResponse.setUser(user);
     return updateCustomerResponse;
   }
-
-  public GetCustomerResponse getCustomerProfile (String UID){
-    GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
-    User user = null;
-    try (Session session = sessionFactory.openSession()) {
-      user = session.get(User.class,UID);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
-    if(user!= null){
-      getCustomerResponse.setMessage("get user success.");
-      getCustomerResponse.setUser(user);
-      getCustomerResponse.setStatus("200");
-
-
-    }
-    else{
-      getCustomerResponse.setMessage("get user fail.");
-      getCustomerResponse.setStatus("404");
-
-    }
-    return getCustomerResponse;
-  }
-
 }

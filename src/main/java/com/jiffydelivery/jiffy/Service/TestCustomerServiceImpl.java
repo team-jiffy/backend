@@ -2,19 +2,19 @@ package com.jiffydelivery.jiffy.Service;
 
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
-import com.jiffydelivery.jiffy.Repository.CustomerRepository;
+import com.jiffydelivery.jiffy.Repository.TestCustomerRepository;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CustomerServiceImpl implements CustomerRepository {
-  private CustomerRepository customerRepository;
+public class TestCustomerServiceImpl implements TestCustomerRepository {
+  private TestCustomerRepository testCustomerRepository;
 
 
   @Autowired
-  public CustomerServiceImpl(CustomerRepository customerRepository){
-    this.customerRepository = customerRepository;
+  public TestCustomerServiceImpl(TestCustomerRepository testCustomerRepository){
+    this.testCustomerRepository = testCustomerRepository;
 
   }
   @Override
