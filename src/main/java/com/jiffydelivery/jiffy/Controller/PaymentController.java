@@ -7,7 +7,7 @@ import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.NewPaymentRequest;
 import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.SetDefaultRequest;
 import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.UpdatePaymentRequest;
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.*;
-import com.jiffydelivery.jiffy.Service.PaymentService;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
