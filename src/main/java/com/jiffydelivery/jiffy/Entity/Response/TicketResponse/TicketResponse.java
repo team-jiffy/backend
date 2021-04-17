@@ -1,4 +1,4 @@
-package com.jiffydelivery.jiffy.Entity.Response.Ticket;
+package com.jiffydelivery.jiffy.Entity.Response.TicketResponse;
 
 import lombok.*;
 

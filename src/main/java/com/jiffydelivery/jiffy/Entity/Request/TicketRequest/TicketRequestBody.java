@@ -1,4 +1,4 @@
-package com.jiffydelivery.jiffy.Entity.Request.Ticket;
+package com.jiffydelivery.jiffy.Entity.Request.TicketRequest;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -10,8 +10,8 @@ import lombok.ToString;
 @EqualsAndHashCode
 @ToString
 public class TicketRequestBody {
-    public String Name;
-    public String Email;
-    public String Phone;
-    public String Content;
+    public String name;
+    public String email;
+    public String phone;
+    public String content;
 }
