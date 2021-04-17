@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.Response.CustomerResponse;
 
+import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -15,7 +16,7 @@ import lombok.ToString;
 public class GetCustomerResponse {
   private String status;
   private String message;
-  private User user;
+  private Customer customer;
 
   public GetCustomerResponse() {
 

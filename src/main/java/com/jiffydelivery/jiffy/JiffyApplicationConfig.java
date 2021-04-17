@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
@@ -9,6 +10,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
+@ComponentScan(basePackages = "com.jiffydelivery.jiffy.Repository")
 public class JiffyApplicationConfig {
 
     @Bean(name = "sessionFactory")

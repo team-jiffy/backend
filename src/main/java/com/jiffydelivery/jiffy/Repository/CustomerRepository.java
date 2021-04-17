@@ -1,6 +1,8 @@
 package com.jiffydelivery.jiffy.Repository;
 
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
+
+    ;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CreateCustomerRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CreateCustomerResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
@@ -8,10 +10,14 @@ import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LogoutResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdateCustomerResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdatePasswordResponse;
+import com.jiffydelivery.jiffy.JiffyApplication;
+import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import lombok.Getter;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -21,16 +27,19 @@ public class CustomerRepository {
 
   public LoginResponse loginVerify (String email, String password){
     LoginResponse loginResponse = new LoginResponse();
-    User user = null;
+    Customer
+        user = null;
     try (Session session = sessionFactory.openSession()) {
       //// TODO: 4/17/21
-      user = session.get(User.class,email);
+      user = session.get(Customer
+          .class,email);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-    if(user!= null && user.getPassword() ==password){
+    if(user!= null && user.getPassword() == password){
       loginResponse.setMessage("user verify success.");
-      loginResponse.setUser(user);
+      loginResponse.setCustomer
+          (user);
       loginResponse.setStatus("200");
       return loginResponse;
 
@@ -40,11 +49,13 @@ public class CustomerRepository {
 
 
   public LogoutResponse logoutVerify (String UID){
-    LogoutResponse logoutResponse = null;
-    User user = null;
+    LogoutResponse logoutResponse = new LogoutResponse();
+    Customer
+        user = null;
     try (Session session = sessionFactory.openSession()) {
       //// TODO: 4/17/21
-      user = session.get(User.class,UID);
+      user = session.get(Customer
+          .class,UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -65,11 +76,11 @@ public class CustomerRepository {
     return logoutResponse;
 
   }
-
+//create customer
   public CreateCustomerResponse createCustomer (CreateCustomerRequest createCustomerRequest){
     Session session = null;
     CreateCustomerResponse createCustomerResponse = new CreateCustomerResponse();
-    User user = new User();
+    Customer user = new Customer();
     user.setEmail(createCustomerRequest.getEmail());
     user.setFirstName(createCustomerRequest.getFirstName());
     user.setLastName(createCustomerRequest.getLastName());
@@ -90,18 +101,20 @@ public class CustomerRepository {
     }
     createCustomerResponse.setMessage("success");
     createCustomerResponse.setStatus("200");
-    createCustomerResponse.setUser(user);
+    createCustomerResponse.setCustomer(user);
     return createCustomerResponse;
   }
-
-  public UpdatePasswordResponse createCustomer (String UID, String password){
+//update password
+  public UpdatePasswordResponse updatePassword (String UID, String password){
     Session session = null;
     UpdatePasswordResponse updatePasswordResponse = new UpdatePasswordResponse();
-    User user= null;
+    Customer
+        user= null;
 
     try {
       session = sessionFactory.openSession();
-      user = session.get(User.class,UID);
+      user = session.get(Customer
+          .class,UID);
       if(user == null ){
         updatePasswordResponse.setMessage("user not found");
         updatePasswordResponse.setStatus("404");
@@ -109,7 +122,7 @@ public class CustomerRepository {
       }
       user.setPassword(password);
       session.beginTransaction();
-      session.save(user);
+      session.update(user);
       session.getTransaction().commit();
     } catch (Exception ex) {
       ex.printStackTrace();
@@ -125,18 +138,20 @@ public class CustomerRepository {
 
     return updatePasswordResponse;
   }
-
-  public GetCustomerResponse getCustomerProfile (String UID){
+//get customer information
+  public GetCustomerResponse getCustomerProfile (int UID){
     GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
-    User user = null;
+    Customer
+        user = null;
     try (Session session = sessionFactory.openSession()) {
-      user = session.get(User.class,UID);
+      user = session.get(Customer
+          .class,UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
     if(user!= null){
       getCustomerResponse.setMessage("get user success.");
-      getCustomerResponse.setUser(user);
+      getCustomerResponse.setCustomer(user);
       getCustomerResponse.setStatus("200");
 
 
@@ -148,22 +163,32 @@ public class CustomerRepository {
     }
     return getCustomerResponse;
   }
-  public UpdateCustomerResponse createCustomer (User updatedUser){
+
+  //update customer profile
+  public UpdateCustomerResponse updateCustomer (Customer
+      updatedCustomer
+  ){
     Session session = null;
     UpdateCustomerResponse updateCustomerResponse = new UpdateCustomerResponse();
-    User user= null;
+    Customer
+        user= null;
 
     try {
       session = sessionFactory.openSession();
-      user = session.get(User.class,updatedUser.getUID());
+      user = session.get(Customer
+          .class,updatedCustomer
+          .getId());
       if(user == null ){
         updateCustomerResponse.setMessage("user not found");
         updateCustomerResponse.setStatus("404");
 
+      } else {
+        user = updatedCustomer;
+        session.beginTransaction();
+        session.update(user
+        );
+        session.getTransaction().commit();
       }
-      session.beginTransaction();
-      session.save(updatedUser);
-      session.getTransaction().commit();
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
@@ -175,7 +200,29 @@ public class CustomerRepository {
     }
     updateCustomerResponse.setMessage("update success");
     updateCustomerResponse.setStatus("200");
-    updateCustomerResponse.setUser(user);
+    updateCustomerResponse.setCustomer(user);
     return updateCustomerResponse;
   }
+
+
+  public static void main(String[] args) {
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+        JiffyApplicationConfig.class);
+
+    CustomerRepository test=  applicationContext.getBean(CustomerRepository.class);
+    // 1. Test for customer creation
+    // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
+    // test.createCustomer(createCustomerRequest);
+    // 2. test for customer update
+    // Customer testCustomer = new Customer(5,"update@email.com","oldpass","admin","updatefirst","updateLast","update phone",null,null,null);
+    // test.updateCustomer(testCustomer);
+    // 3. test for getting customer profile
+    // String log = test.getCustomerProfile(3).getCustomer().toString();
+    // System.out.println(log);
+
+//        test.updatePassword();
+
+  }
+
+
 }
