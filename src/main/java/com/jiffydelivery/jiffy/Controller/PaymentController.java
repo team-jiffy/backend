@@ -7,12 +7,8 @@ import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.AllPaymentsRespo
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.DeletePaymentResponse;
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.NewPaymentResponse;
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.SetDefaultResponse;
-import com.jiffydelivery.jiffy.Service.PaymentService;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import java.rmi.server.UID;
 
 @RestController
 public class PaymentController {
