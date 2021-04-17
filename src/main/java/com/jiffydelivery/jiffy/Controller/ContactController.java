@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Controller;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Address;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.Card;
+import com.jiffydelivery.jiffy.Entity.ModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.ModelEntities.ContactType;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.addAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.addAddressResponse;
