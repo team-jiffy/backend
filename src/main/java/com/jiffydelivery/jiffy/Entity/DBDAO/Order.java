@@ -18,7 +18,7 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     private double packageWeight;
     private double price;
@@ -57,6 +57,6 @@ public class Order implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "trip")
-    private List<Trip> tip;
+    @OneToMany(mappedBy = "order")
+    private List<Trip> trip;
 }

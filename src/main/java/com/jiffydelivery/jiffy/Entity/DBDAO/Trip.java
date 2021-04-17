@@ -14,13 +14,13 @@ public class Trip implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @Enumerated(EnumType.STRING)
     private TripType tripType;
 
     @ManyToOne
-    private ADV adv;
+    private ADV ADV;
 
     @ManyToOne
     private Order order;

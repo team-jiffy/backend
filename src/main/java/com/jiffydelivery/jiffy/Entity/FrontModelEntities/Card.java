@@ -8,7 +8,6 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-
 public class Card {
 
     private String last4Digits;

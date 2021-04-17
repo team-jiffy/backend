@@ -14,7 +14,7 @@ public class Contact implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     @Enumerated(EnumType.STRING)
     private ContactType contactType;

@@ -11,7 +11,7 @@ public class WareHouse implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private String id;
+    private int id;
 
     private double longitude;
     private double latitude;

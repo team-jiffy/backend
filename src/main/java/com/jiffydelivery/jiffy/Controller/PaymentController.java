@@ -30,6 +30,7 @@ public class PaymentController {
         return new AllPaymentsResponse("200", "OK", new Card[]{new Card("1234",
                 "card-type",
                 "card-label",
+                "GUnit",
                 new Address(),
                 new Address(),
                 "card",
