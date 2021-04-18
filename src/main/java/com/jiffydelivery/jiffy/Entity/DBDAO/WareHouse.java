@@ -7,10 +7,10 @@ import java.util.List;
 @Entity
 @Table(name = "Warehouse")
 public class WareHouse implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7551999649239365225L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private double longitude;

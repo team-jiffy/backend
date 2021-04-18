@@ -9,10 +9,10 @@ import java.util.List;
 
 public class Customer implements Serializable {
 
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7596499365251992523L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private String email;

@@ -14,7 +14,7 @@ import java.util.List;
 @Entity
 @Table(name = "Trip")
 public class Trip implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7551999649952252363L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
