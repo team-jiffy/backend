@@ -12,10 +12,10 @@ import java.util.List;
 @Entity
 @Table(name = "Contact")
 public class Contact implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7552252199964993653L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     @Enumerated(EnumType.STRING)

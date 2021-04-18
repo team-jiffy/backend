@@ -9,10 +9,10 @@ import java.util.List;
 @Entity
 @Table(name = "Creditcard")
 public class CreditCard implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7964993652255519923L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private String holderName;

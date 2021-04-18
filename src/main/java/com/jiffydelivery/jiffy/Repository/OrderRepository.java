@@ -122,7 +122,7 @@ public class OrderRepository {
         OrderRepository test = applicationContext.getBean(OrderRepository.class);
 
         Trip trip = new Trip(1, TripType.charging,null,null,null,new Date());
-        test.createOrder(new Order(20, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+        test.createOrder(new Order(30, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
                 Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], null,
                 null, null, null, null, null));
 
