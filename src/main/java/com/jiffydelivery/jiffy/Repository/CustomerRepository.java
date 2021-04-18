@@ -1,22 +1,22 @@
-//package com.jiffydelivery.jiffy.Repository;
-//
-//import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
-//
-//    ;
-//import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
-//import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
-//import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
-//import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
-//import com.jiffydelivery.jiffy.JiffyApplicationConfig;
-//import org.hibernate.Session;
-//import org.hibernate.SessionFactory;
-//import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.context.ApplicationContext;
-//import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-//import org.springframework.stereotype.Repository;
-//
-//@Repository
-//public class CustomerRepository {
+package com.jiffydelivery.jiffy.Repository;
+
+import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
+
+    ;
+import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
+import com.jiffydelivery.jiffy.JiffyApplicationConfig;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public class CustomerRepository {
 //  @Autowired
 //  private SessionFactory sessionFactory;
 //
@@ -210,7 +210,7 @@
 ////    customerUpdateResponse.setCustomer(user);
 //    return customerUpdateResponse;
 //  }
-
+//
 //
 //  public static void main(String[] args) {
 //    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
@@ -232,5 +232,5 @@
 //
 //  }
 //
-//
-//}
+
+}
