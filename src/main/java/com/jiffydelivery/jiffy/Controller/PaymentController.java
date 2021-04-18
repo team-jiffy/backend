@@ -9,6 +9,7 @@ import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.UpdatePaymentReques
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.*;
 
 
+import com.jiffydelivery.jiffy.Service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,14 +18,25 @@ import java.rmi.server.UID;
 @RestController
 public class PaymentController {
 
+    @Autowired
+    PaymentService paymentService;
+
     @PostMapping("/billing/createPayment")
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest) {
+
+
+//        NewPaymentResponse newPaymentResponse = paymentService.addPayment(newPaymentRequest);
+
         return new NewPaymentResponse("200", "ok", new Card("1234","credit",
                 "visa","yubo", new Address(), new Address(),"card-1",true));
     }
 
     @PutMapping("/billing/createPayment")
     public UpdatePaymentResponse updatePayment(@RequestBody UpdatePaymentRequest updatePaymentRequest) {
+
+
+//        UpdatePaymentResponse updatePaymentResponse = paymentService.updatePayment(updatePaymentRequest);
+
         return new UpdatePaymentResponse("200", "ok", new Card("1234","credit",
                 "visa","yubo", new Address(), new Address(),"card-1",true));
     }
