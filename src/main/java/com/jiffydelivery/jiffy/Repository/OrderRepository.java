@@ -5,9 +5,16 @@ import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
 import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
+import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.AllOrdersResponse;
+import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.NewOrderResponse;
+import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.OrderHistoryResponse;
+import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.RecoResponse;
+import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,36 +29,46 @@ public class OrderRepository {
     private SessionFactory sessionFactory;
 
     // insert a new order record to order table
-    public void createOrder(Order order) {
+    public NewOrderResponse createOrder(Order order) {
         Session session = null;
+        NewOrderResponse newOrderResponse = new NewOrderResponse();
         try {
             session = sessionFactory.openSession();
             session.beginTransaction();
-            session.save(order);
+            session.saveOrUpdate(order);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
         } finally {
             if (session != null) {
+                newOrderResponse.setMessage("Order created");
+                newOrderResponse.setStatus("200");
+                // TODO: newOrderResponse.setOrder(mapped Order)
                 session.close();
             }
         }
+        return newOrderResponse;
     }
 
-    public List<BriefOrder> getAllOrders(String UID) {
+    public AllOrdersResponse getAllOrders(String UID) {
+        AllOrdersResponse allOrdersResponse = new AllOrdersResponse();
         List<Order> orders = new ArrayList<>();
         try (Session session = sessionFactory.openSession()) {
             orders = session.createCriteria(Order.class).list();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        List<BriefOrder> result = new ArrayList<>();
-        for (Order order : orders) {
-            BriefOrder briefOrder = this.extractOrder(order);
-            result.add(briefOrder);
+        BriefOrder[] briefOrders = new BriefOrder[orders.size()];
+        for (int i = 0; i < orders.size(); i++) {
+            briefOrders[i] = this.extractOrder(orders.get(i));
         }
-        return result;
+        if (briefOrders.length > 0) {
+            allOrdersResponse.setMessage("Get all orders");
+            allOrdersResponse.setStatus("200");
+            allOrdersResponse.setOrders(briefOrders);
+        }
+        return allOrdersResponse;
     }
 
     private BriefOrder extractOrder(Order order) {
@@ -73,28 +90,45 @@ public class OrderRepository {
 //        }
 
     // get order history by tracking number
-    public Order getOrderHistory(String trackNumber) {
+    public OrderHistoryResponse getOrderHistory(String trackNumber) {
         Order order = null;
+        OrderHistoryResponse orderHistoryResponse = new OrderHistoryResponse();
         try (Session session = sessionFactory.openSession()) {
             order = session.get(Order.class, trackNumber);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return order;
+        if (order != null) {
+            orderHistoryResponse.setMessage("Get order history");
+            orderHistoryResponse.setStatus("200");
+            // TODO: orderHistoryResponse.setOrder(mapped Order);
+        }
+        return orderHistoryResponse;
     }
 
     // get reco
-    public List<Reco> getReco(Address pickupAddress, Address senderAddress) {
+    public RecoResponse getReco(Address pickupAddress, Address senderAddress) {
+        RecoResponse recoResponse = new RecoResponse();
         List<Reco> res = new ArrayList<>();
         // TODO: call reco service API
-        return res;
+        if (!res.isEmpty()) {
+            recoResponse.setMessage("Get recommendation list");
+            recoResponse.setStatus("200");
+            // TODO: recoResponse.setOrder(mapped Reco[] recos);
+        }
+        return recoResponse;
     }
 
     public static void main(String[] args) {
-        OrderRepository o = new OrderRepository();
-        o.createOrder(new Order(123, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+        ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);
+        OrderRepository test = applicationContext.getBean(OrderRepository.class);
+        // 1. Test createOrder
+
+        test.createOrder(new Order(1, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
                 Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], new WareHouse(),
-                new CreditCard(), new Contact(), new Contact(), new Customer(), new ArrayList<Trip>()));
+                new CreditCard(), new Contact(), new Contact(), new Customer(), new ArrayList<>()));
+        // 2. Test getAllOrders
+
     }
 
 }
