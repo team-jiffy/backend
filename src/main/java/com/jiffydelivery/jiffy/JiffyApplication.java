@@ -1,8 +1,5 @@
 package com.jiffydelivery.jiffy;
 
-import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
-import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CreateCustomerRequest;
-import com.jiffydelivery.jiffy.Repository.CustomerRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;

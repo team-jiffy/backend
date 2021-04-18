@@ -5,6 +5,7 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,17 +13,15 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
 @ToString
 public class LoginResponse {
   private String status;
   private String message;
-  private Customer customer;
+  private User user;
 
 
 
-  public LoginResponse() {
-
-  }
 
 
 }
