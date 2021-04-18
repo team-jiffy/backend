@@ -22,10 +22,10 @@ import java.util.List;
 @Entity
 @Table(name = "Order_table")
 public class Order implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7529996499351526523L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private int id;
 
     private double packageWeight;
@@ -65,7 +65,7 @@ public class Order implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<Trip> trip;
 
 }
