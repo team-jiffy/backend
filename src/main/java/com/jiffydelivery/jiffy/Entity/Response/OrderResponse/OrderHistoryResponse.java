@@ -7,6 +7,7 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 @AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class OrderHistoryResponse {
     private String status;
