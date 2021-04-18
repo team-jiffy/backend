@@ -13,7 +13,7 @@ public class JiffyApplication {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);
-        //SpringApplication.run(JiffyApplication.class, args);
+        SpringApplication.run(JiffyApplication.class, args);
 
 
 
