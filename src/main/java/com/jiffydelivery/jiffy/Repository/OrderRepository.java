@@ -2,6 +2,7 @@ package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
+import com.jiffydelivery.jiffy.Entity.Constance.TripType;
 import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
@@ -17,10 +18,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Repository
 public class OrderRepository {
@@ -122,12 +120,12 @@ public class OrderRepository {
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);
         OrderRepository test = applicationContext.getBean(OrderRepository.class);
-        // 1. Test createOrder
 
-        test.createOrder(new Order(1, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
-                Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], new WareHouse(),
-                new CreditCard(), new Contact(), new Contact(), new Customer(), new ArrayList<>()));
-        // 2. Test getAllOrders
+        Trip trip = new Trip(1, TripType.charging,null,null,null,new Date());
+        test.createOrder(new Order(20, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+                Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], null,
+                null, null, null, null, null));
+
 
     }
 
