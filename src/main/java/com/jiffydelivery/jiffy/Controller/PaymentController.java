@@ -17,16 +17,21 @@ import java.rmi.server.UID;
 @RestController
 public class PaymentController {
 
+
+//    @Autowired
+//    private PaymentService peymentService;
+
+
     @PostMapping("/billing/createPayment")
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest) {
         return new NewPaymentResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo", new Address(), new Address(),"card-1",true));
+                "visa","yubo",new Address(), new Address(),"card-1",true));
     }
 
     @PutMapping("/billing/createPayment")
     public UpdatePaymentResponse updatePayment(@RequestBody UpdatePaymentRequest updatePaymentRequest) {
         return new UpdatePaymentResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo", new Address(), new Address(),"card-1",true));
+                "visa","yubo",new Address(),  new Address(),"card-1",true));
     }
 
     @GetMapping("/billing/getPayments")
@@ -50,6 +55,6 @@ public class PaymentController {
     @PutMapping("/billing/setDefault")
     public SetDefaultResponse setDefault(@RequestBody SetDefaultRequest setDefaultRequest) {
         return new SetDefaultResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo", new Address(), new Address(),"card-1",true));
+                "visa","yubo",new Address(),  new Address(),"card-1",true));
     }
 }
