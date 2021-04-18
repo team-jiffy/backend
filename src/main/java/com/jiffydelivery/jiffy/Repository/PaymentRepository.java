@@ -13,7 +13,7 @@ public class PaymentRepository {
     @Autowired
     private SessionFactory sessionFactory;
 
-//    public void addPayment(Card card ) {
+//    public void addPayment(Card card) {
 //        try (Session session = sessionFactory.openSession()) {
 //            String cardNum = card.cardNumber;
 //            String name = card
@@ -32,4 +32,5 @@ public class PaymentRepository {
 //
 //        return cards;
 //    }
+
 }
