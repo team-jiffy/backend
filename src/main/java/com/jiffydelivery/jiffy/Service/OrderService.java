@@ -9,6 +9,5 @@ import org.springframework.stereotype.Service;
 @Service
 public class OrderService {
     @Autowired
-    OrderRepositor orderRepository;
-
+    OrderRepository orderRepository;
 }
