@@ -8,8 +8,11 @@ import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateRe
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
+import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import com.jiffydelivery.jiffy.Repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -139,4 +142,27 @@ public class UserService {
 
 
     }
+
+
+    public static void main(String[] args) {
+    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+        JiffyApplicationConfig.class);
+
+    CustomerRepository test=  applicationContext.getBean(CustomerRepository.class);
+    // 1. Test for customer creation
+    // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
+    // test.createCustomer(createCustomerRequest);
+//     2. test for customer update
+//     Customer testCustomer = new Customer(5,"xxxxx","oldpass","admin","updatefirst","updateLast","update phone",
+//         null,null,null);
+      User testUser = new User("update","update",null,"1","update","update","update",null,null);
+     test.updateCustomer(testUser);
+    // 3. test for getting customer profile
+    // String log = test.getCustomerProfile(3).getCustomer().toString();
+    // System.out.println(log);
+
+//        test.updatePassword();
+
   }
+
+}

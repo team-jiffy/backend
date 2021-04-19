@@ -199,25 +199,6 @@ public class CustomerRepository {
   }
 
 
-//  public static void main(String[] args) {
-//    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-//        JiffyApplicationConfig.class);
-//
-//    CustomerRepository test=  applicationContext.getBean(CustomerRepository.class);
-//    // 1. Test for customer creation
-//    // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
-//    // test.createCustomer(createCustomerRequest);
-////     2. test for customer update
-//     Customer testCustomer = new Customer(5,"xxxxx","oldpass","admin","updatefirst","updateLast","update phone",
-//         null,null,null);
-//     //test.updateCustomer(testCustomer);
-//    // 3. test for getting customer profile
-//    // String log = test.getCustomerProfile(3).getCustomer().toString();
-//    // System.out.println(log);
-//
-////        test.updatePassword();
-//
-//  }
 
 
 }
