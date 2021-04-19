@@ -5,9 +5,14 @@ import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
+import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.SetDefaultResponse;
 import com.jiffydelivery.jiffy.Service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @RestController
 public class OrderController {
@@ -16,7 +21,16 @@ public class OrderController {
     OrderService orderService;
 
     @PutMapping("/order/createOrder")
-    public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest) {
+    public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest ,
+                                        HttpServletRequest req, HttpServletResponse res) {
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            NewOrderResponse response = new NewOrderResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
         System.out.println(newOrderRequest.toString());
 //      TODO: return related service API with newOrderRequest as param
         return new NewOrderResponse("200","OK",new Order("label", null, null, 1, null, "drone", "13:30", true,
@@ -24,7 +38,16 @@ public class OrderController {
     }
 
     @GetMapping("/order/getAllOrders")
-    public AllOrdersResponse getAllOrders(@RequestParam(value="UID", required = true, defaultValue = "unknown") String UID) {
+    public AllOrdersResponse getAllOrders(@RequestParam(value="UID", required = true, defaultValue = "unknown") String UID,
+                                        HttpServletRequest req, HttpServletResponse res) {
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            AllOrdersResponse response = new AllOrdersResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
         System.out.println("testRequestParam: " + UID);
         // TODO: return related service API with allOrdersRequest as param
         return new AllOrdersResponse("200", "OK", new BriefOrder[]{new BriefOrder.BriefOrderBuilder()
@@ -49,7 +72,16 @@ public class OrderController {
     }
 
     @PostMapping("/order/getReco")
-    public RecoResponse createReco(@RequestBody RecoRequest recoRequest) {
+    public RecoResponse createReco(@RequestBody RecoRequest recoRequest,
+                                   HttpServletRequest req, HttpServletResponse res) {
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            RecoResponse response = new RecoResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
         System.out.println(recoRequest.toString());
         // TODO: return related service API with recoRequest as param
         return new RecoResponse("200", "OK", new Reco[]{new Reco("drone", "$19.90", "13:30")});

@@ -22,37 +22,37 @@ public class UserService {
   private CustomerRepository customerRepository;
 
 
-  public LoginResponse loginVerify(String email, String password) {
-
-    LoginResponse loginResponse = new LoginResponse();
-    Customer dbuser = customerRepository.loginVerify(email, password);
-    User user = new User();
-
-    if (dbuser != null && dbuser.getPassword() == password) {
-
-
-      String s = Integer.toString((int) dbuser.getId());
-
-      user.setUID(s);
-      user.setLastName(dbuser.getLastName());
-      user.setFirstName(dbuser.getFirstName());
-      user.setEmail(dbuser.getEmail());
-      user.setPhone(dbuser.getPhone());
-      user.setProfilePictureURL(
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
-      loginResponse.setMessage("user verify success.");
-      loginResponse.setStatus("200");
-      loginResponse.setUser(user);
-
-
-    }
-    else {
-      loginResponse.setMessage("user verify fail.");
-      loginResponse.setStatus("400");
-
-    }
-    return loginResponse;
-  }
+//  public LoginResponse loginVerify(String email, String password) {
+//
+//    LoginResponse loginResponse = new LoginResponse();
+//    Customer dbuser = customerRepository.loginVerify(email, password);
+//    User user = new User();
+//
+//    if (dbuser != null && dbuser.getPassword() == password) {
+//
+//
+//      String s = Integer.toString((int) dbuser.getId());
+//
+//      user.setUID(s);
+//      user.setLastName(dbuser.getLastName());
+//      user.setFirstName(dbuser.getFirstName());
+//      user.setEmail(dbuser.getEmail());
+//      user.setPhone(dbuser.getPhone());
+//      user.setProfilePictureURL(
+//          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
+//      loginResponse.setMessage("user verify success.");
+//      loginResponse.setStatus("200");
+//      loginResponse.setUser(user);
+//
+//
+//    }
+//    else {
+//      loginResponse.setMessage("user verify fail.");
+//      loginResponse.setStatus("400");
+//
+//    }
+//    return loginResponse;
+//  }
 
     public CustomerCreationResponse CreateCustomerResponse (
         CustomerCreationRequest customerCreationRequest){
