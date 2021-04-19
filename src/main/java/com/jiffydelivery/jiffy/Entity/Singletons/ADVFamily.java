@@ -22,7 +22,7 @@ public enum ADVFamily {
     Drone15(65), Drone16(66), Drone17(67), Drone18(68), Drone19(69);
 
     private final int id;
-    private final Queue<Trip> queue;
+    private Queue<Trip> queue;
 
     ADVFamily(int id) {
         this.id = id;
@@ -31,4 +31,8 @@ public enum ADVFamily {
 
     public int getId() { return id; }
     public Queue<Trip> getQueue() {return queue;}
+
+    public void setQueue(Queue<Trip> queue) {
+        this.queue = queue;
+    }
 }

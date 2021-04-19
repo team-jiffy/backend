@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayDeque;
+import java.util.Date;
 import java.util.Queue;
 
 @Service
@@ -21,6 +22,7 @@ public class ProgressReportService {
     OrderQueue orderQueue;
 
     public void assignNextTrip(ADV adv) {
+        // TODO: advId is not index, how to deal with this?
         int id = (int)adv.getId();
         ADVType advType = adv.getADVSpec().getADVType();
         Queue<Trip> advQueue = ADVFamily.values()[id].getQueue();
@@ -39,16 +41,30 @@ public class ProgressReportService {
 
         // step2: get new order, call optimizer()
         Order newOrder = orderQ.peek();
-        // hard code now, shall get optimized results via Optimizer()
+        // create 2 new trips
+        Trip newPickupTrip = new Trip();
+        newPickupTrip.setTripType(TripType.outside);
+        newPickupTrip.setADV(adv);
+        newPickupTrip.setOrder(newOrder);
+        newPickupTrip.setAddress(newOrder.getSenderContact().getAddress());
+        newPickupTrip.setCurrentTime(new Date());
+
+        Trip newDeliveryTrip = new Trip();
+        newDeliveryTrip.setTripType(TripType.outside);
+        newDeliveryTrip.setADV(adv);
+        newDeliveryTrip.setOrder(newOrder);
+        newDeliveryTrip.setAddress(newOrder.getRecipiantContact().getAddress());
+        newDeliveryTrip.setCurrentTime(new Date());
+
+        // hard code now, shall get optimized results via Optimizer(), passing 2 new trips and current queue
         ArrayDeque<Trip> optimizedQueue = new ArrayDeque<>();
         if (optimizedQueue != null) {
-            advQueue = optimizedQueue.clone();
+            ADVFamily.values()[id].setQueue(optimizedQueue);
             orderQ.poll();
         }
         Trip newTrip = advQueue.peek();
         adv.getTrip().add(newTrip);
     }
-
 
     private void updateOrderStatus(Order order) {
         OrderStatus orderStatus = order.getOrderStatus();
