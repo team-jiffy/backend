@@ -71,7 +71,7 @@ public class PaymentRepository {
             Customer customer = session.get(Customer.class, UID);
             List<CreditCard> cardList = customer.getCreditCard();
             for (CreditCard card : cardList) {
-                if (Integer.toString(card.getId()).equals(cardID)) {
+                if (Integer.toString((int) card.getId()).equals(cardID)) {
                     cardList.remove(card);
                 }
             }
