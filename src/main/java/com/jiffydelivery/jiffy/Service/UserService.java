@@ -1,6 +1,9 @@
 package com.jiffydelivery.jiffy.Service;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerCreationResponse;
@@ -140,13 +143,29 @@ public class UserService {
 
 
     }
-  }
-<<<<<<< HEAD
+
+
 
   public User checkUserPassword(String email, String password){
-//    return contactRepository.CheckUserPassword(email,password);
-    return new User();
+    Customer customer = customerRepository.checkUserPassword(email,password);
+
+    if (customer==null) return null;
+    com.jiffydelivery.jiffy.Entity.DBDAO.Contact[] contacts = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact[2];
+
+    for (com.jiffydelivery.jiffy.Entity.DBDAO.Contact contact : customer.getContact()){
+      if (contact.getContactType().equals(ContactType.Sender) && contact.isDef()){
+        contacts[0] = contact;
+      }
+      if (contact.getContactType().equals(ContactType.Recipient) && contact.isDef()){
+        contacts[0] = contact;
+      }
+    }
+
+    return new User(customer.getEmail(),customer.getLastName(),null,
+            String.valueOf(customer.getId()),customer.getFirstName(),customer.getPhone(),"",
+            null,null);
+
+//    return new User();
   }
 }
-=======
->>>>>>> e8df8f73a3088d6c046f564a7d4ba959427f9f9e
+

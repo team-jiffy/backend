@@ -12,29 +12,32 @@ import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateRe
 import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
-
-  public Customer loginVerify (String email, String password){
-    LoginResponse loginResponse = new LoginResponse();
-    Customer
-        user = null;
-    try (Session session = sessionFactory.openSession()) {
-
-      user = session.get(Customer
-          .class,email);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
- return user;
-    }
+//
+//  public Customer loginVerify (String email, String password){
+//    LoginResponse loginResponse = new LoginResponse();
+//    Customer
+//        user = null;
+//    try (Session session = sessionFactory.openSession()) {
+//
+//      user = session.get(Customer
+//          .class,email);
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+// return user;
+//    }
 
 
 //
@@ -189,6 +192,13 @@ public class CustomerRepository {
     return dbuser;
   }
 
+
+  public Customer checkUserPassword(String email, String password){
+    Session session = null;
+
+
+
+  }
 
 //  public static void main(String[] args) {
 //    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
