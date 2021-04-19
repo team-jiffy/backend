@@ -108,9 +108,9 @@ public class CustomerRepository {
 
 
 //update password
-  public Customer updatePassword (String UID, String password){
+  public PasswordUpdateResponse updatePassword (String UID, String password){
     Session session = null;
-
+    PasswordUpdateResponse passwordUpdateResponse = new PasswordUpdateResponse();
     Customer
         user= null;
 
@@ -118,7 +118,11 @@ public class CustomerRepository {
       session = sessionFactory.openSession();
       user = session.get(Customer
           .class,UID);
+      if(user == null ){
+        passwordUpdateResponse.setMessage("user not found");
+        passwordUpdateResponse.setStatus("404");
 
+      }
       user.setPassword(password);
       session.beginTransaction();
       session.update(user);

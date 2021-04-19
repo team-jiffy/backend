@@ -104,30 +104,9 @@ public class UserService {
 
 
   public PasswordUpdateResponse updatePassword(String UID, String password) {
-    PasswordUpdateResponse passwordUpdateResponse = new PasswordUpdateResponse();
-    Customer dbuser = customerRepository.updatePassword(UID, password);
-    User user = new User();
-    String s = Integer.toString(dbuser.getId());
-    user.setUID(s);
-    user.setLastName(dbuser.getLastName());
-    user.setFirstName(dbuser.getFirstName());
-    user.setEmail(dbuser.getEmail());
-    user.setPhone(dbuser.getPhone());
-    user.setProfilePictureURL(
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
+    return customerRepository.updatePassword(UID, password);
 
 
-    if(user == null ){
-      passwordUpdateResponse.setMessage("user not found");
-      passwordUpdateResponse.setStatus("404");
-
-    }else {
-      customerUpdateResponse.setMessage("user update success.");
-      customerUpdateResponse.setUser(user);
-      customerUpdateResponse.setStatus("200");
-    }
-
-    return customerUpdateResponse;
 
   }
 }
