@@ -1,16 +1,12 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import jdk.jfr.Enabled;
-import lombok.*;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 @Getter
-@Setter
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 @Entity
 @Table(name = "ADV")
 public class ADV implements Serializable {
