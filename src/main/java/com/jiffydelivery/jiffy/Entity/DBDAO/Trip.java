@@ -1,16 +1,18 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.jiffydelivery.jiffy.Entity.Constance.TripType;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Trip")
 public class Trip implements Serializable {

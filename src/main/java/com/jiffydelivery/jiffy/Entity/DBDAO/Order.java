@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name = "Order_table")
 public class Order implements Serializable {
