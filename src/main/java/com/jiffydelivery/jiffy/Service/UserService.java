@@ -55,21 +55,20 @@ public class UserService {
         CustomerCreationRequest customerCreationRequest){
       Customer dbuser = customerRepository.createCustomer(customerCreationRequest);
       User user = new User();
-      String s = Integer.toString((int) dbuser.getId());
-
-      user.setUID(s);
-      user.setLastName(dbuser.getLastName());
-      user.setFirstName(dbuser.getFirstName());
-      user.setEmail(dbuser.getEmail());
-      user.setPhone(dbuser.getPhone());
-      user.setProfilePictureURL(
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
-
       CustomerCreationResponse customerCreationResponse = new CustomerCreationResponse();
       if (dbuser == null) {
         customerCreationResponse.setMessage("user creation fail.");
         customerCreationResponse.setStatus("404");
       } else {
+        String s = Integer.toString((int) dbuser.getId());
+
+        user.setUID(s);
+        user.setLastName(dbuser.getLastName());
+        user.setFirstName(dbuser.getFirstName());
+        user.setEmail(dbuser.getEmail());
+        user.setPhone(dbuser.getPhone());
+        user.setProfilePictureURL(
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
         customerCreationResponse.setMessage("user creation success.");
         customerCreationResponse.setUser(user);
         customerCreationResponse.setStatus("200");
@@ -82,24 +81,22 @@ public class UserService {
 
       Customer dbuser = customerRepository.getCustomerProfile(UID);
       User user = new User();
-      String s = Integer.toString((int) dbuser.getId());
-      user.setUID(s);
-      user.setLastName(dbuser.getLastName());
-      user.setFirstName(dbuser.getFirstName());
-      user.setEmail(dbuser.getEmail());
-      user.setPhone(dbuser.getPhone());
 
-//    user.setDefaultRecipient();
-//    user.setDefaultSender();
-//    user.setLocation();
-      user.setProfilePictureURL(
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
 
       GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
       if (dbuser == null) {
+
         getCustomerResponse.setMessage("get user fail.");
         getCustomerResponse.setStatus("404");
       } else {
+        String s = Integer.toString((int) dbuser.getId());
+        user.setUID(s);
+        user.setLastName(dbuser.getLastName());
+        user.setFirstName(dbuser.getFirstName());
+        user.setEmail(dbuser.getEmail());
+        user.setPhone(dbuser.getPhone());
+        user.setProfilePictureURL(
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
         getCustomerResponse.setMessage("get user success.");
         getCustomerResponse.setUser(user);
         getCustomerResponse.setStatus("200");
@@ -110,22 +107,24 @@ public class UserService {
     public CustomerUpdateResponse updateCustomer (User updatedUser){
 
       CustomerUpdateResponse customerUpdateResponse = new CustomerUpdateResponse();
-
       Customer dbuser = customerRepository.updateCustomer(updatedUser);
+
       User user = new User();
-      String s = Integer.toString((int) dbuser.getId());
-      user.setUID(s);
-      user.setLastName(dbuser.getLastName());
-      user.setFirstName(dbuser.getFirstName());
-      user.setEmail(dbuser.getEmail());
-      user.setPhone(dbuser.getPhone());
-      user.setProfilePictureURL(
-          "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
+
 
       if (dbuser == null) {
         customerUpdateResponse.setMessage("user update fail.");
         customerUpdateResponse.setStatus("404");
       } else {
+
+        String s = Integer.toString((int) dbuser.getId());
+        user.setUID(s);
+        user.setLastName(dbuser.getLastName());
+        user.setFirstName(dbuser.getFirstName());
+        user.setEmail(dbuser.getEmail());
+        user.setPhone(dbuser.getPhone());
+        user.setProfilePictureURL(
+            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzH6TfTtq91hzmeIvm_4JOdb5y1UWjTlYZdA&usqp=CAU");
         customerUpdateResponse.setMessage("user update success.");
         customerUpdateResponse.setUser(user);
         customerUpdateResponse.setStatus("200");

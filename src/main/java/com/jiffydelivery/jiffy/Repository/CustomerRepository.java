@@ -141,7 +141,7 @@ public class CustomerRepository {
     Customer user = null;
     try (Session session = sessionFactory.openSession()) {
       user = session.get(Customer
-          .class,UID);
+          .class,(long)UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -155,17 +155,26 @@ public class CustomerRepository {
   ){
     Session session = null;
    Customer dbuser = null;
-
+  long dbuserID = 0;
     try {
       session = sessionFactory.openSession();
+
+      try{
+        dbuserID = Integer.parseInt(updatedUser.getUID());
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
+
+      }
+
          dbuser = session.get(Customer
-            .class,updatedUser
-            .getUID());
-        dbuser.setEmail(updatedUser.getEmail());
-        dbuser.setFirstName(updatedUser.getFirstName());
-        dbuser.setLastName(updatedUser.getLastName());
-        dbuser.setPhone(updatedUser.getPhone());
-        session.saveOrUpdate(updatedUser);
+            .class,dbuserID);
+         if(dbuser!= null) {
+           dbuser.setEmail(updatedUser.getEmail());
+           dbuser.setFirstName(updatedUser.getFirstName());
+           dbuser.setLastName(updatedUser.getLastName());
+           dbuser.setPhone(updatedUser.getPhone());
+         }
+        session.update(updatedUser);
 
 
         session.beginTransaction();
