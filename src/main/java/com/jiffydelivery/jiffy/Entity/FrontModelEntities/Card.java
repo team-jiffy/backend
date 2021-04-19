@@ -10,16 +10,16 @@ import lombok.*;
 @ToString
 public class Card {
 
-    private String last4Digits;
-    private String cardType;
-    private String cardLabel;
-    private String holderName;
+    private String LastFourDigits;
+    private String CardType;
+    private String CardLabel;
+    private String HolderName;
 
-    private Address cardAddress;
+    private Address CardAddress;
 
-    private Address billingAddress;
+    private Address BillingAddress;
 
-    private String cardId;
+    private String CardId;
 
-    private boolean isDefaultCard;
+    private boolean Default;
 }

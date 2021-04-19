@@ -11,14 +11,14 @@ import lombok.*;
 
 public class User {
 
-    private String email;
-    private String lastName;
-    private Contact defaultSender;
+    private String Email;
+    private String LastName;
+    private Contact DefaultSender;
     private String UID;
-    private String firstName;
-    private String phone;
-    private String profilePictureURL;
-    private Contact defaultRecipient;
-    private Address location;
+    private String FirstName;
+    private String Phone;
+    private String ProfilePictureURL;
+    private Contact DefaultRecipient;
+    private Address Location;
 
 }

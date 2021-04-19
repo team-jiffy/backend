@@ -12,21 +12,21 @@ import lombok.*;
 public class BriefOrder {
     private long trackNumber;
 
-    private String senderName;
-    private String recipientName;
-    private String orderDate;
+    private String SenderName;
+    private String RecipientName;
+    private String OrderDate;
     private String ADVType;
     private String ETA;
-    private String orderStatus;
+    private String Status;
 
     private BriefOrder(BriefOrderBuilder builder) {
         this.trackNumber = builder.trackNumber;
-        this.senderName = builder.senderName;
-        this.recipientName = builder.recipientName;
-        this.orderDate = builder.orderDate;
+        this.SenderName = builder.senderName;
+        this.RecipientName = builder.recipientName;
+        this.OrderDate = builder.orderDate;
         this.ADVType = builder.ADVType;
         this.ETA = builder.ETA;
-        this.orderStatus = builder.orderStatus;
+        this.Status = builder.orderStatus;
     }
 
     public static class BriefOrderBuilder {

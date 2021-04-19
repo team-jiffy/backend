@@ -10,7 +10,7 @@ import lombok.*;
 @EqualsAndHashCode
 
 public class Position {
-    private Coordinates delivery;
-    private Coordinates pickup;
-    private Coordinates curr;
+    private Coordinates Delivery;
+    private Coordinates Pickup;
+    private Coordinates Curr;
 }

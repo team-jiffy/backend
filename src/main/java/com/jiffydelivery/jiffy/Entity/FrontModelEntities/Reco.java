@@ -10,6 +10,6 @@ import lombok.*;
 
 public class Reco {
     private String ADVType;
-    private String price;
+    private String Price;
     private String ETA;
 }
