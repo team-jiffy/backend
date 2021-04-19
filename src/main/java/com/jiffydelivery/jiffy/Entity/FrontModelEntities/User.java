@@ -18,7 +18,7 @@ public class User {
     private String FirstName;
     private String Phone;
     private String ProfilePictureURL;
-    private Contact DefaultRecipient;
+    private Contact DefaultDeliver;
     private Address Location;
 
 }
