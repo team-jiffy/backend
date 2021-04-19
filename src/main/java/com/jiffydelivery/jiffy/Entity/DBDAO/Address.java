@@ -10,7 +10,6 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name="Address")
 public class Address implements Serializable {

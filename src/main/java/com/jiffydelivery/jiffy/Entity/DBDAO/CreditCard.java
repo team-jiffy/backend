@@ -9,14 +9,10 @@ import lombok.ToString;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
-
-
 @Getter
 @Setter
 @EqualsAndHashCode
 @ToString
-
 @Entity
 @Table(name = "Creditcard")
 public class CreditCard implements Serializable {

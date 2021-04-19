@@ -6,7 +6,6 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
 @Getter
 @Entity
 @Table(name = "ADV_spec")

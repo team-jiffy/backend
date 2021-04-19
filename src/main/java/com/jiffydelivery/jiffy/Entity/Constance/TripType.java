@@ -1,8 +1,8 @@
 package com.jiffydelivery.jiffy.Entity.Constance;
 
 public enum TripType {
-    outside("Outside"),
-    charging("Charging");
+    outside("outside"),
+    charging("charging");
 
     private String tripType;
 
