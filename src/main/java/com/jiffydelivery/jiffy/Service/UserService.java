@@ -21,7 +21,8 @@ public class UserService {
       CustomerCreationRequest customerCreationRequest) {
     Customer dbuser = customerRepository.createCustomer(customerCreationRequest);
     User user = new User();
-    String s = Integer.toString(dbuser.getId());
+    String s = Integer.toString((int) dbuser.getId());
+
     user.setUID(s);
     user.setLastName(dbuser.getLastName());
     user.setFirstName(dbuser.getFirstName());
@@ -47,7 +48,7 @@ public class UserService {
 
     Customer dbuser = customerRepository.getCustomerProfile(UID);
     User user = new User();
-    String s = Integer.toString(dbuser.getId());
+    String s = Integer.toString((int) dbuser.getId());
     user.setUID(s);
     user.setLastName(dbuser.getLastName());
     user.setFirstName(dbuser.getFirstName());
@@ -79,7 +80,7 @@ public class UserService {
 
     Customer dbuser = customerRepository.updateCustomer(updatedUser);
     User user = new User();
-    String s = Integer.toString(dbuser.getId());
+    String s = Integer.toString((int) dbuser.getId());
     user.setUID(s);
     user.setLastName(dbuser.getLastName());
     user.setFirstName(dbuser.getFirstName());
