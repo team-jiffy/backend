@@ -11,25 +11,25 @@ import lombok.*;
 
 public class Order {
 
-    private String orderLabel;
+    private String OrderLabel;
 
-    private Contact senderContactId;
-    private Contact recipientContactId;
+    private Contact SenderContactId;
+    private Contact RecipientContactId;
 
-    private int trackNumber;
+    private int TrackNumber;
 
-    private User buyerUserId;
+    private User BuyerUserId;
 
     private String ADVType;
     private String ETA;
-    private boolean sameDay;
-    private String price;
-    private String orderDate;
-    private String orderStatus;
+    private boolean SameDay;
+    private String Price;
+    private String OrderDate;
+    private String OrderStatus;
 
-    private String packageInfo;
+    private String PackageInfo;
 
-    private Position position;
+    private Position Position;
 
-    private Card paymentCardId;
+    private Card PaymentCardId;
 }

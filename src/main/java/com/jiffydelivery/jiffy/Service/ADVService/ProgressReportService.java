@@ -63,7 +63,7 @@ public class ProgressReportService {
             orderQ.poll();
         }
         Trip newTrip = advQueue.peek();
-        adv.getTrip().add(newTrip);
+        adv.getTrip();//.add(newTrip);
     }
 
     private void updateOrderStatus(Order order) {

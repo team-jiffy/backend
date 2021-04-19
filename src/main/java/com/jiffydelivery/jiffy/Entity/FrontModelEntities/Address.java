@@ -11,11 +11,11 @@ import lombok.*;
 
 public class Address {
 
-    private String street1;
-    private String street2;
-    private final String city = "San Francisco";
-    private final String state = "California";
-    private String zip;
-    private String aptNo;
+    private String Street1;
+    private String Street2;
+    private final String City = "San Francisco";
+    private final String State = "California";
+    private String Zip;
+    private String AptNo;
 
 }

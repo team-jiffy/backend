@@ -1,8 +1,15 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import lombok.*;
+
 import javax.persistence.*;
 import java.io.Serializable;
-
+@Getter
+@Setter
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name="Address")
 public class Address implements Serializable {

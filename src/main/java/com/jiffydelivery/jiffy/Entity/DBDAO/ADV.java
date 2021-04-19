@@ -6,7 +6,6 @@ import lombok.Getter;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
 @Getter
 @Entity
 @Table(name = "ADV")
@@ -29,7 +28,7 @@ public class ADV implements Serializable {
     @ManyToOne
     private ADVSpec ADVSpec;
 
-    @OneToMany(mappedBy = "ADV")
-    private List<Trip> trip;
+    @OneToOne(mappedBy = "ADV")
+    private Trip trip;
 
 }

@@ -22,27 +22,20 @@ public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
 
-//  public LoginResponse loginVerify (String email, String password){
-//    LoginResponse loginResponse = new LoginResponse();
-//    Customer
-//        user = null;
-//    try (Session session = sessionFactory.openSession()) {
-//
-//      user = session.get(Customer
-//          .class,email);
-//    } catch (Exception ex) {
-//      ex.printStackTrace();
-//    }
-//    if(user!= null && user.getPassword() == password){
-//      loginResponse.setMessage("user verify success.");
-//      loginResponse.setCustomer
-//          (user);
-//      loginResponse.setStatus("200");
-//      return loginResponse;
-//
-//    }
-//    else return null;
-//  }
+  public Customer loginVerify (String email, String password){
+    LoginResponse loginResponse = new LoginResponse();
+    Customer
+        user = null;
+    try (Session session = sessionFactory.openSession()) {
+
+      user = session.get(Customer
+          .class,email);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+ return user;
+    }
+
 
 //
 //  public LogoutResponse logoutVerify (String UID){
@@ -148,7 +141,7 @@ public class CustomerRepository {
     Customer user = null;
     try (Session session = sessionFactory.openSession()) {
       user = session.get(Customer
-          .class,UID);
+          .class,(long)UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -162,17 +155,26 @@ public class CustomerRepository {
   ){
     Session session = null;
    Customer dbuser = null;
-
+  long dbuserID = 0;
     try {
       session = sessionFactory.openSession();
+
+      try{
+        dbuserID = Integer.parseInt(updatedUser.getUID());
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
+
+      }
+
          dbuser = session.get(Customer
-            .class,updatedUser
-            .getUID());
-        dbuser.setEmail(updatedUser.getEmail());
-        dbuser.setFirstName(updatedUser.getFirstName());
-        dbuser.setLastName(updatedUser.getLastName());
-        dbuser.setPhone(updatedUser.getPhone());
-        session.saveOrUpdate(updatedUser);
+            .class,dbuserID);
+         if(dbuser!= null) {
+           dbuser.setEmail(updatedUser.getEmail());
+           dbuser.setFirstName(updatedUser.getFirstName());
+           dbuser.setLastName(updatedUser.getLastName());
+           dbuser.setPhone(updatedUser.getPhone());
+         }
+        session.update(updatedUser);
 
 
         session.beginTransaction();

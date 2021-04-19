@@ -8,12 +8,19 @@ import lombok.*;
 @ToString
 public class NewPaymentRequest {
     private String cardNumber;
-    private String name;
+//    private String name;
     private String cardExpire;
     private String cardCVV;
     private String holderName;
     private String cardType;
     private String UID;
+    private String zipCode;
+    private boolean def;
     private Address cardAddress;
     private Address billingAddress;
+
+    public boolean getDef() {
+        return this.def;
+    }
+
 }
