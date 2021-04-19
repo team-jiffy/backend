@@ -64,7 +64,6 @@ public class Order implements Serializable {
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Trip> trip;
-
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Trip trip;
 }

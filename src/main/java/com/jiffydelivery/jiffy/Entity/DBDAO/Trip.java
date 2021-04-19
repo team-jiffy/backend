@@ -25,10 +25,10 @@ public class Trip implements Serializable {
     @Enumerated(EnumType.STRING)
     private TripType tripType;
 
-    @ManyToOne
+    @OneToOne
     private ADV ADV;
 
-    @ManyToOne
+    @OneToOne
     private Order order;
 
     @OneToOne

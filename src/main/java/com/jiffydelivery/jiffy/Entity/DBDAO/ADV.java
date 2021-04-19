@@ -32,7 +32,7 @@ public class ADV implements Serializable {
     @ManyToOne
     private ADVSpec ADVSpec;
 
-    @OneToMany(mappedBy = "ADV")
-    private List<Trip> trip;
+    @OneToOne(mappedBy = "ADV")
+    private Trip trip;
 
 }
