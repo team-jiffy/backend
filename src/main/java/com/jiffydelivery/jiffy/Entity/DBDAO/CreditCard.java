@@ -1,10 +1,21 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
+
+
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
 
 @Entity
 @Table(name = "Creditcard")
@@ -25,7 +36,7 @@ public class CreditCard implements Serializable {
 
     private String expDate;
 
-    private boolean def;
+    private boolean def = false;
 
     @OneToOne
     @JoinColumn(unique=true)
@@ -37,5 +48,5 @@ public class CreditCard implements Serializable {
     @OneToMany(mappedBy = "creditCard")
     private List<Order> order;
 
-
 }
+
