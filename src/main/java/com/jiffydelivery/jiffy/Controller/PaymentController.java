@@ -19,26 +19,23 @@ import java.rmi.server.UID;
 public class PaymentController {
 
 
-//    @Autowired
-//    private PaymentService peymentService;
-
-
+    @Autowired
+    PaymentService peymentService;
     
+
     @PostMapping("/billing/createPayment")
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest) {
 
+        NewPaymentResponse newPaymentResponse = peymentService.addPayment(newPaymentRequest);
 
-//        NewPaymentResponse newPaymentResponse = paymentService.addPayment(newPaymentRequest);
-
-        return new NewPaymentResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo",new Address(), new Address(),"card-1",true));
+        return newPaymentResponse;
     }
 
     @PutMapping("/billing/createPayment")
     public UpdatePaymentResponse updatePayment(@RequestBody UpdatePaymentRequest updatePaymentRequest) {
 
 
-//        UpdatePaymentResponse updatePaymentResponse = paymentService.updatePayment(updatePaymentRequest);
+//        UpdatePaymentResponse updatePaymentResponse = peymentService.updatePayment(updatePaymentRequest);
 
         return new UpdatePaymentResponse("200", "ok", new Card("1234","credit",
                 "visa","yubo",new Address(),  new Address(),"card-1",true));
@@ -48,17 +45,16 @@ public class PaymentController {
     public AllPaymentsResponse getAllPayments(@RequestParam(value="UID") String UID) {
         //System.out.println("testRequestParam" + UID);
 
-        //List<Payment> payments = paymentService.getAllPayments();
+        AllPaymentsResponse allPaymentsResponse = peymentService.getAllPayments(UID);
 
-        return new AllPaymentsResponse("200", "OK", new Card[]{new Card("1234", "credit",
-                "visa", "yubo", new Address(), new Address(), "card-1", true)});
+        return allPaymentsResponse;
     }
 
     @PutMapping("/billing/deletePayment")
     public DeletePaymentResponse deletePayment(@RequestBody DeletePaymentRequest deletePaymentRequest) {
 
-        //paymentsService.deletePayment(UID);
-        //return "redirect:/getAllPayments";
+        peymentService.deletePayment(deletePaymentRequest);
+
         return new DeletePaymentResponse("200", "ok");
     }
 

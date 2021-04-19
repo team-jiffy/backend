@@ -6,6 +6,7 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
 @ToString
 
 public class SetDefaultResponse {
