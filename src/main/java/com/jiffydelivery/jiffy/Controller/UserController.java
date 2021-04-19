@@ -2,11 +2,8 @@ package com.jiffydelivery.jiffy.Controller;
 
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerCreationResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LogoutResponse;
+import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerSigninRequest;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.*;
 
 import com.jiffydelivery.jiffy.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,17 @@ public class UserController {
         return userService.CreateCustomerResponse(userRequest);
     }
 
+    @PostMapping("/signin")
+    public CustomerSigninResponse signin(@RequestBody CustomerSigninRequest userSigninRequest){
+//        System.out.println(userSigninRequest);
+        User user = userService.checkUserPassword(userSigninRequest.getEmail(),userSigninRequest.getPassword());
+        if (user!=null) {
+            CustomerSigninResponse response = new CustomerSigninResponse();
+            response.setUser(user);
+            response.setStatus("OK");
+        }
+        return new CustomerSigninResponse();
+    }
     /* maps to API #18. logout*/
 //    @PutMapping("/logout")
 //    public LogoutResponse createOrder(@RequestParam(value="UID", required = true, defaultValue = "unknownID") String UID) {
@@ -35,6 +43,7 @@ public class UserController {
     /* maps to API #20 update a user's info */
     @PostMapping("/users/updateInfo")
     public CustomerUpdateResponse updateCustomer(@RequestBody User newUser) {
+        System.out.print("sadf");
         // TODO: User actual user input to initialize the User
         return userService.updateCustomer(newUser);
     }

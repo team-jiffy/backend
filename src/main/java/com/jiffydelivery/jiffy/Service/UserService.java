@@ -110,4 +110,9 @@ public class UserService {
 
 
   }
+
+  public User checkUserPassword(String email, String password){
+//    return contactRepository.CheckUserPassword(email,password);
+    return new User();
+  }
 }
