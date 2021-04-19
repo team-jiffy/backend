@@ -22,27 +22,20 @@ public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
 
-//  public LoginResponse loginVerify (String email, String password){
-//    LoginResponse loginResponse = new LoginResponse();
-//    Customer
-//        user = null;
-//    try (Session session = sessionFactory.openSession()) {
-//
-//      user = session.get(Customer
-//          .class,email);
-//    } catch (Exception ex) {
-//      ex.printStackTrace();
-//    }
-//    if(user!= null && user.getPassword() == password){
-//      loginResponse.setMessage("user verify success.");
-//      loginResponse.setCustomer
-//          (user);
-//      loginResponse.setStatus("200");
-//      return loginResponse;
-//
-//    }
-//    else return null;
-//  }
+  public Customer loginVerify (String email, String password){
+    LoginResponse loginResponse = new LoginResponse();
+    Customer
+        user = null;
+    try (Session session = sessionFactory.openSession()) {
+
+      user = session.get(Customer
+          .class,email);
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+ return user;
+    }
+
 
 //
 //  public LogoutResponse logoutVerify (String UID){
