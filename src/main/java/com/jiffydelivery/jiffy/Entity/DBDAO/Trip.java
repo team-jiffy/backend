@@ -18,7 +18,7 @@ public class Trip implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     @Enumerated(EnumType.STRING)
     private TripType tripType;

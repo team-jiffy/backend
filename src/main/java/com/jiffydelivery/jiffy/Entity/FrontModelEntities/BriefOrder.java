@@ -10,7 +10,7 @@ import lombok.*;
 @ToString
 
 public class BriefOrder {
-    private int trackNumber;
+    private long trackNumber;
 
     private String senderName;
     private String recipientName;
@@ -30,7 +30,7 @@ public class BriefOrder {
     }
 
     public static class BriefOrderBuilder {
-        private int trackNumber;
+        private long trackNumber;
 
         private String senderName;
         private String recipientName;
@@ -39,7 +39,7 @@ public class BriefOrder {
         private String ETA;
         private String orderStatus;
 
-        public BriefOrderBuilder trackNumber(int trackNumber) {
+        public BriefOrderBuilder trackNumber(long trackNumber) {
             this.trackNumber = trackNumber;
             return this;
         }

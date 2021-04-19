@@ -7,6 +7,7 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
 import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
@@ -26,7 +27,7 @@ public class CustomerRepository {
 //    Customer
 //        user = null;
 //    try (Session session = sessionFactory.openSession()) {
-//      //// TODO: 4/17/21
+//
 //      user = session.get(Customer
 //          .class,email);
 //    } catch (Exception ex) {
@@ -42,7 +43,7 @@ public class CustomerRepository {
 //    }
 //    else return null;
 //  }
-//
+
 //
 //  public LogoutResponse logoutVerify (String UID){
 //    LogoutResponse logoutResponse = new LogoutResponse();

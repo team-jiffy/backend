@@ -26,7 +26,7 @@ public class Order implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     private double packageWeight;
     private double price;

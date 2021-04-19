@@ -13,7 +13,7 @@ public class ADV implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     private double currentBatteryPercentage;
     private double currentLatitude;
