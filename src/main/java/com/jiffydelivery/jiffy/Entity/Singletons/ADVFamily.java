@@ -7,7 +7,7 @@ import java.util.Queue;
 public enum ADVFamily {
     Robot0(0), Robot1(1), Robot2(2), Robot3(3), Robot4(4),
     Robot5(5), Robot6(6), Robot7(7), Robot8(8), Robot9(9),
-    Robot10(11), Robot11(11), Robot12(12), Robot13(13), Robot14(14),
+    Robot10(10), Robot11(11), Robot12(12), Robot13(13), Robot14(14),
     Robot15(15), Robot16(16), Robot17(17), Robot18(18), Robot19(19),
     Robot20(20), Robot21(21), Robot22(22), Robot23(23), Robot24(24),
     Robot25(25), Robot26(26), Robot27(27), Robot28(28), Robot29(29),

@@ -1,10 +1,7 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.jiffydelivery.jiffy.Entity.Constance.TripType;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -12,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
