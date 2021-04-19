@@ -3,11 +3,12 @@ package com.jiffydelivery.jiffy.Entity.DBDAO;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+@Setter
 @Getter
 @Entity
 @Table(name = "Contact")

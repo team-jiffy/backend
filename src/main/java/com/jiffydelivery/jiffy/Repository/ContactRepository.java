@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Repository;
 
+import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
@@ -12,11 +13,14 @@ import org.springframework.stereotype.Repository;
 public class ContactRepository {
     @Autowired
     private SessionFactory sessionFactory;
-    public void addContact(Contact contact) {
+    public Contact addContact(String UID, Contact contact) {
 
         Session session = null;
+        Customer user = null;
         try {
             session = sessionFactory.openSession();
+            user = session.get(Customer.class,UID);
+            contact.
             session.beginTransaction();
             session.save(contact);
             session.getTransaction().commit();
@@ -28,7 +32,7 @@ public class ContactRepository {
                 session.close();
             }
         }
-
+        return Contact;
     }
     public void setContactAsDefault(String contactId) {
         Session session = null;
