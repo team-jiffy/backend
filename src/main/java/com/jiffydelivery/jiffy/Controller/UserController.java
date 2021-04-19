@@ -47,7 +47,7 @@ public class UserController {
     }
 
     /* maps to API #22. update password */
-    @GetMapping("/user/updatePassword")
+    @PostMapping("/user/updatePassword")
     public PasswordUpdateResponse updatePassword(@RequestParam(value="UID", required = true, defaultValue="id") String UID, @RequestParam(value="password", required = true, defaultValue="defaultPassword") String password) {
 //        System.out.println("UID is: " + UID);
         return userService.updatePassword(UID, password);
