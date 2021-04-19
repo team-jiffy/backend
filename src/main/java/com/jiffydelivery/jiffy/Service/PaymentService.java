@@ -30,7 +30,7 @@ public class PaymentService {
         Card EntityCard = new Card();
         EntityCard.setHolderName(Dbcard.getHolderName());
         EntityCard.setCardId(Integer.toString((int) Dbcard.getId()));
-        EntityCard.setDefaultCard(true);
+        EntityCard.setDefault(true);
 
         NewPaymentResponse newPaymentResponse = new NewPaymentResponse();
         if (newPaymentResponse == null) {
