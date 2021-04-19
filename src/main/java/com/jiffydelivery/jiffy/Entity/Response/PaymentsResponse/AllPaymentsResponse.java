@@ -1,6 +1,9 @@
 package com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse;
+import com.jiffydelivery.jiffy.Entity.DBDAO.CreditCard;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
 import lombok.*;
+
+import java.util.List;
 
 @Getter
 @Setter
@@ -10,5 +13,5 @@ import lombok.*;
 public class AllPaymentsResponse {
     private String status;
     private String message;
-    private Card[] cards;
+    private List<CreditCard> cards;
 }
