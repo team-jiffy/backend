@@ -13,7 +13,7 @@ public class CreditCard implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private int id;
+    private long id;
 
     private String holderName;
 
