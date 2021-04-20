@@ -13,5 +13,5 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class ProgressReportRequest {
-    private ADVRobot adv;
+    private ADVRobot adV;
 }
