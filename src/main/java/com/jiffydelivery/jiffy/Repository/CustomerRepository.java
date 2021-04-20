@@ -197,6 +197,7 @@ public class CustomerRepository {
   }
 
 
+
   public Customer checkUserPassword(String email, String password){
     Session session = null;
     Customer customer =null;
@@ -238,6 +239,7 @@ public class CustomerRepository {
 ////        test.updatePassword();
 //
 //  }
+
 
 
 }
