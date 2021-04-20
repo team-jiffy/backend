@@ -11,7 +11,7 @@ import lombok.*;
 @ToString
 @EqualsAndHashCode
 public class Trip {
-    private TripType Triptype;
+    private TripType TripType;
     private Coordinates Coordinates;
     private String TripID;
 }
