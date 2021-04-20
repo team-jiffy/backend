@@ -58,7 +58,7 @@ public class OrderRepository {
         return new BriefOrder.BriefOrderBuilder()
                 .trackNumber(order.getId())
                 .senderName(order.getSenderContact().getFirstName() + order.getSenderContact().getLastName())
-                .recipientName(order.getRecipiantContact().getFirstName() + order.getRecipiantContact().getLastName())
+                .recipientName(order.getRecipientContact().getFirstName() + order.getRecipientContact().getLastName())
                 .orderDate(order.getDeliverOrderDate().toString())
                 .ADVType(order.getADVType().toString())
                 .ETA(order.getDeliverTime().toString())
