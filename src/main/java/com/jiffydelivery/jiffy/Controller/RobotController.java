@@ -8,6 +8,8 @@ import com.jiffydelivery.jiffy.Entity.Request.RobotRequest.ProgressReportRequest
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
 import com.jiffydelivery.jiffy.Entity.Response.RobotResponse.AccidentReportResponse;
 import com.jiffydelivery.jiffy.Entity.Response.RobotResponse.ProgressReportResponse;
+import com.jiffydelivery.jiffy.Service.ProgressReportService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -24,6 +26,9 @@ public class RobotController {
         response.setHeader("Content-Type", "application/json");
     }
 
+    @Autowired
+    ProgressReportService progressReportService;
+
     @PostMapping("/accidentReport")
     public AccidentReportResponse accidentReport(@RequestBody AccidentReportRequest request){
 
@@ -33,8 +38,9 @@ public class RobotController {
     @PostMapping("/progressReport")
     public ProgressReportResponse progressReportResponse(
             @RequestBody ProgressReportRequest request) {
+        progressReportService.assignNextTrip(request.getAdvDao());
         System.out.println(request.toString());
-        return new ProgressReportResponse(new Trip(TripType.outside,
+        return new ProgressReportResponse(new Trip(TripType.Outside,
                 new Coordinates("32","65","75"),
                 "343"));
     }

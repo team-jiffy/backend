@@ -1,6 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
-import com.jiffydelivery.jiffy.Entity.Constance.TripType;
+import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import lombok.*;
 
 @Getter
@@ -9,8 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class ADVRobot {
-    private int ADVID;
+public class ADVDto {
+    private int ADVID;          // enum index
+    private ADVType ADVType;
     private Coordinates position;
     private int capacity;
     private double batteryStatus;
