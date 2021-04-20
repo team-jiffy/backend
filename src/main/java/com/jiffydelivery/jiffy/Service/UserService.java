@@ -152,10 +152,10 @@ public class UserService {
     com.jiffydelivery.jiffy.Entity.DBDAO.Contact[] contacts = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact[2];
 
     for (com.jiffydelivery.jiffy.Entity.DBDAO.Contact contact : customer.getContact()){
-      if (contact.getContactType().equals(ContactType.Sender) && contact.isDef()){
+      if (contact.getContactType().equals(ContactType.sender) && contact.isDef()){
         contacts[0] = contact;
       }
-      if (contact.getContactType().equals(ContactType.Recipient) && contact.isDef()){
+      if (contact.getContactType().equals(ContactType.recipient) && contact.isDef()){
         contacts[0] = contact;
       }
     }

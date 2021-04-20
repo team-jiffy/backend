@@ -2,7 +2,7 @@ package com.jiffydelivery.jiffy.Entity.Constance;
 
 public enum ADVType {
     drone("drone"),
-    Robot("robot");
+    robot("robot");
 
     private String advType;
 
