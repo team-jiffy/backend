@@ -5,6 +5,7 @@ import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
 import com.jiffydelivery.jiffy.Entity.Constance.TripType;
 import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.AllOrdersResponse;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.NewOrderResponse;
@@ -116,6 +117,39 @@ public class OrderRepository {
         }
         return recoResponse;
     }
+
+    public Order updateOrderStatus(long OrderID, OrderStatus orderStatus,
+                                   Date pickupTime, Date deliverTime,
+                                   Calendar deliverOrderDate, Boolean sameDay, Long tripID){
+
+        Order newOrder = null;
+        Session session = null;
+        try  {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            Order order = session.get(Order.class, OrderID);
+            if (tripID!=null){
+                Trip trip = session.get(Trip.class, tripID);
+                order.setTrip(trip);
+            }
+            order.setOrderStatus(orderStatus);
+            if (pickupTime!=null) order.setPickupTime(pickupTime);
+            if (deliverTime!=null) order.setDeliverTime(deliverTime);
+            if (deliverOrderDate!=null) order.setDeliverOrderDate(deliverOrderDate);
+            if (sameDay!=null) order.setSameday(sameDay);
+            session.update(order);
+            newOrder = order;
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+            return null;
+        } finally {
+            session.close();
+        }
+        return newOrder;
+    }
+
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);

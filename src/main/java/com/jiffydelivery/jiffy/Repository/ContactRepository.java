@@ -149,7 +149,7 @@ public class ContactRepository {
             ex.printStackTrace();
         }
         if (user != null) {
-            return user.getDefaultRecipient();
+            return user.getDefaultDeliver();
         }
         return null;
     }

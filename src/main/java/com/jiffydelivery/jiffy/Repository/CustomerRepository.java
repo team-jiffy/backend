@@ -1,40 +1,38 @@
 package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
-
-    ;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
-import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
-
-  public Customer loginVerify (String email, String password){
-    LoginResponse loginResponse = new LoginResponse();
-    Customer
-        user = null;
-    try (Session session = sessionFactory.openSession()) {
-
-      user = session.get(Customer
-          .class,email);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
- return user;
-    }
+//
+//  public Customer loginVerify (String email, String password){
+//    LoginResponse loginResponse = new LoginResponse();
+//    Customer
+//        user = null;
+//    try (Session session = sessionFactory.openSession()) {
+//
+//      user = session.get(Customer
+//          .class,email);
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+// return user;
+//    }
 
 
 //
@@ -141,7 +139,7 @@ public class CustomerRepository {
     Customer user = null;
     try (Session session = sessionFactory.openSession()) {
       user = session.get(Customer
-          .class,UID);
+          .class,(long)UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
@@ -155,19 +153,27 @@ public class CustomerRepository {
   ){
     Session session = null;
    Customer dbuser = null;
-
+  long dbuserID = 0;
     try {
       session = sessionFactory.openSession();
+
+      try{
+        dbuserID = Integer.parseInt(updatedUser.getUID());
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
+
+      }
+
          dbuser = session.get(Customer
-            .class,updatedUser
-            .getUID());
-        dbuser.setEmail(updatedUser.getEmail());
-        dbuser.setFirstName(updatedUser.getFirstName());
-        dbuser.setLastName(updatedUser.getLastName());
-        dbuser.setPhone(updatedUser.getPhone());
 
-        session.saveOrUpdate(updatedUser);
-
+            .class,dbuserID);
+         if(dbuser!= null) {
+           dbuser.setEmail(updatedUser.getEmail());
+           dbuser.setFirstName(updatedUser.getFirstName());
+           dbuser.setLastName(updatedUser.getLastName());
+           dbuser.setPhone(updatedUser.getPhone());
+         }
+        session.update(updatedUser);
 
         session.beginTransaction();
 
@@ -190,6 +196,28 @@ public class CustomerRepository {
     return dbuser;
   }
 
+
+  public Customer checkUserPassword(String email, String password){
+    Session session = null;
+    Customer customer =null;
+    try{
+      session = sessionFactory.openSession();
+      session.beginTransaction();
+      String hql = "from Customer c where c.email=:e and c.password=:w";
+      Query query = session.createQuery(hql,Customer.class);
+      query.setParameter("e",email);
+      query.setParameter("w",password);
+      List<Customer> list = query.list();
+      System.out.println(list.size());
+      if (list.size()!=0){
+        customer = list.get(0);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return customer;
+  }
 
 //  public static void main(String[] args) {
 //    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(

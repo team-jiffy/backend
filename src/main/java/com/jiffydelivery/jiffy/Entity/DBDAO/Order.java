@@ -18,7 +18,6 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name = "Order_table")
 public class Order implements Serializable {
@@ -60,12 +59,11 @@ public class Order implements Serializable {
     private Contact senderContact;
 
     @OneToOne
-    private Contact recipiantContact;
+    private Contact recipientContact;
 
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
-    private List<Trip> trip;
-
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Trip trip;
 }

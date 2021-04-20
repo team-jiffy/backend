@@ -1,11 +1,12 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
+import lombok.Getter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
+@Getter
 @Entity
 @Table(name = "ADV_spec")
 public class ADVSpec implements Serializable {

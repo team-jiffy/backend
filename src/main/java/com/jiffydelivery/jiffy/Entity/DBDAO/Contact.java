@@ -2,14 +2,19 @@ package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-@Setter
+
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Contact")
 public class Contact implements Serializable {
@@ -41,7 +46,7 @@ public class Contact implements Serializable {
     @OneToOne(mappedBy = "senderContact")
     private Order orderSend;
 
-    @OneToOne(mappedBy = "recipiantContact")
+    @OneToOne(mappedBy = "recipientContact")
     private Order orderReci;
 
 
