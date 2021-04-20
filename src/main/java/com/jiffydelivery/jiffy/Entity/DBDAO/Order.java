@@ -59,7 +59,7 @@ public class Order implements Serializable {
     private Contact senderContact;
 
     @OneToOne
-    private Contact recipiantContact;
+    private Contact recipientContact;
 
     @ManyToOne
     private Customer customer;
