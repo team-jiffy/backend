@@ -9,9 +9,9 @@ import lombok.*;
 @AllArgsConstructor
 @ToString
 @EqualsAndHashCode
-public class ADVRobot {
-    private int ADVID;
-    private final ADVType ADVType = com.jiffydelivery.jiffy.Entity.Constance.ADVType.Robot;
+public class ADVDto {
+    private int ADVID;          // enum index
+    private ADVType ADVType;
     private Coordinates position;
     private int capacity;
     private double batteryStatus;

@@ -38,7 +38,7 @@ public class RobotController {
     @PostMapping("/progressReport")
     public ProgressReportResponse progressReportResponse(
             @RequestBody ProgressReportRequest request) {
-        progressReportService.assignNextTripToRobot(request.getAdv());
+        progressReportService.assignNextTrip(request.getAdvDao());
         System.out.println(request.toString());
         return new ProgressReportResponse(new Trip(TripType.Outside,
                 new Coordinates("32","65","75"),
