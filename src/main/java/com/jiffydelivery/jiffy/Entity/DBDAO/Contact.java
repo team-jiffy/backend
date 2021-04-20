@@ -2,11 +2,14 @@ package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
+
 import lombok.*;
+
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -28,7 +31,9 @@ public class Contact implements Serializable {
     private String lastName;
     private String email;
     private String phone;
+    private boolean getDefaultContact;
     private boolean def;
+    private String getContactLabel;
 
     @OneToOne
     @JoinColumn(unique = true)

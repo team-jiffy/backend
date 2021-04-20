@@ -19,6 +19,7 @@ public class Contact {
 
     private Address Address;
 
+
     private Card Card;
 
     private String ContactLabel;

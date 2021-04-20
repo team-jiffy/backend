@@ -4,6 +4,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+
 @Getter
 @Setter
 @EqualsAndHashCode
@@ -24,6 +25,7 @@ public class Address implements Serializable {
     private String city;
     private String zip;
     private String aptNo;
+    private String state;
 
     @OneToOne(mappedBy = "billingAddress")
     private CreditCard creditCard;
@@ -36,4 +38,7 @@ public class Address implements Serializable {
 
     @OneToOne(mappedBy = "address")
     private Trip trip;
+
+
+
 }

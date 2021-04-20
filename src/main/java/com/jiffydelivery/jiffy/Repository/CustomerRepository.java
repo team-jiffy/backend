@@ -165,6 +165,7 @@ public class CustomerRepository {
       }
 
          dbuser = session.get(Customer
+
             .class,dbuserID);
          if(dbuser!= null) {
            dbuser.setEmail(updatedUser.getEmail());
@@ -173,7 +174,6 @@ public class CustomerRepository {
            dbuser.setPhone(updatedUser.getPhone());
          }
         session.update(updatedUser);
-
 
         session.beginTransaction();
 

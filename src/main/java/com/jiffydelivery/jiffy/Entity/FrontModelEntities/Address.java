@@ -11,6 +11,7 @@ import lombok.*;
 
 public class Address {
 
+
     private String Street1;
     private String Street2;
     private final String City = "San Francisco";
