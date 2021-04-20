@@ -7,10 +7,8 @@ import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
-import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.AllOrdersResponse;
-import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.NewOrderResponse;
-import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.OrderHistoryResponse;
-import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.RecoResponse;
+import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.CreateOrderRequest;
+import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -49,6 +47,31 @@ public class OrderRepository {
         }
         return newOrderResponse;
     }
+
+    // added by annie
+    // insert a new order record to order table
+    public NewOrderResponse createOrder(CreateOrderRequest order) {
+        Session session = null;
+        NewOrderResponse newOrderResponse = new NewOrderResponse();
+        try {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.saveOrUpdate(order);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                newOrderResponse.setMessage("Order created");
+                newOrderResponse.setStatus("200");
+                // TODO: newOrderResponse.setOrder(mapped Order)
+                session.close();
+            }
+        }
+        return newOrderResponse;
+    }
+    //
 
     public AllOrdersResponse getAllOrders(String UID) {
         AllOrdersResponse allOrdersResponse = new AllOrdersResponse();
@@ -163,4 +186,8 @@ public class OrderRepository {
 
     }
 
+    public Order getNonFiniOrder(int uid) {
+        //@TODO: Make this return the actual order in the db
+        return null;
+    }
 }

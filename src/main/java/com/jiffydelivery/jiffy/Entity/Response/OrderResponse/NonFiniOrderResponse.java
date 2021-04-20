@@ -1,17 +1,16 @@
 package com.jiffydelivery.jiffy.Entity.Response.OrderResponse;
 
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import lombok.*;
 
 @Getter
 @Setter
-@EqualsAndHashCode
 @AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode
 @ToString
-public class RecoResponse {
+public class NonFiniOrderResponse {
     private String status;
     private String message;
-    // private Reco[] recos;
-    private Object[] results;
+    private Order order;
 }

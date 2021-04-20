@@ -22,4 +22,7 @@ public class CreateOrderRequest {
 
     private Coordinates DeliverCoordinates;
     private Coordinates PickupCoordinates;
+
+    // price is a double on the frontend
+    private double Price;
 }
