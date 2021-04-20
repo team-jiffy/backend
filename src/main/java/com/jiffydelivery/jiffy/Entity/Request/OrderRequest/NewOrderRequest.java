@@ -6,6 +6,8 @@ import lombok.*;
 @Getter
 @Setter
 @EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 @ToString
 public class NewOrderRequest {
     private String ADVType;

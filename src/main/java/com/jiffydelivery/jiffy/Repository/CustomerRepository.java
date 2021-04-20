@@ -1,52 +1,40 @@
 package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
-
-    ;
-import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CreateCustomerRequest;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CreateCustomerResponse;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
+import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LogoutResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdateCustomerResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.UpdatePasswordResponse;
-import com.jiffydelivery.jiffy.JiffyApplication;
-import com.jiffydelivery.jiffy.JiffyApplicationConfig;
-import lombok.Getter;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
-
-//  public LoginResponse loginVerify (String email, String password){
+//
+//  public Customer loginVerify (String email, String password){
 //    LoginResponse loginResponse = new LoginResponse();
 //    Customer
 //        user = null;
 //    try (Session session = sessionFactory.openSession()) {
-//      //// TODO: 4/17/21
+//
 //      user = session.get(Customer
 //          .class,email);
 //    } catch (Exception ex) {
 //      ex.printStackTrace();
 //    }
-//    if(user!= null && user.getPassword() == password){
-//      loginResponse.setMessage("user verify success.");
-//      loginResponse.setCustomer
-//          (user);
-//      loginResponse.setStatus("200");
-//      return loginResponse;
-//
+// return user;
 //    }
-//    else return null;
-//  }
-//
+
+
 //
 //  public LogoutResponse logoutVerify (String UID){
 //    LogoutResponse logoutResponse = new LogoutResponse();
@@ -76,15 +64,19 @@ public class CustomerRepository {
 //    return logoutResponse;
 //
 //  }
+
+
+
+
 //create customer
-  public CreateCustomerResponse createCustomer (CreateCustomerRequest createCustomerRequest){
+  public Customer createCustomer (CustomerCreationRequest customerCreationRequest){
     Session session = null;
-    CreateCustomerResponse createCustomerResponse = new CreateCustomerResponse();
+    //CustomerCreationResponse customerCreationResponse = new CustomerCreationResponse();
     Customer user = new Customer();
-    user.setEmail(createCustomerRequest.getEmail());
-    user.setFirstName(createCustomerRequest.getFirstName());
-    user.setLastName(createCustomerRequest.getLastName());
-    user.setPassword(createCustomerRequest.getPassword());
+    user.setEmail(customerCreationRequest.getEmail());
+    user.setFirstName(customerCreationRequest.getFirstName());
+    user.setLastName(customerCreationRequest.getLastName());
+    user.setPassword(customerCreationRequest.getPassword());
     try {
       session = sessionFactory.openSession();
       session.beginTransaction();
@@ -93,21 +85,24 @@ public class CustomerRepository {
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
-      createCustomerResponse.setMessage("fail");
+      //createCustomerResponse.setMessage("fail");
     } finally {
       if (session != null) {
         session.close();
       }
     }
-    createCustomerResponse.setMessage("success");
-    createCustomerResponse.setStatus("200");
-    createCustomerResponse.setCustomer(user);
-    return createCustomerResponse;
+//    createCustomerResponse.setMessage("success");
+//    createCustomerResponse.setStatus("200");
+//    createCustomerResponse.setUser(user);
+    return user;
   }
+
+
+
 //update password
-  public UpdatePasswordResponse updatePassword (String UID, String password){
+  public PasswordUpdateResponse updatePassword (String UID, String password){
     Session session = null;
-    UpdatePasswordResponse updatePasswordResponse = new UpdatePasswordResponse();
+    PasswordUpdateResponse passwordUpdateResponse = new PasswordUpdateResponse();
     Customer
         user= null;
 
@@ -116,8 +111,8 @@ public class CustomerRepository {
       user = session.get(Customer
           .class,UID);
       if(user == null ){
-        updatePasswordResponse.setMessage("user not found");
-        updatePasswordResponse.setStatus("404");
+        passwordUpdateResponse.setMessage("user not found");
+        passwordUpdateResponse.setStatus("404");
 
       }
       user.setPassword(password);
@@ -127,109 +122,122 @@ public class CustomerRepository {
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
-      updatePasswordResponse.setMessage("fail");
+      passwordUpdateResponse.setMessage("fail");
     } finally {
       if (session != null) {
         session.close();
       }
     }
-    updatePasswordResponse.setMessage("update success");
-    updatePasswordResponse.setStatus("200");
+    passwordUpdateResponse.setMessage("update success");
+    passwordUpdateResponse.setStatus("200");
 
-    return updatePasswordResponse;
+    return passwordUpdateResponse;
   }
 //get customer information
-  public GetCustomerResponse getCustomerProfile (int UID){
+  public Customer getCustomerProfile (int UID){
     GetCustomerResponse getCustomerResponse = new GetCustomerResponse();
-    Customer
-        user = null;
+    Customer user = null;
     try (Session session = sessionFactory.openSession()) {
       user = session.get(Customer
-          .class,UID);
+          .class,(long)UID);
     } catch (Exception ex) {
       ex.printStackTrace();
     }
-    if(user!= null){
-      getCustomerResponse.setMessage("get user success.");
-      getCustomerResponse.setCustomer(user);
-      getCustomerResponse.setStatus("200");
 
-
-    }
-    else{
-      getCustomerResponse.setMessage("get user fail.");
-      getCustomerResponse.setStatus("404");
-
-    }
-    return getCustomerResponse;
+    return user;
   }
 
   //update customer profile
-  public UpdateCustomerResponse updateCustomer (Customer
-      updatedCustomer
+  public Customer updateCustomer (User
+      updatedUser
   ){
     Session session = null;
-    UpdateCustomerResponse updateCustomerResponse = new UpdateCustomerResponse();
-    Customer
-        user= null;
-
+   Customer dbuser = null;
+  long dbuserID = 0;
     try {
       session = sessionFactory.openSession();
-//      user = session.get(Customer
-//          .class,updatedCustomer
-//          .getId());
-      if(updatedCustomer == null ){
-        updateCustomerResponse.setMessage("user not found");
-        updateCustomerResponse.setStatus("404");
 
-      } else {
-        //user = updatedCustomer;
+      try{
+        dbuserID = Integer.parseInt(updatedUser.getUID());
+      } catch (NumberFormatException e) {
+        e.printStackTrace();
+
+      }
+
+         dbuser = session.get(Customer
+            .class,dbuserID);
+         if(dbuser!= null) {
+           dbuser.setEmail(updatedUser.getEmail());
+           dbuser.setFirstName(updatedUser.getFirstName());
+           dbuser.setLastName(updatedUser.getLastName());
+           dbuser.setPhone(updatedUser.getPhone());
+         }
+        session.update(updatedUser);
+
+
         session.beginTransaction();
-        try{ session.saveOrUpdate(updatedCustomer
-        );}
-        catch (Exception ex){
-          ex.printStackTrace();
-          updateCustomerResponse.setMessage("fail");
-        }
+
 //        session.update(updatedCustomer
 //        );
         session.getTransaction().commit();
-      }
+
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
-      updateCustomerResponse.setMessage("fail");
+
     } finally {
       if (session != null) {
         session.close();
       }
     }
-    updateCustomerResponse.setMessage("update success");
-    updateCustomerResponse.setStatus("200");
-    updateCustomerResponse.setCustomer(user);
-    return updateCustomerResponse;
+//    customerUpdateResponse.setMessage("update success");
+//    customerUpdateResponse.setStatus("200");
+//    customerUpdateResponse.setCustomer(user);
+    return dbuser;
   }
 
 
-  public static void main(String[] args) {
-    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
-        JiffyApplicationConfig.class);
+  public Customer checkUserPassword(String email, String password){
+    Session session = null;
+    Customer customer =null;
+    try{
+      session = sessionFactory.openSession();
+      session.beginTransaction();
+      String hql = "from Customer c where c.email=:e and c.password=:w";
+      Query query = session.createQuery(hql,Customer.class);
+      query.setParameter("e",email);
+      query.setParameter("w",password);
+      List<Customer> list = query.list();
+      System.out.println(list.size());
+      if (list.size()!=0){
+        customer = list.get(0);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
-    CustomerRepository test=  applicationContext.getBean(CustomerRepository.class);
-    // 1. Test for customer creation
-    // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
-    // test.createCustomer(createCustomerRequest);
-//     2. test for customer update
-     Customer testCustomer = new Customer(5,"xxxxx","oldpass","admin","updatefirst","updateLast","update phone",
-         null,null,null);
-     test.updateCustomer(testCustomer);
-    // 3. test for getting customer profile
-    // String log = test.getCustomerProfile(3).getCustomer().toString();
-    // System.out.println(log);
-
-//        test.updatePassword();
-
+    return customer;
   }
+
+//  public static void main(String[] args) {
+//    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(
+//        JiffyApplicationConfig.class);
+//
+//    CustomerRepository test=  applicationContext.getBean(CustomerRepository.class);
+//    // 1. Test for customer creation
+//    // CreateCustomerRequest createCustomerRequest = new CreateCustomerRequest("1@gmail.com","ethan","hunt","12345");
+//    // test.createCustomer(createCustomerRequest);
+////     2. test for customer update
+//     Customer testCustomer = new Customer(5,"xxxxx","oldpass","admin","updatefirst","updateLast","update phone",
+//         null,null,null);
+//     //test.updateCustomer(testCustomer);
+//    // 3. test for getting customer profile
+//    // String log = test.getCustomerProfile(3).getCustomer().toString();
+//    // System.out.println(log);
+//
+////        test.updatePassword();
+//
+//  }
 
 
 }

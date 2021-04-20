@@ -1,10 +1,10 @@
 package com.jiffydelivery.jiffy.Entity.Response.CustomerResponse;
 
-import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -12,14 +12,11 @@ import lombok.ToString;
 @Setter
 @AllArgsConstructor
 @EqualsAndHashCode
+@NoArgsConstructor
 @ToString
-
-public class CreateCustomerResponse {
+public class PasswordUpdateResponse {
   private String status;
   private String message;
-  private Customer customer;
 
-  public CreateCustomerResponse() {
 
-  }
 }

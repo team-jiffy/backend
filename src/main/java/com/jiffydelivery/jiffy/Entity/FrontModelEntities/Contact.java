@@ -11,16 +11,16 @@ import lombok.*;
 
 public class Contact {
 
-    private String lastName;
-    private String firstName;
-    private String phone;
-    private String email;
-    private ContactType contactType;
+    private String LastName;
+    private String FirstName;
+    private String Phone;
+    private String Email;
+    private ContactType ContactType;
 
-    private Address address;
+    private Address Address;
 
-    private Card card;
+    private Card Card;
 
-    private String contactLabel;
-    private boolean isDefaultContact;
+    private String ContactLabel;
+    private boolean Default;
 }

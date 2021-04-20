@@ -18,15 +18,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 @Entity
 @Table(name = "Order_table")
 public class Order implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7529996499351526523L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
 
     private double packageWeight;
     private double price;
@@ -60,12 +59,11 @@ public class Order implements Serializable {
     private Contact senderContact;
 
     @OneToOne
-    private Contact recipiantContact;
+    private Contact recipientContact;
 
     @ManyToOne
     private Customer customer;
 
-    @OneToMany(mappedBy = "order")
-    private List<Trip> trip;
-
+    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    private Trip trip;
 }

@@ -2,21 +2,24 @@ package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
-import lombok.Getter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
-
 @Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 @Entity
 @Table(name = "Contact")
 public class Contact implements Serializable {
-    private static final long serialVersionUID = 7551999649936522523L;
+    private static final long serialVersionUID = 7552252199964993653L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private int id;
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    private long id;
 
     @Enumerated(EnumType.STRING)
     private ContactType contactType;
@@ -38,7 +41,7 @@ public class Contact implements Serializable {
     @OneToOne(mappedBy = "senderContact")
     private Order orderSend;
 
-    @OneToOne(mappedBy = "recipiantContact")
+    @OneToOne(mappedBy = "recipientContact")
     private Order orderReci;
 
 
