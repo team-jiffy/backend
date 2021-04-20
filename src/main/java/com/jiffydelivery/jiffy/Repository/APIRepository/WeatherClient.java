@@ -1,6 +1,6 @@
 package com.jiffydelivery.jiffy.Repository.APIRepository;
 
-import Entity.WeatherResponse;
+import com.jiffydelivery.jiffy.Repository.APIRepository.Entity.WeatherResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.ResponseHandler;

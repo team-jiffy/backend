@@ -4,8 +4,6 @@ import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
