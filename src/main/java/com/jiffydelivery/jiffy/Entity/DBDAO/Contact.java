@@ -26,7 +26,9 @@ public class Contact implements Serializable {
     private String lastName;
     private String email;
     private String phone;
+    private boolean getDefaultContact;
     private boolean def;
+    private String getContactLabel;
 
     @OneToOne
     @JoinColumn(unique = true)

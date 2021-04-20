@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
+
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
@@ -13,16 +14,22 @@ import org.springframework.stereotype.Repository;
 public class ContactRepository {
     @Autowired
     private SessionFactory sessionFactory;
-    public Contact addContact(String UID, Contact contact) {
 
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact addContactToUser(String UID, Contact contact) {
         Session session = null;
         Customer user = null;
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbcontact = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
+
         try {
             session = sessionFactory.openSession();
+            //string uid to long dbuser id
+            //int userintID =
+
             user = session.get(Customer.class,UID);
-            contact.
+            dbcontact.setCustomer(user);
+
             session.beginTransaction();
-            session.save(contact);
+            session.save(dbcontact);
             session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -32,8 +39,65 @@ public class ContactRepository {
                 session.close();
             }
         }
-        return Contact;
+        return dbcontact;
     }
+
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact updateContactToUser(String UID,
+                                                                           Contact contact,
+                                                                            String ContactID) {
+        Session session = null;
+        Customer user = null;
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbcontact = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
+
+        try {
+            session = sessionFactory.openSession();
+            user = session.get(Customer.class,UID);
+            //List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact address : addressList>
+            //for ()
+            dbcontact.setCustomer(user);
+
+            session.beginTransaction();
+            session.save(dbcontact);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return dbcontact;
+    }
+
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact setContact(String UID, String ContactID) {
+        Session session = null;
+        Customer user = null;
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbcontact = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
+
+        try {
+            session = sessionFactory.openSession();
+            user = session.get(Customer.class,UID);
+            //List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact address : addressList>
+            //for ()
+            dbcontact.setCustomer(user);
+
+            session.beginTransaction();
+            session.save(dbcontact);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return dbcontact;
+    }
+
+
+
     public void setContactAsDefault(String contactId) {
         Session session = null;
         try {

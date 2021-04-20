@@ -4,12 +4,6 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
-@Getter
-@Setter
-@EqualsAndHashCode
-@AllArgsConstructor
-@NoArgsConstructor
-@ToString
 
 @Getter
 @Setter
@@ -31,6 +25,7 @@ public class Address implements Serializable {
     private String city;
     private String zip;
     private String aptNo;
+    private String state;
 
     @OneToOne(mappedBy = "billingAddress")
     @JoinColumn(unique = true)

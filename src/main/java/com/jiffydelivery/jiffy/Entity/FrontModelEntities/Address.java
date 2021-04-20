@@ -13,8 +13,8 @@ public class Address {
 
     private String street1;
     private String street2;
-    private final String city = "San Francisco";
-    private final String state = "California";
+    private String city = "San Francisco";
+    private String state = "California";
     private String zip;
     private String aptNo;
 

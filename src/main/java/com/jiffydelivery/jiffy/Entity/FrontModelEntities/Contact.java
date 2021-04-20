@@ -18,6 +18,7 @@ public class Contact {
     private ContactType contactType;
 
     private Address address;
+    private String UID;
 
     private Card card;
 
