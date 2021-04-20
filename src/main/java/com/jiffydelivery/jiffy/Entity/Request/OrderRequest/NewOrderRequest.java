@@ -17,4 +17,7 @@ public class NewOrderRequest {
 
     private Contact senderContactId;
     private Contact recipientContactId;
+
+    // price is a double
+
 }
