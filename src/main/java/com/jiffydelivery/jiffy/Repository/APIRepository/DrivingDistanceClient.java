@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Repository.APIRepository;
 
+import com.jiffydelivery.jiffy.Entity.DAO.PositionCoordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -15,7 +16,9 @@ public class    DrivingDistanceClient {
     static final String baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
     static final String APIKey = "AIzaSyBdSLzCEPaTQTlR4mrIZtmt68fQy82AKCU";
 
-    public double getDrivingDistance(Coordinates position1, Coordinates position2) throws MalformedURLException {
+//     Get Driving distance in miles of two LatLong
+
+    public double getDrivingDistance(PositionCoordinates position1, PositionCoordinates position2) throws MalformedURLException {
 
 //    public double getDrivingDistance(double lat1, double lng1, double lat2, double lng2) throws MalformedURLException {
         String url1 = baseUrl + "origins=" +
@@ -80,12 +83,12 @@ public class    DrivingDistanceClient {
     }
     public static void main(String[] args) throws ParseException, MalformedURLException {
         DrivingDistanceClient drivingDistanceClient = new DrivingDistanceClient();
-        Coordinates position1 = new Coordinates();
-        Coordinates position2 = new Coordinates();
-        position1.setLatitude(String.valueOf(36.5785810));
-        position1.setLongitude(String.valueOf(-118.2919940));
-        position2.setLatitude(String.valueOf(36.5785810));
-        position1.setLongitude(String.valueOf(-104.98470340));
+        PositionCoordinates position1 = new PositionCoordinates();
+        PositionCoordinates position2 = new PositionCoordinates();
+        position1.setLatitude(36.5785810);
+        position1.setLongitude(-118.2919940);
+        position2.setLatitude(36.5785810);
+        position1.setLongitude(-104.98470340);
         System.out.println(drivingDistanceClient.getDrivingDistance(position1,position2));
     }
 }
