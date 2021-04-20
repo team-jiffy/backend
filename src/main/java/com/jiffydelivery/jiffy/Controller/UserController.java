@@ -25,7 +25,7 @@ public class UserController {
     @Autowired UserService userService;
 
     /* maps to API #17. Sign up a user*/
-    @PutMapping("/signup")
+    @PostMapping("/signup")
     public CustomerCreationResponse createOrder(@RequestBody CustomerCreationRequest userRequest) {
         return userService.CreateCustomerResponse(userRequest);
     }
