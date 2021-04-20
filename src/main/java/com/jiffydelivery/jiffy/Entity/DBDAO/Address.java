@@ -26,18 +26,14 @@ public class Address implements Serializable {
     private String aptNo;
 
     @OneToOne(mappedBy = "billingAddress")
-    @JoinColumn(unique = true)
     private CreditCard creditCard;
 
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
     private Contact contact;
 
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
     private WareHouse wareHouse;
 
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
     private Trip trip;
 }

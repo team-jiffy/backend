@@ -72,16 +72,8 @@ public class OrderController {
     }
 
     @PostMapping("/order/getReco")
-    public RecoResponse createReco(@RequestBody RecoRequest recoRequest,
-                                   HttpServletRequest req, HttpServletResponse res) {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            RecoResponse response = new RecoResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+    public RecoResponse createReco(@RequestBody RecoRequest recoRequest) {
+
         System.out.println(recoRequest.toString());
         // TODO: return related service API with recoRequest as param
         return new RecoResponse("200", "OK", new Reco[]{new Reco("drone", "$19.90", "13:30")});
