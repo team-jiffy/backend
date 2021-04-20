@@ -29,6 +29,6 @@ public class ADV implements Serializable {
     private ADVSpec ADVSpec;
 
     @OneToOne(mappedBy = "ADV")
+    @JoinColumn(unique = true)
     private Trip trip;
-
 }

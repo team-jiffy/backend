@@ -41,7 +41,7 @@ public class Contact implements Serializable {
     @OneToOne(mappedBy = "senderContact")
     private Order orderSend;
 
-    @OneToOne(mappedBy = "recipiantContact")
+    @OneToOne(mappedBy = "recipientContact")
     private Order orderReci;
 
 
