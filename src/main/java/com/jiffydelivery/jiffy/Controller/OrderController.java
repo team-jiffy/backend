@@ -76,7 +76,10 @@ public class OrderController {
 
         System.out.println(recoRequest.toString());
         // TODO: return related service API with recoRequest as param
-        return new RecoResponse("200", "OK", new Reco[]{new Reco("drone", "$19.90", "13:30")});
+        // return new RecoResponse("200", "OK", new Reco[]{new Reco("drone", "$19.90", "13:30")});
+        return new RecoResponse("200", "OK", new Reco[]{new Reco("private drone", "$19.90", "13:30"),
+                new Reco("private robot", "$15.90", "09:30"),
+                new Reco("shared drone", "$9.90", null)});
     }
 
 }

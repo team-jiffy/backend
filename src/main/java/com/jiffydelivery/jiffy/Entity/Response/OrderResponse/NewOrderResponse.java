@@ -9,7 +9,7 @@ import lombok.*;
 @NoArgsConstructor
 @EqualsAndHashCode
 @ToString
-public class NewOrderResponse {
+public class CreateOrderResponse {
     private String status;
     private String message;
     private Order order;
