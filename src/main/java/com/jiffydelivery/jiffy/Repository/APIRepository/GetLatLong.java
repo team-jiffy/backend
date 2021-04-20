@@ -13,10 +13,12 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-public class GoogleClient{
+public class GetLatLong {
         static final String baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?";
         static final String location = "address=%s&Key=%s";
         static final String APIKey = "AIzaSyBdSLzCEPaTQTlR4mrIZtmt68fQy82AKCU";
+
+//        get LatLong of an address
 
         public double[] getCoordinates(Address address) throws MalformedURLException {
                 String addressString = address.getStreet1() + " " +
@@ -101,7 +103,7 @@ public class GoogleClient{
                 return null;
         }
         public static void main(String[] args) throws ParseException, MalformedURLException {
-                GoogleClient googleClient = new GoogleClient();
+                GetLatLong googleClient = new GetLatLong();
                 Address address = new Address();
                 address.setStreet1("1600 Amphitheatre Parkway");
                 address.setCity("Mountain View");
