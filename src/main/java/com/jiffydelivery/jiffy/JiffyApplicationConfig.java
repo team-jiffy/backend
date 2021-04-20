@@ -22,6 +22,7 @@ public class JiffyApplicationConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
+                        .allowedMethods("PUT", "DELETE","POST","GET")
                         .allowedOrigins("*")
                         .maxAge(3600);
             }
