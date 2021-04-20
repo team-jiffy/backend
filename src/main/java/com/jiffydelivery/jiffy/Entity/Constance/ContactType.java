@@ -1,12 +1,16 @@
 package com.jiffydelivery.jiffy.Entity.Constance;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import lombok.Getter;
 
 @Getter
 public enum ContactType {
-    sender("sender"),
-    recipient("recipient");
+
+    Sender("sender"),
+    Recipient("recipient");
 
     private String contactType;
 
@@ -14,7 +18,8 @@ public enum ContactType {
         this.contactType = typeString;
     }
 
-    public String getString(){
+    @JsonValue
+    public String getContactType(){
         return contactType;
     }
 
