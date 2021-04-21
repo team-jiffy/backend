@@ -117,17 +117,17 @@ public class UserService {
   public User checkUserPassword(String email, String password){
     Customer customer = customerRepository.checkUserPassword(email,password);
 
-    if (customer==null) return null;
-    com.jiffydelivery.jiffy.Entity.DBDAO.Contact[] contacts = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact[2];
-
-    for (com.jiffydelivery.jiffy.Entity.DBDAO.Contact contact : customer.getContact()){
-      if (contact.getContactType().equals(ContactType.Sender) && contact.isDef()){
-        contacts[0] = contact;
-      }
-      if (contact.getContactType().equals(ContactType.Recipient) && contact.isDef()){
-        contacts[0] = contact;
-      }
-    }
+//    if (customer==null) return null;
+//    com.jiffydelivery.jiffy.Entity.DBDAO.Contact[] contacts = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact[2];
+//
+//    for (com.jiffydelivery.jiffy.Entity.DBDAO.Contact contact : customer.getContact()){
+//      if (contact.getContactType().equals(ContactType.Sender) && contact.isDef()){
+//        contacts[0] = contact;
+//      }
+//      if (contact.getContactType().equals(ContactType.Recipient) && contact.isDef()){
+//        contacts[0] = contact;
+//      }
+//    }
 
     return new User(customer.getEmail(),customer.getLastName(),null,
             String.valueOf(customer.getId()),customer.getFirstName(),customer.getPhone(),"",
