@@ -31,14 +31,14 @@ public class PaymentController {
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest,
                                          HttpServletRequest req, HttpServletResponse res) {
 
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            NewPaymentResponse response = new NewPaymentResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            NewPaymentResponse response = new NewPaymentResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
 
         NewPaymentResponse newPaymentResponse = peymentService.addPayment(newPaymentRequest);
 
@@ -49,14 +49,14 @@ public class PaymentController {
     public UpdatePaymentResponse updatePayment(@RequestBody UpdatePaymentRequest updatePaymentRequest,
                                                HttpServletRequest req, HttpServletResponse res) {
 
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            UpdatePaymentResponse response = new UpdatePaymentResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            UpdatePaymentResponse response = new UpdatePaymentResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
 //        UpdatePaymentResponse updatePaymentResponse = peymentService.updatePayment(updatePaymentRequest);
 
         return new UpdatePaymentResponse("200", "ok", new Card("1234","credit",
@@ -68,14 +68,14 @@ public class PaymentController {
                                               HttpServletRequest req, HttpServletResponse res) {
         //System.out.println("testRequestParam" + UID);
 
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            AllPaymentsResponse response = new AllPaymentsResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            AllPaymentsResponse response = new AllPaymentsResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
 
         AllPaymentsResponse allPaymentsResponse = peymentService.getAllPayments(UID);
 
@@ -86,14 +86,14 @@ public class PaymentController {
     public DeletePaymentResponse deletePayment(@RequestBody DeletePaymentRequest deletePaymentRequest,
                                                 HttpServletRequest req, HttpServletResponse res) {
 
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            DeletePaymentResponse response = new DeletePaymentResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            DeletePaymentResponse response = new DeletePaymentResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
 
         peymentService.deletePayment(deletePaymentRequest);
 
@@ -103,14 +103,14 @@ public class PaymentController {
     @PutMapping("/billing/setDefault")
     public SetDefaultResponse setDefault(@RequestBody SetDefaultRequest setDefaultRequest,
                                          HttpServletRequest req, HttpServletResponse res) {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            SetDefaultResponse response = new SetDefaultResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            SetDefaultResponse response = new SetDefaultResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
 
         return new SetDefaultResponse("200", "ok", new Card("1234","credit",
                 "visa","yubo",new Address(),  new Address(),"card-1",true));

@@ -71,14 +71,14 @@ public class UserController {
     /* maps to API #20 update a user's info */
     @PostMapping("/users/updateInfo")
     public CustomerUpdateResponse updateCustomer(@RequestBody User newUser, HttpServletRequest req, HttpServletResponse res) {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            CustomerUpdateResponse response = new CustomerUpdateResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            CustomerUpdateResponse response = new CustomerUpdateResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
         // TODO: User actual user input to initialize the User
         return userService.updateCustomer(newUser);
     }
@@ -86,14 +86,14 @@ public class UserController {
     /* maps to API #21. get user profile */
     @GetMapping("/user/profile")
     public GetCustomerResponse getCustomer(@RequestParam(value="UID", required = false) String UID,  HttpServletRequest req, HttpServletResponse res) {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            GetCustomerResponse response = new GetCustomerResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            GetCustomerResponse response = new GetCustomerResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
         int uidAsInt=Integer.parseInt(UID);
         return userService.getCustomer(uidAsInt);
     }
@@ -104,14 +104,14 @@ public class UserController {
                                                  @RequestParam(value="password", required = true, defaultValue="defaultPassword") String password,
                                                  HttpServletRequest req, HttpServletResponse res) {
 //        System.out.println("UID is: " + UID);
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            PasswordUpdateResponse response = new PasswordUpdateResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            PasswordUpdateResponse response = new PasswordUpdateResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
         return userService.updatePassword(UID, password);
     }
 }
