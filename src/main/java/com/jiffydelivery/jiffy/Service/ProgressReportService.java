@@ -109,8 +109,8 @@ public class ProgressReportService {
                 new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Trip();
         resTrip.setTripType(newTrip.getTripType());
         Address address = newTrip.getAddress();
-        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address addressFrontend = new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address(
-            address.getStreet1(), address.getStreet2(), address.getZip(), address.getAptNo());
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address addressFrontend =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address(address);
         double[] coordinates = getLatLong.getCoordinates(addressFrontend);
         Coordinates coordinate = new Coordinates(String.valueOf(coordinates[0]), String.valueOf(coordinates[1]));
         resTrip.setCoordinates(coordinate);

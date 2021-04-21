@@ -28,7 +28,6 @@ public class ADVRepository {
         } finally {
             if (session!=null){
                 session.close();
-                return null;
             }
         }
         return adv;
