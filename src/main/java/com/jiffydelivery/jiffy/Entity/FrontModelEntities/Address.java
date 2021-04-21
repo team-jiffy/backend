@@ -18,4 +18,14 @@ public class Address {
     private String Zip;
     private String AptNo;
 
+    public Address(com.jiffydelivery.jiffy.Entity.DBDAO.Address backendAddress){
+        this.Street1 = backendAddress.getStreet1();
+        this.Street1 = backendAddress.getStreet2();
+        this.City = "San Francisco";
+        this.State ="California";
+        this.Zip = backendAddress.getZip();
+        this.AptNo = backendAddress.getAptNo();
+
+    }
+
 }
