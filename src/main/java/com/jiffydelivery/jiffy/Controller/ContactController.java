@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -67,14 +68,14 @@ public class ContactController {
     @RequestMapping(value = "/contact/setDefault", method = RequestMethod.POST)
     public SetDefaultAddressResponse setAddress(@RequestBody SetDefaultAddressRequest address,
                                          HttpServletRequest req, HttpServletResponse res) {
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            SetAddressResponse response = new SetAddressResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            SetAddressResponse response = new SetAddressResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
 
         SetDefaultAddressResponse setDefaultAddressResponse = contactService.setAddressAsDefault(address);
 
