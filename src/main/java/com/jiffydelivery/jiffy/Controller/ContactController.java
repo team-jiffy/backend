@@ -92,7 +92,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/getContacts", method = RequestMethod.GET)
-    public GetAddressResponse getAddress(@RequestParam String ContactID,
+    public GetAddressResponse getAddress(@RequestParam String UID,
                                          HttpServletRequest req, HttpServletResponse res) {
         HttpSession session = req.getSession(false);
         if (session==null){
@@ -102,7 +102,7 @@ public class ContactController {
             res.setStatus(404);
             return response;
         }
-        System.out.println("testRequestParam: " + ContactID);
+        System.out.println("testRequestParam: " + UID);
         return new GetAddressResponse();
     }
 

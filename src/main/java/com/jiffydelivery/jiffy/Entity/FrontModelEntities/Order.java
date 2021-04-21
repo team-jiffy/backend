@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import lombok.*;
 
 @Getter
@@ -20,7 +21,7 @@ public class Order {
 
     private User BuyerUserId;
 
-    private String ADVType;
+    private com.jiffydelivery.jiffy.Entity.Constance.ADVType ADVType;
     private String ETA;
     private boolean SameDay;
     private String Price;
@@ -32,4 +33,18 @@ public class Order {
     private Position Position;
 
     private Card PaymentCardId;
+
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Order toDAO(){
+        com.jiffydelivery.jiffy.Entity.DBDAO.Order order =
+                new com.jiffydelivery.jiffy.Entity.DBDAO.Order();
+        order.setTrackNumber(String.valueOf(this.TrackNumber));
+        order.setADVType(this.ADVType);
+        order.setOrderLabel(this.OrderLabel);
+        order.setPrice(Double.valueOf(this.Price));
+        order.setSameday(this.SameDay);
+        //todo make up
+//        order.setPlaceOrderDate();
+//        order.setOrderStatus();
+        return order;
+    }
 }
