@@ -37,7 +37,7 @@ public class OrderController {
         }
         System.out.println(newOrderRequest.toString());
         NewOrderResponse newOrderResponse = orderService.createOrder(newOrderRequest);
-        robotService.assignNewOrderToRobot(newOrderResponse.getOrder().toDAO());
+        //robotService.assignNewOrderToRobot(newOrderResponse.getOrder().toDAO());
         return newOrderResponse;
     }
 
