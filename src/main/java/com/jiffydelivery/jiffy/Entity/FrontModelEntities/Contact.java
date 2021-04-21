@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import lombok.*;
 
 @Getter
@@ -9,17 +10,20 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Contact {
-
+    private String ContactID;
     private String LastName;
     private String FirstName;
     private String Phone;
     private String Email;
-    private ContactType ContactType;
+    private com.jiffydelivery.jiffy.Entity.Constance.ContactType ContactType;
 
     private Address Address;
 
-    private Card Card;
+
 
     private String ContactLabel;
     private boolean Default;
+
+
+
 }
