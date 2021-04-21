@@ -12,5 +12,5 @@ public class Deliver {
     private String Name;
     private String Email;
     private String Phone;
-    private Address DeliveryAddress;
+    private Address Address;
 }

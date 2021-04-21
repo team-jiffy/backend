@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Controller;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.*;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
@@ -32,9 +33,7 @@ public class OrderController {
             return response;
         }
         System.out.println(newOrderRequest.toString());
-//      TODO: return related service API with newOrderRequest as param
-        return new NewOrderResponse("200","OK",new Order("label", null, null, 1, null, "drone", "13:30", true,
-                "$19.90", "Apr 11", "on delivery", "small", null, null));
+        return orderService.createOrder(newOrderRequest);
     }
 
     @GetMapping("/order/getAllOrders")
@@ -50,25 +49,17 @@ public class OrderController {
         }
         System.out.println("testRequestParam: " + UID);
         // TODO: return related service API with allOrdersRequest as param
-        return new AllOrdersResponse("200", "OK", new BriefOrder[]{new BriefOrder.BriefOrderBuilder()
-                .trackNumber(1)
-                .senderName("hayley")
-                .recipientName("zev")
-                .orderDate("Apr 11")
-                .ADVType("robot")
-                .orderDate("Apr 13")
-                .orderStatus("on process")
-                .build()});
+        return orderService.GetAllOrders(UID);
     }
 
     @GetMapping("/order/getOrderHistory")
     public OrderHistoryResponse getOrderHistory(@RequestParam(value="trackNumber", required = false) String trackNumber,
-                                                @RequestParam(value="UID", required = false) String UID) {
-        System.out.println("testRequestParam: " + "trackNumber: " + trackNumber + "; " + "UID: " + UID);
-        // TODO: return related service API with orderHistoryRequest as param
-        return new OrderHistoryResponse("200", "OK", new Order("label", null, null, 1, null, "drone",
-                "13:30", true,
-                "$19.90", "Apr 11", "on delivery", "small", null, null));
+                                        HttpServletRequest req, HttpServletResponse res) {
+        OrderHistoryResponse response = orderService.GetOrderHistory(trackNumber);
+        if (!response.getStatus().equals("success")) {
+            res.setStatus(404);
+        }
+        return response;
     }
 
     @PostMapping("/order/getReco")

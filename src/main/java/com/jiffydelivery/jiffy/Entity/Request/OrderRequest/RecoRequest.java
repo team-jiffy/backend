@@ -18,8 +18,8 @@ import lombok.*;
 //    private int weight;
 //}
 public class RecoRequest {
-    private Pickup PickupAddress;
-    private Deliver DeliveryAddress;
+    private Address Deliver;
+    private Address Pickup;
     private int weight;
 }
 

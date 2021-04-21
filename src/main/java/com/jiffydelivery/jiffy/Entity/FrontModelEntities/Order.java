@@ -1,7 +1,13 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
+import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
 import lombok.*;
+
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Locale;
 
 @Getter
 @Setter
@@ -9,15 +15,15 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @ToString
-
 public class Order {
 
+    private int UID;
     private String OrderLabel;
 
     private Contact SenderContactId;
     private Contact RecipientContactId;
 
-    private int TrackNumber;
+    private String TrackNumber;
 
     private User BuyerUserId;
 
@@ -26,7 +32,7 @@ public class Order {
     private boolean SameDay;
     private String Price;
     private String OrderDate;
-    private String OrderStatus;
+    private com.jiffydelivery.jiffy.Entity.Constance.OrderStatus OrderStatus;
 
     private String PackageInfo;
 
@@ -42,9 +48,19 @@ public class Order {
         order.setOrderLabel(this.OrderLabel);
         order.setPrice(Double.valueOf(this.Price));
         order.setSameday(this.SameDay);
-        //todo make up
-//        order.setPlaceOrderDate();
-//        order.setOrderStatus();
+        order.setPrice(Double.valueOf(this.Price));
+        order.setSameday(this.SameDay);
+        order.setOrderStatus(this.OrderStatus);
+        Calendar cal= Calendar.getInstance();
+        cal.setTime(new SimpleDateFormat("dd/MM/yyyy")
+                .parse(this.OrderDate,new ParsePosition(0)));
+        order.setPlaceOrderDate(cal);
+        order.setADVType(this.ADVType);
+        order.setETA(new SimpleDateFormat("dd/MM/yyyy")
+                .parse(this.ETA,new ParsePosition(0)));
+        order.setCreditCard(this.PaymentCardId.toDAO());
+        order.setSenderContact(this.SenderContactId.toDAO());
+        order.setRecipientContact(this.RecipientContactId.toDAO());
         return order;
     }
 }

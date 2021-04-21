@@ -1,6 +1,7 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import lombok.*;
 
 import javax.persistence.*;
@@ -24,7 +25,6 @@ public class Customer implements Serializable {
 
     private String email;
     private String password;
-
     private String authorities;
     private String firstName;
     private String lastName;
@@ -42,4 +42,15 @@ public class Customer implements Serializable {
     @OneToMany(mappedBy = "customer")
     @JsonIgnore
     private List<Order> order;
+
+    public User extract(){
+        User user = new User();
+        user.setEmail(this.email);
+        user.setLastName(lastName);
+        user.setFirstName(firstName);
+        user.setUID(String.valueOf(id));
+        user.setPhone(phone);
+        user.setProfilePictureURL("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5Yz0qclAV0rsQh3P7JZ1oMd72xNbAydXFTA&usqp=CAU");
+        return user;
+    }
 }

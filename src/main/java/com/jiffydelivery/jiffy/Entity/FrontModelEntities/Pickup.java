@@ -12,5 +12,5 @@ public class Pickup {
     private String Name;
     private String Email;
     private String Phone;
-    private Address PickupAddress;
+    private Address Address;
 }

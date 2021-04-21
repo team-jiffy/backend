@@ -25,7 +25,7 @@ public class GetLatLong {
                                         address.getStreet2() + ", " +
                                         "San Francisco" + " " +
                                         "CA";
-                addressString.replaceAll("\\s+","+");
+                addressString = addressString.replaceAll("\\s+","+");
                 String url1 = baseUrl + "address="+addressString + "&key=" + APIKey;
                 URL url = new URL(url1);
                 try {

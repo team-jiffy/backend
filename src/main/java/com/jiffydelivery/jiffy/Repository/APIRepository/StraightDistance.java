@@ -11,7 +11,7 @@ public class StraightDistance {
 
 //    get Straight distance of two addresses for Drone;
 
-    private static double distance(PositionCoordinates coord1, PositionCoordinates coord2) {
+    public static double distance(PositionCoordinates coord1, PositionCoordinates coord2) {
         String unit="M";
         if ((coord1.getLatitude()==coord2.getLatitude())
                 && coord1.getLongitude()==coord1.getLongitude()) {

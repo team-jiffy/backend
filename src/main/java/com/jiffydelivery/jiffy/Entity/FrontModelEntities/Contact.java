@@ -24,6 +24,20 @@ public class Contact {
     private String ContactLabel;
     private boolean Default;
 
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact toDAO(){
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact contact =
+                new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
 
+        contact.setId(Long.valueOf(ContactID));
+        contact.setLastName(LastName);
+        contact.setFirstName(FirstName);
+        contact.setPhone(Phone);
+        contact.setEmail(Email);
+        contact.setContactType(ContactType);
+        contact.setAddress(Address.toDAO());
+        contact.setDef(Default);
+
+        return contact;
+    }
 
 }

@@ -22,14 +22,14 @@ public class ContactController {
     public AddAddressResponse addAddress(@RequestBody AddAddressRequest address,
                                          HttpServletRequest req, HttpServletResponse res) {
 
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            AddAddressResponse response = new AddAddressResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            AddAddressResponse response = new AddAddressResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
 
         //4/28
         //call contact service, input address request, return address response
@@ -47,14 +47,14 @@ public class ContactController {
     public UpdateAddressResponse updateAddress(@RequestBody UpdateAddressRequest address,
                                                HttpServletRequest req, HttpServletResponse res) {
 
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            UpdateAddressResponse response = new UpdateAddressResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            UpdateAddressResponse response = new UpdateAddressResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
 
         UpdateAddressResponse updateAddressResponse = contactService.updateAddress(address);
 
@@ -70,7 +70,7 @@ public class ContactController {
                                          HttpServletRequest req, HttpServletResponse res) {
         HttpSession session = req.getSession(false);
         if (session==null){
-            SetAddressResponse response = new SetAddressResponse();
+            SetDefaultAddressResponse response = new SetDefaultAddressResponse();
             response.setStatus("Failed");
             response.setMessage("You should login first");
             res.setStatus(404);
