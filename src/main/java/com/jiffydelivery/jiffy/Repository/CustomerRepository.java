@@ -1,40 +1,36 @@
 package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
-
-    ;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.CustomerRequest.CustomerCreationRequest;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.CustomerUpdateResponse;
-import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.LoginResponse;
 import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.PasswordUpdateResponse;
-import com.jiffydelivery.jiffy.JiffyApplicationConfig;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CustomerRepository {
   @Autowired
   private SessionFactory sessionFactory;
-
-  public Customer loginVerify (String email, String password){
-    LoginResponse loginResponse = new LoginResponse();
-    Customer
-        user = null;
-    try (Session session = sessionFactory.openSession()) {
-
-      user = session.get(Customer
-          .class,email);
-    } catch (Exception ex) {
-      ex.printStackTrace();
-    }
- return user;
-    }
+//
+//  public Customer loginVerify (String email, String password){
+//    LoginResponse loginResponse = new LoginResponse();
+//    Customer
+//        user = null;
+//    try (Session session = sessionFactory.openSession()) {
+//
+//      user = session.get(Customer
+//          .class,email);
+//    } catch (Exception ex) {
+//      ex.printStackTrace();
+//    }
+// return user;
+//    }
 
 
 //
@@ -71,6 +67,7 @@ public class CustomerRepository {
 
 
 //create customer
+
   public Customer createCustomer (CustomerCreationRequest customerCreationRequest){
     Session session = null;
     //CustomerCreationResponse customerCreationResponse = new CustomerCreationResponse();
@@ -87,15 +84,11 @@ public class CustomerRepository {
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
-      //createCustomerResponse.setMessage("fail");
     } finally {
       if (session != null) {
         session.close();
       }
     }
-//    createCustomerResponse.setMessage("success");
-//    createCustomerResponse.setStatus("200");
-//    createCustomerResponse.setUser(user);
     return user;
   }
 
@@ -198,6 +191,28 @@ public class CustomerRepository {
     return dbuser;
   }
 
+
+  public Customer checkUserPassword(String email, String password){
+    Session session = null;
+    Customer customer =null;
+    try{
+      session = sessionFactory.openSession();
+      session.beginTransaction();
+      String hql = "from Customer c where c.email=:e and c.password=:w";
+      Query query = session.createQuery(hql,Customer.class);
+      query.setParameter("e",email);
+      query.setParameter("w",password);
+      List<Customer> list = query.list();
+      System.out.println(list.size());
+      if (list.size()!=0){
+        customer = list.get(0);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+
+    return customer;
+  }
 
 //  public static void main(String[] args) {
 //    ApplicationContext applicationContext = new AnnotationConfigApplicationContext(

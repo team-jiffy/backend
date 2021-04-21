@@ -22,6 +22,7 @@ public class JiffyApplicationConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
+                        .allowedMethods("PUT", "DELETE","POST","GET")
                         .allowedOrigins("*")
                         .maxAge(3600);
             }
@@ -41,7 +42,7 @@ public class JiffyApplicationConfig {
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
         dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-        dataSource.setUrl("jdbc:mysql://jiffydb2.cm5giifmqrqj.us-east-2.rds.amazonaws.com/jiffyDB");
+        dataSource.setUrl("jdbc:mysql://jiffydb.cm5giifmqrqj.us-east-2.rds.amazonaws.com/jiffyDB");
         dataSource.setUsername("admin");
         dataSource.setPassword("adminadmin");
         return dataSource;

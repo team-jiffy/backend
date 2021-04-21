@@ -8,7 +8,7 @@ import lombok.*;
 @ToString
 @AllArgsConstructor
 @NoArgsConstructor
-public class SetAddressResponse {
+public class SetDefaultAddressResponse {
    public String Status;
    public String Message;
    public com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact Contact;

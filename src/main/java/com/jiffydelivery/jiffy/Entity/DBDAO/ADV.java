@@ -1,12 +1,15 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.Enabled;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 @Getter
+@Setter
 @Entity
 @Table(name = "ADV")
 public class ADV implements Serializable {
@@ -29,6 +32,7 @@ public class ADV implements Serializable {
     private ADVSpec ADVSpec;
 
     @OneToOne(mappedBy = "ADV")
+    @JoinColumn(unique = true)
+    @JsonIgnore
     private Trip trip;
-
 }

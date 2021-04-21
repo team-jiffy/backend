@@ -1,6 +1,8 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +28,8 @@ public class CreditCard implements Serializable {
 
     private String cardNumber;
 
+    private String CardLabel;
+
     private String CVV;
 
     private String zip;
@@ -38,11 +42,27 @@ public class CreditCard implements Serializable {
     @JoinColumn(unique=true)
     Address billingAddress;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Customer customer;
 
-    @OneToMany(mappedBy = "creditCard")
-    private List<Order> order;
+    @OneToOne(mappedBy = "creditCard")
+    @JsonIgnore
+    private Order order;
+
+    public Card extract(){
+        Card card = new Card();
+        card.setLastFourDigits("*"+cardNumber.substring(cardNumber.length()-4));
+        card.setCardType("Vias");
+        card.setCardLabel(CardLabel);
+        card.setHolderName(holderName);
+        card.setCardAddress(billingAddress.extract());
+        card.setBillingAddress(billingAddress.extract());
+        card.setCardId(String.valueOf(id));
+        card.setDefault(def);
+        card.setExpDate(expDate);
+        return card;
+    }
 
 }
 

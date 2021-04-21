@@ -7,6 +7,7 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
 import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.DeletePaymentRequest;
 import com.jiffydelivery.jiffy.Entity.Request.PaymentRequest.NewPaymentRequest;
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.DeletePaymentResponse;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -90,8 +91,10 @@ public class PaymentRepository {
 
     public List<CreditCard> getAllPayments(String UID) {
         try(Session session = sessionFactory.openSession()) {
-            Customer customer = session.get(Customer.class, UID);
+            Customer customer = session.get(Customer.class, Long.valueOf(UID));
+
             List<CreditCard> creditCard = customer.getCreditCard();
+            Hibernate.initialize(creditCard);
             return creditCard;
         } catch (Exception e) {
             e.printStackTrace();

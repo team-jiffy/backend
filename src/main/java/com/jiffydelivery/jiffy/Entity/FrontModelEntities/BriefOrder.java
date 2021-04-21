@@ -6,11 +6,11 @@ import lombok.*;
 @Setter
 @EqualsAndHashCode
 //@AllArgsConstructor
-//@NoArgsConstructor
+@NoArgsConstructor
 @ToString
 
 public class BriefOrder {
-    private long trackNumber;
+    private String trackNumber;
 
     private String SenderName;
     private String RecipientName;
@@ -30,7 +30,7 @@ public class BriefOrder {
     }
 
     public static class BriefOrderBuilder {
-        private long trackNumber;
+        private String trackNumber;
 
         private String senderName;
         private String recipientName;
@@ -39,7 +39,7 @@ public class BriefOrder {
         private String ETA;
         private String orderStatus;
 
-        public BriefOrderBuilder trackNumber(long trackNumber) {
+        public BriefOrderBuilder trackNumber(String trackNumber) {
             this.trackNumber = trackNumber;
             return this;
         }

@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -25,13 +26,15 @@ public class WareHouse implements Serializable {
     private double elevation;
     private double chargingCapacity;
     private int numberOfRobot;
-
+    private int numberOfDrone;
     @OneToOne
     private Address address;
 
     @OneToMany(mappedBy = "closestWarehouse")
+    @JsonIgnore
     private List<Order> order;
 
     @OneToMany(mappedBy = "currentWarehouse")
+    @JsonIgnore
     private List<ADV> ADV;
 }

@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import lombok.*;
@@ -39,10 +40,24 @@ public class Contact implements Serializable {
 
 
     @OneToOne(mappedBy = "senderContact")
+    @JsonIgnore
     private Order orderSend;
 
-    @OneToOne(mappedBy = "recipiantContact")
-    private Order orderReci;
+    @OneToOne(mappedBy = "recipientContact")
+    @JsonIgnore
+    private Order orderRecipient;
 
-
+    public com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact extract(){
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact contact =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact();
+        contact.setContactID(String.valueOf(id));
+        contact.setLastName(lastName);
+        contact.setFirstName(firstName);
+        contact.setPhone(phone);
+        contact.setEmail(email);
+        contact.setContactType(contactType);
+        contact.setAddress(address.extract());
+        contact.setDefault(def);
+        return contact;
+    }
 }

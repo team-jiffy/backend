@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,21 +24,36 @@ public class Address implements Serializable {
     private String street2;
     private String city;
     private String zip;
+    private String State;
     private String aptNo;
 
     @OneToOne(mappedBy = "billingAddress")
-    @JoinColumn(unique = true)
+    @JsonIgnore
     private CreditCard creditCard;
 
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
+    @JsonIgnore
     private Contact contact;
 
+
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
+    @JsonIgnore
     private WareHouse wareHouse;
 
     @OneToOne(mappedBy = "address")
-    @JoinColumn(unique = true)
+    @JsonIgnore
     private Trip trip;
+
+    public com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address extract(){
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address address =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address();
+
+        address.setStreet1(street1);
+        address.setStreet2(street2);
+        address.setCity(city);
+        address.setState(State);
+        address.setZip(zip);
+        address.setAptNo(aptNo);
+        return address;
+    }
 }
