@@ -1,7 +1,10 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
+import com.jiffydelivery.jiffy.Repository.APIRepository.GetLatLong;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -9,6 +9,7 @@ import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.NewOrderRequest;
 import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.RecoRequest;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 
+import com.jiffydelivery.jiffy.Repository.ADVRepository;
 import com.jiffydelivery.jiffy.Repository.OrderRepository;
 import com.jiffydelivery.jiffy.Repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
-
+    private ADVRepository advRepository;
 
     private BriefOrder extractOrder(com.jiffydelivery.jiffy.Entity.DBDAO.Order order) {
         return new BriefOrder.BriefOrderBuilder()
@@ -126,5 +127,4 @@ public class OrderService {
 //        // orderRepository.getReco();
 //        return dbRecoRes;
 //    }
-
 }

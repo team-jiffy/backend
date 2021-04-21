@@ -30,7 +30,7 @@ public class ADVRepository {
                 session.close();
             }
         }
-        return adv;
+        return null;
     }
 
     public void updateADV(ADV adv){

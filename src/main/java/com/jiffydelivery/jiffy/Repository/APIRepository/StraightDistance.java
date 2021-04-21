@@ -11,7 +11,7 @@ public class StraightDistance {
 
 //    get Straight distance of two addresses for Drone;
 
-    public static double distance(PositionCoordinates coord1, PositionCoordinates coord2) {
+    public double distance(PositionCoordinates coord1, PositionCoordinates coord2) {
         String unit="M";
         if ((coord1.getLatitude()==coord2.getLatitude())
                 && coord1.getLongitude()==coord1.getLongitude()) {
@@ -38,6 +38,7 @@ public class StraightDistance {
     }
     public static void main (String[] args) throws java.lang.Exception
     {
+        StraightDistance straightDistance = new StraightDistance();
         PositionCoordinates coor1 = new PositionCoordinates();
         PositionCoordinates coor2 = new PositionCoordinates();
         coor1.setLatitude(36.5785810);
@@ -46,7 +47,7 @@ public class StraightDistance {
         coor2.setLatitude(39.73915360);
         coor2.setLongitude(-104.98470340);
         coor2.setElevation(1608.637939453125);
-        System.out.println(distance(coor1, coor2));
+        System.out.println(straightDistance.distance(coor1, coor2));
 
     }
 }
