@@ -8,22 +8,25 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import com.jiffydelivery.jiffy.Entity.Response.PaymentsResponse.SetDefaultResponse;
 import com.jiffydelivery.jiffy.Service.OrderService;
+import com.jiffydelivery.jiffy.Service.RobotService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.MalformedURLException;
 
 @RestController
 public class OrderController {
 
     @Autowired
     OrderService orderService;
+    RobotService robotService;
 
     @PutMapping("/order/createOrder")
     public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest ,
-                                        HttpServletRequest req, HttpServletResponse res) {
+                                        HttpServletRequest req, HttpServletResponse res) throws MalformedURLException {
         HttpSession session = req.getSession(false);
         if (session==null){
             NewOrderResponse response = new NewOrderResponse();
@@ -33,7 +36,9 @@ public class OrderController {
             return response;
         }
         System.out.println(newOrderRequest.toString());
-        return orderService.createOrder(newOrderRequest);
+        NewOrderResponse newOrderResponse = orderService.createOrder(newOrderRequest);
+        robotService.assignNewOrderToRobot(newOrderResponse.getOrder().toDAO());
+        return newOrderResponse;
     }
 
     @GetMapping("/order/getAllOrders")

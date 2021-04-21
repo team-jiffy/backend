@@ -18,6 +18,9 @@ public class Address {
     private String Zip;
     private String AptNo;
 
+    public Address(String street1, String street2, String zip, String aptNo) {
+    }
+
     public com.jiffydelivery.jiffy.Entity.DBDAO.Address toDAO(){
         com.jiffydelivery.jiffy.Entity.DBDAO.Address address =
                 new com.jiffydelivery.jiffy.Entity.DBDAO.Address();
@@ -37,6 +40,5 @@ public class Address {
         this.State ="California";
         this.Zip = backendAddress.getZip();
         this.AptNo = backendAddress.getAptNo();
-
     }
 }
