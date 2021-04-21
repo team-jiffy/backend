@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -38,10 +39,12 @@ public class CreditCard implements Serializable {
     @JoinColumn(unique=true)
     Address billingAddress;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
     private Customer customer;
 
     @OneToMany(mappedBy = "creditCard")
+    @JsonIgnore
     private List<Order> order;
 
 }

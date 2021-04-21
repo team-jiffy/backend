@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.jfr.Enabled;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,5 +33,6 @@ public class ADV implements Serializable {
 
     @OneToOne(mappedBy = "ADV")
     @JoinColumn(unique = true)
+    @JsonIgnore
     private Trip trip;
 }

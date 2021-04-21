@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -26,14 +27,19 @@ public class Address implements Serializable {
     private String aptNo;
 
     @OneToOne(mappedBy = "billingAddress")
+    @JsonIgnore
     private CreditCard creditCard;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private Contact contact;
 
+
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private WareHouse wareHouse;
 
     @OneToOne(mappedBy = "address")
+    @JsonIgnore
     private Trip trip;
 }

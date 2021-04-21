@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
@@ -27,6 +28,8 @@ public class Order implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
 
+    private String TrackNumber;
+    private String OrderLabel;
     private double packageWeight;
     private double price;
     private boolean sameday;
@@ -65,5 +68,6 @@ public class Order implements Serializable {
     private Customer customer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
+    @JsonIgnore
     private Trip trip;
 }
