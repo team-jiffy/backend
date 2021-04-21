@@ -62,33 +62,35 @@ public class ContactRepository {
         return dbContact;
     }
 
-    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact updateContact(String UID, Contact contact) {
-        long dbUserID = Long.valueOf(UID);
-        Customer dbUser = null;
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact updateContact(String UID, Contact contact, String contactID) {
+        //Customer dbUser = null;
         Address address = contact.getAddress();
-
-        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbContact = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
-        com.jiffydelivery.jiffy.Entity.DBDAO.Address dbAddress = new com.jiffydelivery.jiffy.Entity.DBDAO.Address();
-
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbContact = null;
         Session session = null;
 
-        dbAddress.setStreet1(address.getStreet1());
-        dbAddress.setStreet2(address.getStreet2());
-        dbAddress.setCity(address.getCity());
-        dbAddress.setState(address.getState());
-        dbAddress.setZip(address.getZip());
-        dbAddress.setAptNo(address.getAptNo());
         try {
             session = sessionFactory.openSession();
-            dbUser = session.get(Customer.class,dbUserID);
+            //long dbuserID = Integer.parseInt(UID);
+            long dbcontactID = Integer.parseInt(contactID);
 
-            dbContact.setFirstName(contact.getFirstName());
-            dbContact.setLastName(contact.getLastName());
-            dbContact.setContactType(contact.getContactType());
-            dbContact.setPhone(contact.getPhone());
-            dbContact.setEmail(contact.getEmail());
+            //Customer dbUser = session.get(Customer.class, dbuserID);
+            dbContact = session.get(com.jiffydelivery.jiffy.Entity.DBDAO.Contact.class, dbcontactID);
+            com.jiffydelivery.jiffy.Entity.DBDAO.Address dbAddress = dbContact.getAddress();
+
+            dbAddress.setStreet1(address.getStreet1() == null ? null : address.getStreet1());
+            dbAddress.setStreet2(address.getStreet2() == null ? null : address.getStreet2());
+            dbAddress.setCity(address.getCity() == null ? null : address.getCity());
+            dbAddress.setState(address.getState() == null ? null : address.getState());
+            dbAddress.setZip(address.getZip() == null ? null : address.getZip());
+            dbAddress.setAptNo(address.getAptNo() == null ? null : address.getAptNo());
+
+            dbContact.setContactType(contact.getContactType() == null ? null : contact.getContactType());
+            dbContact.setFirstName(contact.getFirstName() == null ? null : contact.getFirstName());
+            dbContact.setLastName(contact.getLastName() == null ? null : contact.getLastName());
+            dbContact.setPhone(contact.getPhone() == null ? null : contact.getPhone());
+            dbContact.setEmail(contact.getEmail() == null ? null : contact.getEmail());
             dbContact.setAddress(dbAddress);
-            dbContact.setCustomer(dbUser);
+
             //dbContact.setDef(contact.get);
             session.beginTransaction();
             session.save(dbContact);

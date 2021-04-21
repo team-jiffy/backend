@@ -41,7 +41,7 @@ public class ContactService {
     public UpdateAddressResponse updateAddress(UpdateAddressRequest request) {
 
         UpdateAddressResponse updateAddressResponse = new UpdateAddressResponse();
-        Contact dbContact = contactRepository.updateContact(request.getUID(), request.getContact());
+        Contact dbContact = contactRepository.updateContact(request.getUID(), request.getContact(), request.getContactID());
         if (dbContact.getCustomer()!=null){
             updateAddressResponse.setMessage("update contact to user succeed");
             updateAddressResponse.setStatus("200");

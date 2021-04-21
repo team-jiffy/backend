@@ -14,4 +14,5 @@ import lombok.ToString;
 public class UpdateAddressRequest {
     public String UID;
     public Contact contact;
+    public String contactID;
 }
