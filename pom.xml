@@ -16,7 +16,15 @@
     <properties>
         <java.version>11</java.version>
     </properties>
-    <dependencies>
+
+        <dependencies>
+
+            <dependency>
+                <groupId>org.optaplanner</groupId>
+                <artifactId>optaplanner-core</artifactId>
+                <version>8.5.0.Final</version>
+            </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -55,6 +63,30 @@
             <scope>test</scope>
         </dependency>
 
+<!--        <dependency>-->
+<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
+<!--            <artifactId>optaweb-vehicle-routing-backend</artifactId>-->
+<!--            <version>8.5.0</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
+<!--            <artifactId>optaweb-vehicle-routing-docs</artifactId>-->
+<!--            <version>8.5.0</version>-->
+<!--            <type>zip</type>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
+<!--            <artifactId>optaweb-vehicle-routing-frontend</artifactId>-->
+<!--            <version>8.5.0</version>-->
+<!--            <type>war</type>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
+<!--            <artifactId>optaweb-vehicle-routing-standalone</artifactId>-->
+<!--            <version>${project.version}</version>-->
+<!--            <classifier>quarkus-app</classifier>-->
+<!--            <type>zip</type>-->
+<!--        </dependency>-->
 
 <!--        <dependency>-->
 <!--            <groupId>org.hibernate</groupId>-->
