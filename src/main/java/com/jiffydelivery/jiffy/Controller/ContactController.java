@@ -56,7 +56,7 @@ public class ContactController {
             return response;
         }
 
-        UpdateAddressResponse updateAddressResponse = contactService.updateAddress(address);
+        UpdateAddressResponse updateAddressResponse = new UpdateAddressResponse();//contactService.updateAddress(address);
 
         System.out.println(address.toString());
 //        Contact a = new Contact("lastname","firstname","123",

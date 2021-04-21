@@ -38,7 +38,7 @@ public class CreditCard implements Serializable {
 
     private boolean def = false;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique=true)
     Address billingAddress;
 

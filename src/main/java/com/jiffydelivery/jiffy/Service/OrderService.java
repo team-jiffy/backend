@@ -44,8 +44,6 @@ public class OrderService {
     */
     public NewOrderResponse createOrder(NewOrderRequest req){
 
-
-        NewOrderResponse dbOrder = new NewOrderResponse();//orderRepository.createOrder(req);
         com.jiffydelivery.jiffy.Entity.DBDAO.Order newOrder
                 = new com.jiffydelivery.jiffy.Entity.DBDAO.Order();
         newOrder.setADVType(req.getADVType());

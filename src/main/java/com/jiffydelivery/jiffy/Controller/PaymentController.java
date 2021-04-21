@@ -31,14 +31,14 @@ public class PaymentController {
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest,
                                          HttpServletRequest req, HttpServletResponse res) {
 
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            NewPaymentResponse response = new NewPaymentResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            NewPaymentResponse response = new NewPaymentResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
 
         NewPaymentResponse newPaymentResponse = peymentService.addPayment(newPaymentRequest);
 
