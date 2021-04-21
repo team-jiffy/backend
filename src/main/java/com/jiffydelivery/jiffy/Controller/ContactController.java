@@ -2,20 +2,17 @@ package com.jiffydelivery.jiffy.Controller;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.ContactType;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.AddAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.DeleteAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.UpdateAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.*;
-import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.RecoResponse;
 import com.jiffydelivery.jiffy.Service.ContactService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 
 @RestController
@@ -38,14 +35,14 @@ public class ContactController {
 
         //4/28
         //call contact service, input address request, return address response
-        AddAddressResponse addressResponse = contactService.addAddress(address);
+        AddAddressResponse addressResponse = contactService.addAddressToUser(address);
 
         System.out.println(address.toString());
-        Contact a = new Contact("lastname","firstname","123",
-                "232@jiffy.com",ContactType.Sender, new Address(),
-                new Card(), "123",true);
+//        Contact a = new Contact("lastname","firstname","123",
+//                "232@jiffy.com",ContactType.Sender, new Address(),
+//                new Card(), "123",true);
 
-        return new AddAddressResponse("ok","ok",a);
+        return new AddAddressResponse();
     }
 
     @RequestMapping(value = "/contact/updateContact", method = RequestMethod.POST)
@@ -64,10 +61,10 @@ public class ContactController {
         UpdateAddressResponse updateAddressResponse = contactService.updateAddress(address);
 
         System.out.println(address.toString());
-        Contact a = new Contact("lastname","firstname","123",
-                "232@jiffy.com",ContactType.Sender, new Address(),
-                new Card(), "123",true);
-        return new UpdateAddressResponse("ok","ok",a);
+//        Contact a = new Contact("lastname","firstname","123",
+//                "232@jiffy.com",ContactType.Sender, new Address(),
+//                new Card(), "123",true);
+        return new UpdateAddressResponse();
     }
 
     @RequestMapping(value = "/contact/setDefault", method = RequestMethod.POST)
@@ -85,10 +82,10 @@ public class ContactController {
         SetAddressResponse setAddressResponse = contactService.setAddress(address);
 
         System.out.println(address.toString());
-        Contact a =  new Contact("lastname","firstname","123",
-                "232@jiffy.com",ContactType.Sender, new Address(),
-                new Card(), "123",true);
-        return new SetAddressResponse("ok","ok",a);
+//        Contact a =  new Contact("lastname","firstname","123",
+//                "232@jiffy.com",ContactType.Sender, new Address(),
+//                new Card(), "123",true);
+        return new SetAddressResponse();
     }
 
     @RequestMapping(value = "/contact/getContacts", method = RequestMethod.GET)

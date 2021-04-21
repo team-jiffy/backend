@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import lombok.*;
 
 @Getter
@@ -14,7 +15,7 @@ public class Contact {
     private String FirstName;
     private String Phone;
     private String Email;
-    private ContactType ContactType;
+    private com.jiffydelivery.jiffy.Entity.Constance.ContactType ContactType;
 
     private Address Address;
 
