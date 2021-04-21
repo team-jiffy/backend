@@ -20,7 +20,7 @@ public class ADVSpec implements Serializable {
     @Enumerated(EnumType.STRING)
     private ADVType ADVType;
 
-    private int batteryVolumn;
+    private double batteryVolumn;
     private double speed;
     private String ADVName;
     private int capacity;

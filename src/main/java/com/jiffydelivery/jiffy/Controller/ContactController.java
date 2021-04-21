@@ -56,13 +56,13 @@ public class ContactController {
             return response;
         }
 
-        UpdateAddressResponse updateAddressResponse = new UpdateAddressResponse();//contactService.updateAddress(address);
+        UpdateAddressResponse updateAddressResponse = contactService.updateAddress(address);
 
         System.out.println(address.toString());
 //        Contact a = new Contact("lastname","firstname","123",
 //                "232@jiffy.com",ContactType.Sender, new Address(),
 //                new Card(), "123",true);
-        return new UpdateAddressResponse();
+        return updateAddressResponse;
     }
 
     @RequestMapping(value = "/contact/setDefault", method = RequestMethod.POST)
