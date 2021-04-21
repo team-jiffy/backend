@@ -25,5 +25,15 @@ public class Contact {
     private boolean Default;
 
 
+    public Contact (com.jiffydelivery.jiffy.Entity.DBDAO.Contact backendContact){
 
+        this.ContactID= String.valueOf(backendContact.getId());
+        this.LastName = backendContact.getLastName();
+        this.FirstName = backendContact.getFirstName();
+        this.Email=backendContact.getEmail();
+        this.Address = new Address(backendContact.getAddress());
+        this.Phone = backendContact.getPhone();
+        this.Default = backendContact.isDef();
+
+    }
 }
