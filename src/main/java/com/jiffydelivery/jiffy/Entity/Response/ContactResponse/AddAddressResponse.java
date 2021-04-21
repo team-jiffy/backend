@@ -9,6 +9,6 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AddAddressResponse {
-   public String Status;
-   public String Message;
+   private String Status;
+   private String Message;
 }

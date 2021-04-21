@@ -40,7 +40,7 @@ public class ContactController {
 //                "232@jiffy.com",ContactType.Sender, new Address(),
 //                new Card(), "123",true);
 
-        return new AddAddressResponse();
+        return addressResponse;
     }
 
     @RequestMapping(value = "/contact/updateContact", method = RequestMethod.POST)

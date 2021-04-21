@@ -198,7 +198,7 @@ public class CustomerRepository {
     try{
       session = sessionFactory.openSession();
       session.beginTransaction();
-      String hql = "from Customer c where c.email=:e and c.password=:w";
+      String hql = "From Customer c where c.email=:e and c.password=:w";
       Query query = session.createQuery(hql,Customer.class);
       query.setParameter("e",email);
       query.setParameter("w",password);
