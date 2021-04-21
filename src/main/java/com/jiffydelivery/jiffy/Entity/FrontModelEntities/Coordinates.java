@@ -13,4 +13,7 @@ public class Coordinates {
     private String Longitude;
     private String Latitude;
     private String Elevation;
+
+    public Coordinates(String valueOf, String valueOf1) {
+    }
 }
