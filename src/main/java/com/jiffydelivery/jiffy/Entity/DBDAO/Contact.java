@@ -31,7 +31,7 @@ public class Contact implements Serializable {
     private String phone;
     private boolean def;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Address address;
 
@@ -45,7 +45,19 @@ public class Contact implements Serializable {
 
     @OneToOne(mappedBy = "recipientContact")
     @JsonIgnore
-    private Order orderReci;
+    private Order orderRecipient;
 
-
+    public com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact extract(){
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact contact =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact();
+        contact.setContactID(String.valueOf(id));
+        contact.setLastName(lastName);
+        contact.setFirstName(firstName);
+        contact.setPhone(phone);
+        contact.setEmail(email);
+        contact.setContactType(contactType);
+        contact.setAddress(address.extract());
+        contact.setDefault(def);
+        return contact;
+    }
 }

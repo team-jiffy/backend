@@ -62,6 +62,50 @@ public class ContactRepository {
         return dbContact;
     }
 
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact updateContact(String UID, Contact contact, String contactID) {
+        //Customer dbUser = null;
+        Address address = contact.getAddress();
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbContact = null;
+        Session session = null;
+
+        try {
+            session = sessionFactory.openSession();
+            //long dbuserID = Integer.parseInt(UID);
+            long dbcontactID = Integer.parseInt(contactID);
+
+            //Customer dbUser = session.get(Customer.class, dbuserID);
+            dbContact = session.get(com.jiffydelivery.jiffy.Entity.DBDAO.Contact.class, dbcontactID);
+            com.jiffydelivery.jiffy.Entity.DBDAO.Address dbAddress = dbContact.getAddress();
+
+            dbAddress.setStreet1(address.getStreet1() == null ? null : address.getStreet1());
+            dbAddress.setStreet2(address.getStreet2() == null ? null : address.getStreet2());
+            dbAddress.setCity(address.getCity() == null ? null : address.getCity());
+            dbAddress.setState(address.getState() == null ? null : address.getState());
+            dbAddress.setZip(address.getZip() == null ? null : address.getZip());
+            dbAddress.setAptNo(address.getAptNo() == null ? null : address.getAptNo());
+
+            dbContact.setContactType(contact.getContactType() == null ? null : contact.getContactType());
+            dbContact.setFirstName(contact.getFirstName() == null ? null : contact.getFirstName());
+            dbContact.setLastName(contact.getLastName() == null ? null : contact.getLastName());
+            dbContact.setPhone(contact.getPhone() == null ? null : contact.getPhone());
+            dbContact.setEmail(contact.getEmail() == null ? null : contact.getEmail());
+            dbContact.setAddress(dbAddress);
+
+            //dbContact.setDef(contact.get);
+            session.beginTransaction();
+            session.save(dbContact);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return dbContact;
+    }
+
     public SetDefaultAddressResponse setContactAsDefault(SetDefaultAddressRequest request) {
         Session session = null;
         Customer dbUser = null;

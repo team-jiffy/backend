@@ -7,11 +7,13 @@ import com.jiffydelivery.jiffy.Entity.DBDAO.*;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
-import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.CreateOrderRequest;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.JiffyApplicationConfig;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -24,83 +26,75 @@ public class OrderRepository {
 
     @Autowired
     private SessionFactory sessionFactory;
-
     // insert a new order record to order table
-    public NewOrderResponse createOrder(Order order) {
+    public Order createOrder(Order order, long UID, long creditCardID) {
+
+        order.setTrackNumber(GenerateTrackNumber());
         Session session = null;
-        NewOrderResponse newOrderResponse = new NewOrderResponse();
         try {
-            session = sessionFactory.openSession();
+            session = sessionFactory.getCurrentSession();
+
+            Customer customer = session.get(Customer.class,UID);
+            CreditCard creditCard = session.get(CreditCard.class,creditCardID);
+            Hibernate.initialize(creditCard);
+            Hibernate.initialize(customer);
+            order.setCustomer(customer);
+            order.setCreditCard(creditCard);
+            order.getRecipientContact().setCustomer(customer);
+            order.getSenderContact().setCustomer(customer);
             session.beginTransaction();
-            session.saveOrUpdate(order);
+            Long recipientID = (Long) session.save(order.getRecipientContact());
+            Long senderID = (Long)session.save(order.getSenderContact());
+            order.getRecipientContact().setId(recipientID);
+            order.getSenderContact().setId(senderID);
+            session.save(order);
             session.getTransaction().commit();
         } catch (Exception e) {
             e.printStackTrace();
             session.getTransaction().rollback();
+            order = null;
         } finally {
             if (session != null) {
-                newOrderResponse.setMessage("Order created");
-                newOrderResponse.setStatus("200");
-                // TODO: newOrderResponse.setOrder(mapped Order)
                 session.close();
             }
         }
-        return newOrderResponse;
+        return order;
     }
 
-    public AllOrdersResponse getAllOrders(String UID) {
-        AllOrdersResponse allOrdersResponse = new AllOrdersResponse();
+    public List<Order> getAllOrders(String UID) {
+
         List<Order> orders = new ArrayList<>();
-        try (Session session = sessionFactory.openSession()) {
-            orders = session.createCriteria(Order.class).list();
+
+        try (Session session = sessionFactory.getCurrentSession()) {
+//            String  hql = "From Order e where e.customer.id = :t";
+//            Query query = session.createQuery(hql);
+//            query.setParameter("t",UID);
+            List<Order> results = session.createCriteria(Order.class)
+                    .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
+                    .list();
+            return results;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        BriefOrder[] briefOrders = new BriefOrder[orders.size()];
-        for (int i = 0; i < orders.size(); i++) {
-            briefOrders[i] = this.extractOrder(orders.get(i));
-        }
-        if (briefOrders.length > 0) {
-            allOrdersResponse.setMessage("Get all orders");
-            allOrdersResponse.setStatus("200");
-            allOrdersResponse.setOrders(briefOrders);
-        }
-        return allOrdersResponse;
+
     }
 
-    private BriefOrder extractOrder(Order order) {
-        return new BriefOrder.BriefOrderBuilder()
-                .trackNumber(order.getId())
-                .senderName(order.getSenderContact().getFirstName() + order.getSenderContact().getLastName())
-                .recipientName(order.getRecipientContact().getFirstName() + order.getRecipientContact().getLastName())
-                .orderDate(order.getDeliverOrderDate().toString())
-                .ADVType(order.getADVType().toString())
-                .ETA(order.getDeliverTime().toString())
-                .orderStatus(order.getOrderStatus().toString())
-                .build();
-    }
 
-//        public List<Order> getAllOrders(String UID) {
-//            Session session = null;
-//            Query query = session.createQuery("from Order_table");
-//            return query.list();
-//        }
-
-    // get order history by tracking number
-    public OrderHistoryResponse getOrderHistory(String trackNumber) {
+    public Order getOrderHistory(String trackNumber) {
         Order order = null;
-        OrderHistoryResponse orderHistoryResponse = new OrderHistoryResponse();
+
         try (Session session = sessionFactory.openSession()) {
-            order = session.get(Order.class, trackNumber);
+            String  hql = "From Order e where e.TrackNumber = :t";
+            Query query = session.createQuery(hql);
+            query.setParameter("t",trackNumber);
+            List<Order> results = query.list();
+            if (results.size()==0) return null;
+            else return results.get(0);
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-        if (order != null) {
-            orderHistoryResponse.setMessage("Get order history");
-            orderHistoryResponse.setStatus("200");
-            // TODO: orderHistoryResponse.setOrder(mapped Order);
-        }
-        return orderHistoryResponse;
     }
 
     // get reco
@@ -114,6 +108,16 @@ public class OrderRepository {
             // TODO: recoResponse.setOrder(mapped Reco[] recos);
         }
         return recoResponse;
+    }
+
+    private static String GenerateTrackNumber(){
+        Random r = new Random();
+        StringBuffer sb = new StringBuffer();
+        while(sb.length() < 10){
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+
+        return sb.toString().substring(0, 10);
     }
 
     public Order updateOrderStatus(long OrderID, OrderStatus orderStatus,
@@ -148,30 +152,15 @@ public class OrderRepository {
         return newOrder;
     }
 
-    private static String GenerateTrackNumber(){
-        Random r = new Random();
-        StringBuffer sb = new StringBuffer();
-        while(sb.length() < 10){
-            sb.append(Integer.toHexString(r.nextInt()));
-        }
-
-        return sb.toString().substring(0, 10);
-    }
-
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);
         OrderRepository test = applicationContext.getBean(OrderRepository.class);
+//
+//        Trip trip = new Trip(1, TripType.Charging,null,null,null,new Date());
+//        test.createOrder(new Order(30,GenerateTrackNumber(),"Good", 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+//                Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], null,
+//                null, null, null, null, null));
 
-        Trip trip = new Trip(1, TripType.Charging,null,null,null,new Date());
-        test.createOrder(new Order(30,GenerateTrackNumber(),"Good", 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
-                Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], null,
-                null, null, null, null, null));
 
-
-    }
-
-    public Order getNonFiniOrder(int uid) {
-        //@TODO: Make this return the actual order in the db
-        return null;
     }
 }

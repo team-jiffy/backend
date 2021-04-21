@@ -31,14 +31,14 @@ public class PaymentController {
     public NewPaymentResponse addPayment(@RequestBody NewPaymentRequest newPaymentRequest,
                                          HttpServletRequest req, HttpServletResponse res) {
 
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            NewPaymentResponse response = new NewPaymentResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            NewPaymentResponse response = new NewPaymentResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
 
         NewPaymentResponse newPaymentResponse = peymentService.addPayment(newPaymentRequest);
 
@@ -60,7 +60,7 @@ public class PaymentController {
 //        UpdatePaymentResponse updatePaymentResponse = peymentService.updatePayment(updatePaymentRequest);
 
         return new UpdatePaymentResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo",new Address(),  new Address(),"card-1",true));
+                "visa","yubo","asdf",new Address(),  new Address(),"card-1",true));
     }
 
     @GetMapping("/billing/getPayments")
@@ -113,6 +113,6 @@ public class PaymentController {
 //        }
 
         return new SetDefaultResponse("200", "ok", new Card("1234","credit",
-                "visa","yubo",new Address(),  new Address(),"card-1",true));
+                "visa","yubo","asdf",new Address(),  new Address(),"card-1",true));
     }
 }

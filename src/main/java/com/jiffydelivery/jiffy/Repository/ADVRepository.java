@@ -28,10 +28,9 @@ public class ADVRepository {
         } finally {
             if (session!=null){
                 session.close();
-                return null;
             }
         }
-        return adv;
+        return null;
     }
 
     public void updateADV(ADV adv){

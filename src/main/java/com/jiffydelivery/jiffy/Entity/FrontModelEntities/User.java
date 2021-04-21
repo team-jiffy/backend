@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.FrontModelEntities;
 
+import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import lombok.*;
 
 @Getter
@@ -21,4 +22,12 @@ public class User {
     private Contact DefaultDeliver;
     private Address Location;
 
+    public Customer ToCustomer(){
+        Customer customer= new Customer();
+        customer.setEmail(this.Email);
+        customer.setLastName(this.LastName);
+        customer.setFirstName(this.FirstName);
+        customer.setPhone(this.Phone);
+        return customer;
+    }
 }
