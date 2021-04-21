@@ -101,7 +101,7 @@ public class OrderService {
 
         List<Order> orders = orderRepository.getAllOrders(UID);
 
-        if(orders.size() == 0){
+        if(orders == null){
             res.setMessage("get all orders failed.");
             res.setStatus("failed");
         }else{

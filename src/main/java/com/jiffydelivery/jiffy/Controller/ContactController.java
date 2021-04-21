@@ -83,7 +83,7 @@ public class ContactController {
 //        Contact a =  new Contact("lastname","firstname","123",
 //                "232@jiffy.com",ContactType.Sender, new Address(),
 //                new Card(), "123",true);
-        return new SetDefaultAddressResponse();
+        return setDefaultAddressResponse;
     }
 
     @RequestMapping(value = "/contact/getContacts", method = RequestMethod.GET)
@@ -98,22 +98,21 @@ public class ContactController {
             return response;
         }
         System.out.println("testRequestParam: " + UID);
-        return new GetAddressResponse();
+        return contactService.getAllAddresses(UID);
     }
 
     @RequestMapping(value = "contact/deleteContact", method = RequestMethod.DELETE)
     public DeleteAddressResponse deleteAddress(@RequestBody DeleteAddressRequest address,
                                                HttpServletRequest req, HttpServletResponse res) {
-//        HttpSession session = req.getSession(false);
-//        if (session==null){
-//            DeleteAddressResponse response = new DeleteAddressResponse();
-//            response.setStatus("Failed");
-//            response.setMessage("You should login first");
-//            res.setStatus(404);
-//            return response;
-//        }
-        String a = address.toString();
-        System.out.println(address.toString());
-        return new DeleteAddressResponse("ok", "success");
+        HttpSession session = req.getSession(false);
+        if (session==null){
+            DeleteAddressResponse response = new DeleteAddressResponse();
+            response.setStatus("Failed");
+            response.setMessage("You should login first");
+            res.setStatus(404);
+            return response;
+        }
+
+        return contactService.deleteAddress(address);
     }
 }

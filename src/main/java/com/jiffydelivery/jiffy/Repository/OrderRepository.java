@@ -66,12 +66,13 @@ public class OrderRepository {
         List<Order> orders = new ArrayList<>();
 
         try (Session session = sessionFactory.getCurrentSession()) {
-//            String  hql = "From Order e where e.customer.id = :t";
-//            Query query = session.createQuery(hql);
-//            query.setParameter("t",UID);
+            String  hql = "From Order e where e.customer.id = :t";
+            Query query = session.createQuery(hql);
+            query.setParameter("t",UID);
             List<Order> results = session.createCriteria(Order.class)
                     .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
                     .list();
+//            List<Order> results = query.list();
             return results;
         } catch (Exception e) {
             e.printStackTrace();

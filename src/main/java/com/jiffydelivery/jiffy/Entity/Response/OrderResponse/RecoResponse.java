@@ -12,6 +12,6 @@ import lombok.*;
 public class RecoResponse {
     private String status;
     private String message;
-    // private Reco[] recos;
-    private Object[] results;
+    private Reco[] recos;
+
 }
