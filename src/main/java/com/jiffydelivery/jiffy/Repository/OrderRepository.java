@@ -48,31 +48,6 @@ public class OrderRepository {
         return newOrderResponse;
     }
 
-    // added by annie
-    // insert a new order record to order table
-    public NewOrderResponse createOrder(CreateOrderRequest order) {
-        Session session = null;
-        NewOrderResponse newOrderResponse = new NewOrderResponse();
-        try {
-            session = sessionFactory.openSession();
-            session.beginTransaction();
-            session.saveOrUpdate(order);
-            session.getTransaction().commit();
-        } catch (Exception e) {
-            e.printStackTrace();
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                newOrderResponse.setMessage("Order created");
-                newOrderResponse.setStatus("200");
-                // TODO: newOrderResponse.setOrder(mapped Order)
-                session.close();
-            }
-        }
-        return newOrderResponse;
-    }
-    //
-
     public AllOrdersResponse getAllOrders(String UID) {
         AllOrdersResponse allOrdersResponse = new AllOrdersResponse();
         List<Order> orders = new ArrayList<>();
@@ -173,13 +148,22 @@ public class OrderRepository {
         return newOrder;
     }
 
+    private static String GenerateTrackNumber(){
+        Random r = new Random();
+        StringBuffer sb = new StringBuffer();
+        while(sb.length() < 10){
+            sb.append(Integer.toHexString(r.nextInt()));
+        }
+
+        return sb.toString().substring(0, 10);
+    }
 
     public static void main(String[] args) {
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(JiffyApplicationConfig.class);
         OrderRepository test = applicationContext.getBean(OrderRepository.class);
 
         Trip trip = new Trip(1, TripType.Charging,null,null,null,new Date());
-        test.createOrder(new Order(30, 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
+        test.createOrder(new Order(30,GenerateTrackNumber(),"Good", 2.3, 13.3, true, OrderStatus.values()[0], new Date(), new Date(),
                 Calendar.getInstance(), Calendar.getInstance(), ADVType.values()[0], null,
                 null, null, null, null, null));
 

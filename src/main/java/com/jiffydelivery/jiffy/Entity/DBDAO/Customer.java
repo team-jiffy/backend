@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -31,11 +32,14 @@ public class Customer implements Serializable {
 
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<CreditCard> creditCard;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Contact> contact;
 
     @OneToMany(mappedBy = "customer")
+    @JsonIgnore
     private List<Order> order;
 }

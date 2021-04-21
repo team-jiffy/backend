@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import lombok.Getter;
 
@@ -26,5 +27,6 @@ public class ADVSpec implements Serializable {
     private double chargingSpeed;
 
     @OneToMany(mappedBy = "ADVSpec")
+    @JsonIgnore
     private List<ADV> ADV;
 }

@@ -1,5 +1,6 @@
 package com.jiffydelivery.jiffy.Entity.DBDAO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import lombok.*;
@@ -39,9 +40,11 @@ public class Contact implements Serializable {
 
 
     @OneToOne(mappedBy = "senderContact")
+    @JsonIgnore
     private Order orderSend;
 
     @OneToOne(mappedBy = "recipientContact")
+    @JsonIgnore
     private Order orderReci;
 
 

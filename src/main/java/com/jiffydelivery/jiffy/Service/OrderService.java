@@ -27,7 +27,7 @@ public class OrderService {
     */
     public CreateOrderResponse CreateCreateOrderResponse(CreateOrderRequest req){
 
-        NewOrderResponse dbOrder = orderRepository.createOrder(req);
+        NewOrderResponse dbOrder = new NewOrderResponse();//orderRepository.createOrder(req);
         Order newOrder = new Order();
         CreateOrderResponse createOrdersResponse = new CreateOrderResponse();
 
