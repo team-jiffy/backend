@@ -1,9 +1,9 @@
 package com.jiffydelivery.jiffy.Repository;
 
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetDefaultAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.UpdateAddressRequest;
@@ -16,6 +16,7 @@ import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -154,27 +155,41 @@ public class ContactRepository {
     }
 
     public List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> getAllAddress(String UID) {
-        Session session = null;
+        //Session session = null;
         Customer dbUser = null;
         long uid = Long.valueOf(UID);
-        List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> contactlist = new ArrayList<>();
+        //List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> contactlist = new ArrayList<>();
 
-        try {
-            session = sessionFactory.openSession();
-
-            dbUser = session.get(Customer.class, uid);
-             contactlist = dbUser.getContact();
-            session.beginTransaction();
-            session.getTransaction().commit();
-        } catch (Exception ex) {
-            ex.printStackTrace();
-            session.getTransaction().rollback();
-        } finally {
-            if (session != null) {
-                session.close();
-            }
+//        try {
+//            session = sessionFactory.openSession();
+//
+//            dbUser = session.get(Customer.class, uid);
+//             contactlist = dbUser.getContact();
+//            session.beginTransaction();
+//            session.getTransaction().commit();
+//            return contactlist;
+//        } catch (Exception ex) {
+//            ex.printStackTrace();
+//            session.getTransaction().rollback();
+//            return null;
+//        } finally {
+//            if (session != null) {
+//                session.close();
+//            }
+//        }
+        try (Session session = sessionFactory.getCurrentSession()) {
+//            String  hql = "From Order e where e.customer.id = :t";
+//            Query query = session.createQuery(hql);
+//            query.setParameter("t",UID);
+            List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> contactlist = session.createCriteria(
+                com.jiffydelivery.jiffy.Entity.DBDAO.Contact.class)
+                .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
+                .list();
+            return contactlist;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
-        return contactlist;
     }
 
     public DeleteAddressResponse deleteAddressforUser (String UID, String contactId) {
