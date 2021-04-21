@@ -7,6 +7,7 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetDefaultAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.DeleteAddressResponse;
+import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.GetAddressResponse;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.SetDefaultAddressResponse;
 import java.util.ArrayList;
 import java.util.List;
@@ -68,12 +69,12 @@ public class ContactRepository {
             session = sessionFactory.openSession();
 
             dbUser = session.load(Customer.class, uid);
-            List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> cardlist = new ArrayList<>();
-            cardlist = dbUser.getContact();
+            List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> contactlist = new ArrayList<>();
+            contactlist = dbUser.getContact();
 
 
 
-            dbUser.setContact(cardlist);
+            dbUser.setContact(contactlist);
             session.beginTransaction();
             session.update(dbUser);
             session.getTransaction().commit();
@@ -88,6 +89,29 @@ public class ContactRepository {
         return new SetDefaultAddressResponse();
     }
 
+    public List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> getAllAddress(String UID) {
+        Session session = null;
+        Customer dbUser = null;
+        long uid = Long.valueOf(UID);
+        List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> contactlist = new ArrayList<>();
+
+        try {
+            session = sessionFactory.openSession();
+
+            dbUser = session.get(Customer.class, uid);
+             contactlist = dbUser.getContact();
+            session.beginTransaction();
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return contactlist;
+    }
 
     public DeleteAddressResponse deleteAddressforUser (String UID, String contactId) {
         Customer user = null;
