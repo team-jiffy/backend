@@ -11,5 +11,4 @@ import lombok.*;
 public class AddAddressResponse {
    public String Status;
    public String Message;
-   public Contact Contact;
 }
