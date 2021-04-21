@@ -26,7 +26,7 @@ public class WareHouse implements Serializable {
     private double elevation;
     private double chargingCapacity;
     private int numberOfRobot;
-
+    private int numberOfDrone;
     @OneToOne
     private Address address;
 

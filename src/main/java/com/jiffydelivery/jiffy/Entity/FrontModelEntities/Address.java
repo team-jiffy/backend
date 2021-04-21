@@ -18,6 +18,17 @@ public class Address {
     private String Zip;
     private String AptNo;
 
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Address toDAO(){
+        com.jiffydelivery.jiffy.Entity.DBDAO.Address address =
+                new com.jiffydelivery.jiffy.Entity.DBDAO.Address();
+        address.setStreet1(Street1);
+        address.setStreet2(Street2);
+        address.setState(State);
+        address.setCity(City);
+        address.setZip(Zip);
+        address.setAptNo(AptNo);
+        return address;
+    }
 
     public Address(com.jiffydelivery.jiffy.Entity.DBDAO.Address backendAddress){
         this.Street1 = backendAddress.getStreet1();
@@ -28,5 +39,4 @@ public class Address {
         this.AptNo = backendAddress.getAptNo();
 
     }
-
 }

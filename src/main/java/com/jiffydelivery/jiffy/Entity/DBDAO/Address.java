@@ -24,6 +24,7 @@ public class Address implements Serializable {
     private String street2;
     private String city;
     private String zip;
+    private String State;
     private String aptNo;
 
     @OneToOne(mappedBy = "billingAddress")
@@ -42,4 +43,17 @@ public class Address implements Serializable {
     @OneToOne(mappedBy = "address")
     @JsonIgnore
     private Trip trip;
+
+    public com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address extract(){
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address address =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address();
+
+        address.setStreet1(street1);
+        address.setStreet2(street2);
+        address.setCity(city);
+        address.setState(State);
+        address.setZip(zip);
+        address.setAptNo(aptNo);
+        return address;
+    }
 }
