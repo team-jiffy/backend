@@ -40,7 +40,7 @@ public class Customer implements Serializable {
     private List<Contact> contact;
 
     @OneToMany(mappedBy = "customer")
-    @JsonIgnore
+//    @JsonIgnore
     private List<Order> order;
 
     public User extract(){

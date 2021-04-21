@@ -31,7 +31,7 @@ public class Contact implements Serializable {
     private String phone;
     private boolean def;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(unique = true)
     private Address address;
 

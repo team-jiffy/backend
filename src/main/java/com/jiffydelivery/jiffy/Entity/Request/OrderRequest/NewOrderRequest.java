@@ -24,7 +24,7 @@ public class NewOrderRequest {
     private PlaceOrderContact Pickup;
     private PlaceOrderContact Deliver;
     private PositionCoordinates DeliverCoordinates;
-    private PositionCoordinates PikcupCoordinates;
+    private PositionCoordinates PickupCoordinates;
     // price is a double
 
 }

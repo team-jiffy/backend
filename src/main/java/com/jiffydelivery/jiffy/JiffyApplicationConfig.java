@@ -41,7 +41,7 @@ public class JiffyApplicationConfig {
     @Bean(name = "dataSource")
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName("com.mysql.jdbc.Driver");
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://jiffydb.cm5giifmqrqj.us-east-2.rds.amazonaws.com/jiffyDB");
         dataSource.setUsername("admin");
         dataSource.setPassword("adminadmin");
