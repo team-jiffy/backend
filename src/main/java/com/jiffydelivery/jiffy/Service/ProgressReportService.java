@@ -3,17 +3,24 @@ package com.jiffydelivery.jiffy.Service;
 import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
 import com.jiffydelivery.jiffy.Entity.Constance.TripType;
-import com.jiffydelivery.jiffy.Entity.DBDAO.*;
+import com.jiffydelivery.jiffy.Entity.DBDAO.ADV;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Address;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Trip;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.ADVDto;
 
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
+import com.jiffydelivery.jiffy.Entity.Response.RobotResponse.ProgressReportResponse;
 import com.jiffydelivery.jiffy.Entity.Singletons.ADVFamily;
 import com.jiffydelivery.jiffy.Entity.Singletons.OrderQueue;
 import com.jiffydelivery.jiffy.Repository.ADVRepository;
+import com.jiffydelivery.jiffy.Repository.APIRepository.GetLatLong;
 import com.jiffydelivery.jiffy.Repository.OrderRepository;
 import com.jiffydelivery.jiffy.Repository.TripRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
 import java.util.ArrayDeque;
 import java.util.Date;
 import java.util.Queue;
@@ -26,8 +33,9 @@ public class ProgressReportService {
     private TripRepository tripRepository;
     private OrderRepository orderRepository;
     private ADVRepository advRepository;
+    private GetLatLong getLatLong;
 
-    public void assignNextTrip(ADVDto advDto) {
+    public ProgressReportResponse assignNextTrip(ADVDto advDto) throws MalformedURLException {
 
         int id = advDto.getADVID();
         ADVType advType = advDto.getADVType();
@@ -73,10 +81,6 @@ public class ProgressReportService {
         newDeliveryTrip.setAddress(newOrder.getRecipientContact().getAddress());
         newDeliveryTrip.setCurrentTime(new Date());
 
-        // add new trips into db
-        tripRepository.createTrip(newPickupTrip);
-        tripRepository.createTrip(newDeliveryTrip);
-
         if (advType.equals(ADVType.Robot)) {
             // hard code now, shall get optimized results via Optimizer(), passing 2 new trips and current queue
             ArrayDeque<Trip> optimizedQueue = new ArrayDeque<>();
@@ -97,7 +101,21 @@ public class ProgressReportService {
             orderRepository.updateOrderStatus(currOrder.getId(), currOrder.getOrderStatus(),
                     currOrder.getPickupTime(), currOrder.getDeliverTime(), currOrder.getDeliverOrderDate(),
                     currOrder.isSameday(), currOrder.getTrip().getId());
-            }
+        }
+        // update corresponding trip in db
+        tripRepository.updateTrip(newTrip);
+
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Trip resTrip =
+                new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Trip();
+        resTrip.setTripType(newTrip.getTripType());
+        Address address = newTrip.getAddress();
+        com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address addressFrontend = new com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address(
+            address.getStreet1(), address.getStreet2(), address.getZip(), address.getAptNo());
+        double[] coordinates = getLatLong.getCoordinates(addressFrontend);
+        Coordinates coordinate = new Coordinates(String.valueOf(coordinates[0]), String.valueOf(coordinates[1]));
+        resTrip.setCoordinates(coordinate);
+        resTrip.setTripID(String.valueOf(newTrip.getId()));
+        return new ProgressReportResponse(resTrip);
     }
 
     private void updateOrderStatus(Order order) {

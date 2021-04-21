@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.net.MalformedURLException;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 
@@ -37,11 +38,7 @@ public class RobotController {
 
     @PostMapping("/progressReport")
     public ProgressReportResponse progressReportResponse(
-            @RequestBody ProgressReportRequest request) {
-        progressReportService.assignNextTrip(request.getAdvDao());
-        System.out.println(request.toString());
-        return new ProgressReportResponse(new Trip(TripType.Outside,
-                new Coordinates("32","65","75"),
-                "343"));
+            @RequestBody ProgressReportRequest request) throws MalformedURLException {
+        return progressReportService.assignNextTrip(request.getAdvDao());
     }
 }

@@ -13,10 +13,11 @@ public class Address {
 
     private String Street1;
     private String Street2;
-    private  String City = "San Francisco";
-    private  String State = "California";
+    private String City;
+    private String State;
     private String Zip;
     private String AptNo;
+
 
     public Address(com.jiffydelivery.jiffy.Entity.DBDAO.Address backendAddress){
         this.Street1 = backendAddress.getStreet1();
