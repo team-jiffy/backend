@@ -63,37 +63,6 @@
             <scope>test</scope>
         </dependency>
 
-<!--        <dependency>-->
-<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
-<!--            <artifactId>optaweb-vehicle-routing-backend</artifactId>-->
-<!--            <version>8.5.0</version>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
-<!--            <artifactId>optaweb-vehicle-routing-docs</artifactId>-->
-<!--            <version>8.5.0</version>-->
-<!--            <type>zip</type>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
-<!--            <artifactId>optaweb-vehicle-routing-frontend</artifactId>-->
-<!--            <version>8.5.0</version>-->
-<!--            <type>war</type>-->
-<!--        </dependency>-->
-<!--        <dependency>-->
-<!--            <groupId>org.optaweb.vehiclerouting</groupId>-->
-<!--            <artifactId>optaweb-vehicle-routing-standalone</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--            <classifier>quarkus-app</classifier>-->
-<!--            <type>zip</type>-->
-<!--        </dependency>-->
-
-<!--        <dependency>-->
-<!--            <groupId>org.hibernate</groupId>-->
-<!--            <artifactId>hibernate-core</artifactId>-->
-<!--            <version>5.4.25.Final</version>-->
-<!--        </dependency>-->
-
     </dependencies>
 
     <build>
