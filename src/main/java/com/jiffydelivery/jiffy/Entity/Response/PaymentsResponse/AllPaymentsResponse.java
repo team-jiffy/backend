@@ -14,5 +14,5 @@ import java.util.List;
 public class AllPaymentsResponse {
     private String status;
     private String message;
-    private List<CreditCard> cards;
+    private List<Card> cards;
 }
