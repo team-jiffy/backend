@@ -5,10 +5,15 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.User;
+import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetDefaultAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.DeleteAddressResponse;
+import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.SetDefaultAddressResponse;
+import java.util.ArrayList;
+import java.util.List;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.mapping.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -53,12 +58,24 @@ public class ContactRepository {
         }
         return dbContact;
     }
-    public void setContactAsDefault(String contactId) {
+
+    public SetDefaultAddressResponse setContactAsDefault(SetDefaultAddressRequest request) {
         Session session = null;
+        Customer dbUser = null;
+        long uid = Long.valueOf(request.getUID());
+        long cid = Long.valueOf(request.getContactID());
         try {
             session = sessionFactory.openSession();
+
+            dbUser = session.load(Customer.class, uid);
+            List<com.jiffydelivery.jiffy.Entity.DBDAO.Contact> cardlist = new ArrayList<>();
+            cardlist = dbUser.getContact();
+
+
+
+            dbUser.setContact(cardlist);
             session.beginTransaction();
-            session.save(contactId);
+            session.update(dbUser);
             session.getTransaction().commit();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -68,59 +85,10 @@ public class ContactRepository {
                 session.close();
             }
         }
+        return new SetDefaultAddressResponse();
     }
 
-//    public Contact getRecipientContactByOrderId (String orderId) {
-//        Order order = null;
-//        try (Session session = sessionFactory.openSession()) {
-//            order = session.get(Order.class, orderId);
-//        } catch (Exception ex) {
-//            ex.printStackTrace();
-//        }
-//        if (order != null) {
-//            return order.getRecipientContact();
-//        }
-//        return null;
-//    }
 
-    public Contact getSenderContactByOrderId (String orderId) {
-        Order order = null;
-        try (Session session = sessionFactory.openSession()) {
-            order = session.get(Order.class, orderId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (order != null) {
-            return order.getSenderContactId();
-        }
-        return null;
-    }
-
-    public Contact getDefaultRecipientOfOneUser (String userId) {
-        User user = null;
-        try (Session session = sessionFactory.openSession()) {
-            user = session.get(User.class, userId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (user != null) {
-            return user.getDefaultDeliver();
-        }
-        return null;
-    }
-
-    public Contact getDefaultSenderOfOneUser (String userId) {
-        User user = null;
-        try (Session session = sessionFactory.openSession()) {
-            user = session.get(User.class, userId);
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
-        if (user != null) {
-            return user.getDefaultSender();
-        }
-        return null;
-    }
     public DeleteAddressResponse deleteAddressforUser (String UID, String contactId) {
         Customer user = null;
         com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbContact = null;

@@ -10,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @ToString
 public class Contact {
-
+    private String ContactID;
     private String LastName;
     private String FirstName;
     private String Phone;
@@ -19,8 +19,11 @@ public class Contact {
 
     private Address Address;
 
-    private Card Card;
+
 
     private String ContactLabel;
     private boolean Default;
+
+
+
 }

@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public class CustomerRepository {
@@ -67,6 +68,7 @@ public class CustomerRepository {
 
 
 //create customer
+
   public Customer createCustomer (CustomerCreationRequest customerCreationRequest){
     Session session = null;
     //CustomerCreationResponse customerCreationResponse = new CustomerCreationResponse();
@@ -83,15 +85,11 @@ public class CustomerRepository {
     } catch (Exception ex) {
       ex.printStackTrace();
       session.getTransaction().rollback();
-      //createCustomerResponse.setMessage("fail");
     } finally {
       if (session != null) {
         session.close();
       }
     }
-//    createCustomerResponse.setMessage("success");
-//    createCustomerResponse.setStatus("200");
-//    createCustomerResponse.setUser(user);
     return user;
   }
 

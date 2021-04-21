@@ -11,7 +11,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-public class SetAddressRequest {
+public class SetDefaultAddressRequest {
     public String UID;
     public String ContactID;
 }

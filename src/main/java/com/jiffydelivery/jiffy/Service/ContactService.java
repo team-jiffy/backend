@@ -1,17 +1,19 @@
 package com.jiffydelivery.jiffy.Service;
 
 
-import com.jiffydelivery.jiffy.Entity.DBDAO.Address;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Contact;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.AddAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.DeleteAddressRequest;
-import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetAddressRequest;
+import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetDefaultAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.UpdateAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.AddAddressResponse;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.DeleteAddressResponse;
-import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.SetAddressResponse;
+import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.SetDefaultAddressResponse;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.UpdateAddressResponse;
+import com.jiffydelivery.jiffy.Entity.Response.CustomerResponse.GetCustomerResponse;
 import com.jiffydelivery.jiffy.Repository.ContactRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,6 +40,14 @@ public class ContactService {
         return addAddressResponse ;
     }
 
+
+    public GetCustomerResponse getAllAddresses(String UID){
+        List<com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact> frontContact = new ArrayList<>();
+//         =  contactRepository.getAllAddress(UID);
+
+
+        return new GetCustomerResponse();
+    }
     //7. update address
     public UpdateAddressResponse updateAddress(UpdateAddressRequest address) {
         //mapping logic goes here
@@ -48,12 +58,12 @@ public class ContactService {
     }
 
     //8. set address
-    public SetAddressResponse setAddress(SetAddressRequest addressRequest) {
+    public SetDefaultAddressResponse setAddressAsDefault(SetDefaultAddressRequest request) {
         //mapping logic goes here
 
 
 
-        return new SetAddressResponse();
+        return contactRepository.setContactAsDefault(request);
     }
     public DeleteAddressResponse deleteAddress(DeleteAddressRequest deleteAddressRequest){
 
