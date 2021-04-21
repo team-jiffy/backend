@@ -31,17 +31,12 @@ public class ContactService {
         if (dbContact.getCustomer()!=null){
             addAddressResponse.setMessage("add contact to user succeed");
             addAddressResponse.setStatus("200");
-
         }
         else {
             addAddressResponse.setMessage("something wrong");
-
         }
-
-
         return addAddressResponse ;
     }
-
 
     public GetAddressResponse getAllAddresses(String UID){
         List<com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact> frontContactList = new ArrayList<>();
@@ -57,31 +52,14 @@ public class ContactService {
             response.setStatus("400");
             response.setMessage("fail");
         }
-
         return response;
     }
-    //7. update address
-    public UpdateAddressResponse updateAddress(UpdateAddressRequest address) {
-        //mapping logic goes here
-
-
-
-        return new UpdateAddressResponse();
-    }
-
     //8. set address
     public SetDefaultAddressResponse setAddressAsDefault(SetDefaultAddressRequest request) {
-        //mapping logic goes here
-
-
-
         return contactRepository.setContactAsDefault(request);
     }
     public DeleteAddressResponse deleteAddress(DeleteAddressRequest deleteAddressRequest){
-
         return  contactRepository.deleteAddressforUser(deleteAddressRequest.getUID(),deleteAddressRequest.getContactID());
-
-
     }
 
 
