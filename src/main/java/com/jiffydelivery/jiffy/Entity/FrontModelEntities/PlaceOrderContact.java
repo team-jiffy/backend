@@ -18,8 +18,8 @@ public class PlaceOrderContact {
 
     public Contact extract(){
         Contact contact = new Contact();
-        contact.setFirstName(Name.split("//s+")[0]);
-        contact.setLastName(Name.split("//s+")[1]);
+        contact.setFirstName(Name.split("\\s+")[0]);
+        contact.setLastName(Name.split("\\s+")[1]);
         contact.setEmail(this.Email);
         contact.setPhone(this.Phone);
         contact.setAddress(address.toDAO());

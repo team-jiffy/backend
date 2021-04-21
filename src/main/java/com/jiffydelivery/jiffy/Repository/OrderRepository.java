@@ -9,8 +9,10 @@ import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Reco;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 import com.jiffydelivery.jiffy.JiffyApplicationConfig;
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -25,13 +27,26 @@ public class OrderRepository {
     @Autowired
     private SessionFactory sessionFactory;
     // insert a new order record to order table
-    public Order createOrder(Order order) {
+    public Order createOrder(Order order, long UID, long creditCardID) {
 
         order.setTrackNumber(GenerateTrackNumber());
         Session session = null;
         try {
-            session = sessionFactory.openSession();
+            session = sessionFactory.getCurrentSession();
+
+            Customer customer = session.get(Customer.class,UID);
+            CreditCard creditCard = session.get(CreditCard.class,creditCardID);
+            Hibernate.initialize(creditCard);
+            Hibernate.initialize(customer);
+            order.setCustomer(customer);
+            order.setCreditCard(creditCard);
+            order.getRecipientContact().setCustomer(customer);
+            order.getSenderContact().setCustomer(customer);
             session.beginTransaction();
+            Long recipientID = (Long) session.save(order.getRecipientContact());
+            Long senderID = (Long)session.save(order.getSenderContact());
+            order.getRecipientContact().setId(recipientID);
+            order.getSenderContact().setId(senderID);
             session.save(order);
             session.getTransaction().commit();
         } catch (Exception e) {
@@ -50,15 +65,19 @@ public class OrderRepository {
 
         List<Order> orders = new ArrayList<>();
 
-        try (Session session = sessionFactory.openSession()) {
-            Customer customer;
-            customer = session.get(Customer.class,Long.valueOf(UID));
-            orders = customer.getOrder();
+        try (Session session = sessionFactory.getCurrentSession()) {
+//            String  hql = "From Order e where e.customer.id = :t";
+//            Query query = session.createQuery(hql);
+//            query.setParameter("t",UID);
+            List<Order> results = session.createCriteria(Order.class)
+                    .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
+                    .list();
+            return results;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
 
-        return orders;
     }
 
 
@@ -66,8 +85,9 @@ public class OrderRepository {
         Order order = null;
 
         try (Session session = sessionFactory.openSession()) {
-            String  hql = "From Order_table e where e.TrackNumber = :t";
+            String  hql = "From Order e where e.TrackNumber = :t";
             Query query = session.createQuery(hql);
+            query.setParameter("t",trackNumber);
             List<Order> results = query.list();
             if (results.size()==0) return null;
             else return results.get(0);

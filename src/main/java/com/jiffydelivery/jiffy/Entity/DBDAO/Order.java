@@ -67,13 +67,14 @@ public class Order implements Serializable {
     @OneToOne
     private CreditCard creditCard;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Contact senderContact;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Contact recipientContact;
 
     @ManyToOne
+    @JsonIgnore
     private Customer customer;
 
     @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
@@ -108,7 +109,7 @@ public class Order implements Serializable {
         briefOrder.setRecipientName(recipientContact.getFirstName() + " "
                 + recipientContact.getLastName());
         briefOrder.setTrackNumber(TrackNumber);
-        briefOrder.setOrderDate(new SimpleDateFormat("mm/dd/yyy").format(placeOrderDate));
+        briefOrder.setOrderDate(new SimpleDateFormat("mm-dd-yyy").format(placeOrderDate.getTime()));
 
         return briefOrder;
     }

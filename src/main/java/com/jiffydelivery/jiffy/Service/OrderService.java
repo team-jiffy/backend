@@ -1,5 +1,8 @@
 package com.jiffydelivery.jiffy.Service;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
+import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
+import com.jiffydelivery.jiffy.Entity.DBDAO.Contact;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
@@ -15,6 +18,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -42,17 +47,35 @@ public class OrderService {
     *  @return CreateOrderResponse createOrdersResponse
     */
     public NewOrderResponse createOrder(NewOrderRequest req){
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+        cal.add(Calendar.HOUR,4);
+
 
         com.jiffydelivery.jiffy.Entity.DBDAO.Order newOrder
                 = new com.jiffydelivery.jiffy.Entity.DBDAO.Order();
+
         newOrder.setADVType(req.getADVType());
         newOrder.setSameday(req.isSameDay());
         newOrder.setPrice(req.getPrice());
-        newOrder.setSenderContact(req.getPickup().extract());
-        newOrder.setRecipientContact(req.getDeliver().extract());
+
+        Contact pickup = req.getPickup().extract();
+        Contact deliver = req.getDeliver().extract();
+        pickup.setContactType(ContactType.Sender);
+        deliver.setContactType(ContactType.Recipient);
+
+        newOrder.setETA(cal.getTime());
+
+        newOrder.setSenderContact(pickup);
+        newOrder.setRecipientContact(deliver);
+
+        newOrder.setPlaceOrderDate(Calendar.getInstance());
+
+        newOrder.setOrderStatus(OrderStatus.Placed);
 
         NewOrderResponse newOrderResponse = new NewOrderResponse();
-        Order placedOrder = orderRepository.createOrder(newOrder);
+        Order placedOrder = orderRepository.createOrder(newOrder,(long)req.getUID(),Long.valueOf(req.getCardId()));
+
         newOrderResponse.setOrder(placedOrder.extract());
 
         if(placedOrder == null){
