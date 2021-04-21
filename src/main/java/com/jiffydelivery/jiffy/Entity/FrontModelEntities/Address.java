@@ -13,9 +13,11 @@ public class Address {
 
     private String Street1;
     private String Street2;
-    private  String City = "San Francisco";
-    private  String State = "California";
+    private String City;
+    private String State;
     private String Zip;
     private String AptNo;
 
+    public Address(String street1, String street2, String zip, String aptNo) {
+    }
 }
