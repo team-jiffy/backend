@@ -1,10 +1,7 @@
 package com.jiffydelivery.jiffy.Controller;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Card;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.AddAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.DeleteAddressRequest;
-import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetAddressRequest;
+import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.SetDefaultAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Request.ContactRequst.UpdateAddressRequest;
 import com.jiffydelivery.jiffy.Entity.Response.ContactResponse.*;
 import com.jiffydelivery.jiffy.Service.ContactService;
@@ -68,7 +65,7 @@ public class ContactController {
     }
 
     @RequestMapping(value = "/contact/setDefault", method = RequestMethod.POST)
-    public SetAddressResponse setAddress(@RequestBody SetAddressRequest address,
+    public SetDefaultAddressResponse setAddress(@RequestBody SetDefaultAddressRequest address,
                                          HttpServletRequest req, HttpServletResponse res) {
 //        HttpSession session = req.getSession(false);
 //        if (session==null){
@@ -79,13 +76,13 @@ public class ContactController {
 //            return response;
 //        }
 
-        SetAddressResponse setAddressResponse = contactService.setAddress(address);
+        SetDefaultAddressResponse setDefaultAddressResponse = contactService.setAddressAsDefault(address);
 
         System.out.println(address.toString());
 //        Contact a =  new Contact("lastname","firstname","123",
 //                "232@jiffy.com",ContactType.Sender, new Address(),
 //                new Card(), "123",true);
-        return new SetAddressResponse();
+        return new SetDefaultAddressResponse();
     }
 
     @RequestMapping(value = "/contact/getContacts", method = RequestMethod.GET)
