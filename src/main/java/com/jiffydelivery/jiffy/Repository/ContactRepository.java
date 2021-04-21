@@ -62,6 +62,48 @@ public class ContactRepository {
         return dbContact;
     }
 
+    public com.jiffydelivery.jiffy.Entity.DBDAO.Contact updateContact(String UID, Contact contact) {
+        long dbUserID = Long.valueOf(UID);
+        Customer dbUser = null;
+        Address address = contact.getAddress();
+
+        com.jiffydelivery.jiffy.Entity.DBDAO.Contact dbContact = new com.jiffydelivery.jiffy.Entity.DBDAO.Contact();
+        com.jiffydelivery.jiffy.Entity.DBDAO.Address dbAddress = new com.jiffydelivery.jiffy.Entity.DBDAO.Address();
+
+        Session session = null;
+
+        dbAddress.setStreet1(address.getStreet1());
+        dbAddress.setStreet2(address.getStreet2());
+        dbAddress.setCity(address.getCity());
+        dbAddress.setState(address.getState());
+        dbAddress.setZip(address.getZip());
+        dbAddress.setAptNo(address.getAptNo());
+        try {
+            session = sessionFactory.openSession();
+            dbUser = session.get(Customer.class,dbUserID);
+
+            dbContact.setFirstName(contact.getFirstName());
+            dbContact.setLastName(contact.getLastName());
+            dbContact.setContactType(contact.getContactType());
+            dbContact.setPhone(contact.getPhone());
+            dbContact.setEmail(contact.getEmail());
+            dbContact.setAddress(dbAddress);
+            dbContact.setCustomer(dbUser);
+            //dbContact.setDef(contact.get);
+            session.beginTransaction();
+            session.save(dbContact);
+            session.getTransaction().commit();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            session.getTransaction().rollback();
+        } finally {
+            if (session != null) {
+                session.close();
+            }
+        }
+        return dbContact;
+    }
+
     public SetDefaultAddressResponse setContactAsDefault(SetDefaultAddressRequest request) {
         Session session = null;
         Customer dbUser = null;

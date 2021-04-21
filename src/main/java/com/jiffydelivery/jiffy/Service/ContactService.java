@@ -38,6 +38,19 @@ public class ContactService {
         return addAddressResponse ;
     }
 
+    public UpdateAddressResponse updateAddress(UpdateAddressRequest request) {
+
+        UpdateAddressResponse updateAddressResponse = new UpdateAddressResponse();
+        Contact dbContact = contactRepository.updateContact(request.getUID(), request.getContact());
+        if (dbContact.getCustomer()!=null){
+            updateAddressResponse.setMessage("update contact to user succeed");
+            updateAddressResponse.setStatus("200");
+        }
+        else {
+            updateAddressResponse.setMessage("update contact to user failed");
+        }
+        return updateAddressResponse ;
+    }
     public GetAddressResponse getAllAddresses(String UID){
         List<com.jiffydelivery.jiffy.Entity.FrontModelEntities.Contact> frontContactList = new ArrayList<>();
         List<Contact> backendContactList =  contactRepository.getAllAddress(UID);
@@ -58,9 +71,9 @@ public class ContactService {
     public SetDefaultAddressResponse setAddressAsDefault(SetDefaultAddressRequest request) {
         return contactRepository.setContactAsDefault(request);
     }
+
     public DeleteAddressResponse deleteAddress(DeleteAddressRequest deleteAddressRequest){
         return  contactRepository.deleteAddressforUser(deleteAddressRequest.getUID(),deleteAddressRequest.getContactID());
     }
-
 
 }
