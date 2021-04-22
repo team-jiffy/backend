@@ -19,6 +19,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.*;
 
 @Repository
@@ -66,14 +69,30 @@ public class OrderRepository {
         List<Order> orders = new ArrayList<>();
 
         try (Session session = sessionFactory.getCurrentSession()) {
-            String  hql = "From Order e where e.customer.id = :t";
-            Query query = session.createQuery(hql);
-            query.setParameter("t",UID);
-            List<Order> results = session.createCriteria(Order.class)
-                    .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
-                    .list();
-//            List<Order> results = query.list();
-            return results;
+//            String  hql = "From Order e where e.customer.id = :t";
+//            CriteriaBuilder cb = session.getCriteriaBuilder();
+//            Query query = session.createQuery(hql);
+//            query.setParameter("t",UID);
+//            List results = session.CriteriaQuery(Order.class)
+//                    .add(Restrictions.eq("customer.id", Long.valueOf(UID)))
+//                    .list();
+////            List<Order> results = query.list();
+
+//            CriteriaBuilder cb = session.getCriteriaBuilder();
+//            CriteriaQuery<Order> cr = cb.createQuery(Order.class);
+//            Root<Order> root = cr.from(Order.class);
+//            cr.select(root).where(cb.equal(root.get("customer.id"),Long.valueOf(UID)));
+//
+//            Query<Order> query = session.createQuery(cr);
+//            List<Order> results = query.getResultList();
+
+            Customer customer = session.get(Customer.class, Long.valueOf(UID));
+
+            List<Order> order = customer.getOrder();
+            Hibernate.initialize(order);
+            return order;
+
+//            return results;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
