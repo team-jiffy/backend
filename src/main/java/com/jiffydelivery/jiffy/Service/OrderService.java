@@ -13,6 +13,7 @@ import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.RecoRequest;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 
 import com.jiffydelivery.jiffy.Repository.ADVRepository;
+import com.jiffydelivery.jiffy.Repository.APIRepository.WeatherClient;
 import com.jiffydelivery.jiffy.Repository.OrderRepository;
 import com.jiffydelivery.jiffy.Repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,12 @@ public class OrderService {
     @Autowired
     private OrderRepository orderRepository;
     private ADVRepository advRepository;
+    private WeatherClient weatherClient;
+    public RecoResponse getRecommendation(RecoRequest recoRequest){
+//        in
+        return new RecoResponse();
+    }
+
 
     private BriefOrder extractOrder(com.jiffydelivery.jiffy.Entity.DBDAO.Order order) {
         return new BriefOrder.BriefOrderBuilder()
