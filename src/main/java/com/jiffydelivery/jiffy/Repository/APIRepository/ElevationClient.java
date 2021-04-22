@@ -6,13 +6,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Repository;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
 
-
+@Repository
 public class ElevationClient {
         static final String baseUrl = "https://maps.googleapis.com/maps/api/elevation/json?";
         static final String APIKey = "AIzaSyBdSLzCEPaTQTlR4mrIZtmt68fQy82AKCU";

@@ -1,24 +1,29 @@
 package com.jiffydelivery.jiffy.Service;
 
+import com.jiffydelivery.jiffy.Entity.Constance.ADVType;
 import com.jiffydelivery.jiffy.Entity.Constance.ContactType;
 import com.jiffydelivery.jiffy.Entity.Constance.OrderStatus;
+import com.jiffydelivery.jiffy.Entity.DAO.PositionCoordinates;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Contact;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Customer;
 import com.jiffydelivery.jiffy.Entity.DBDAO.Order;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Address;
-import com.jiffydelivery.jiffy.Entity.FrontModelEntities.BriefOrder;
+import com.jiffydelivery.jiffy.Entity.FrontModelEntities.*;
 
 import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.NewOrderRequest;
 import com.jiffydelivery.jiffy.Entity.Request.OrderRequest.RecoRequest;
 import com.jiffydelivery.jiffy.Entity.Response.OrderResponse.*;
 
 import com.jiffydelivery.jiffy.Repository.ADVRepository;
-import com.jiffydelivery.jiffy.Repository.APIRepository.WeatherClient;
+import com.jiffydelivery.jiffy.Repository.APIRepository.*;
 import com.jiffydelivery.jiffy.Repository.OrderRepository;
 import com.jiffydelivery.jiffy.Repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.net.MalformedURLException;
+import java.nio.charset.MalformedInputException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -29,11 +34,95 @@ public class OrderService {
 
     @Autowired
     private OrderRepository orderRepository;
+    @Autowired
     private ADVRepository advRepository;
+    @Autowired
     private WeatherClient weatherClient;
+    @Autowired
+    private GetLatLong getLatLong;
+    @Autowired
+    private ElevationClient elevationClient;
+    @Autowired
+    private DrivingDistanceClient drivingDistanceClient;
+    @Autowired
+    private StraightDistance straightDistance;
+
+    private PositionCoordinates warehouse1Coordinates = new PositionCoordinates(37.73476682228622,-122.41740295676183,52);
+
+    private PositionCoordinates warehouse2Coordinates = new PositionCoordinates(37.777932499472485,-122.44752128696365,82);
+
+    private PositionCoordinates warehouse3Coordinates = new PositionCoordinates(37.743231072877926,-122.47482151074911,108);
+
+
     public RecoResponse getRecommendation(RecoRequest recoRequest){
-//        in
-        return new RecoResponse();
+        RecoResponse response = new RecoResponse();
+        int weatherCode =-1, eleDiff =0;
+        try {
+            weatherCode = weatherClient.getWeather("94122");
+        } catch (Exception e){
+            e.printStackTrace();
+        }
+
+        double minEle =0;
+        PositionCoordinates pickup = new PositionCoordinates();
+        PositionCoordinates deliver = new PositionCoordinates();
+        try {
+            double[] coords = getLatLong.getCoordinates(recoRequest.getPickup());
+            pickup = new PositionCoordinates(coords[0],coords[1],0);
+            coords = getLatLong.getCoordinates(recoRequest.getDeliver());
+            deliver = new PositionCoordinates(coords[0],coords[1],0);
+
+            pickup = elevationClient.getElevation(pickup);
+            deliver = elevationClient.getElevation(deliver);
+            minEle = Math.min(pickup.getElevation(),deliver.getElevation()) - 108;
+        } catch ( MalformedURLException e){
+            e.printStackTrace();
+        }
+
+        List<Reco> recos = new ArrayList<>();
+        if (minEle <200 ){
+            Reco reco1 = new Reco();
+            Reco reco2 = new Reco();
+            reco1.setADVType("shared " + ADVType.Robot.toString());
+            reco1.setADVType("private " + ADVType.Robot.toString());
+            try {
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.HOUR_OF_DAY, 5);
+
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+
+                reco1.setPrice(String.valueOf(drivingDistanceClient.getDrivingDistance(pickup, deliver)*2));
+                reco2.setPrice(String.valueOf(drivingDistanceClient.getDrivingDistance(pickup, deliver)*3));
+                String strDate = dateFormat.format(calendar.getTime());
+                reco1.setETA(strDate);
+                calendar.add(Calendar.HOUR_OF_DAY, 5);
+                reco2.setETA(strDate);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+
+            recos.add(reco1);
+            recos.add(reco2);
+        }
+        if (weatherCode>650){
+            Reco reco3 = new Reco();
+            reco3.setADVType(ADVType.Drone.toString());
+            try{
+                reco3.setPrice(String.valueOf(straightDistance.distance(pickup,deliver)*5));
+                Calendar calendar = Calendar.getInstance();
+                calendar.add(Calendar.HOUR_OF_DAY, 3);
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
+                String strDate = dateFormat.format(calendar.getTime());
+                reco3.setETA(strDate);
+            } catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+
+        response.setRecos((Reco[])recos.toArray());
+        response.setMessage("Success");
+        response.setStatus("OK");
+        return response;
     }
 
 

@@ -6,13 +6,14 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Repository;
 
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-
-public class    DrivingDistanceClient {
+@Repository
+public class  DrivingDistanceClient {
     static final String baseUrl = "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&";
     static final String APIKey = "AIzaSyBdSLzCEPaTQTlR4mrIZtmt68fQy82AKCU";
 

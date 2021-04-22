@@ -12,7 +12,9 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.stereotype.Repository;
 
+@Repository
 public class GetLatLong {
         static final String baseUrl = "https://maps.googleapis.com/maps/api/geocode/json?";
         static final String location = "address=%s&Key=%s";
@@ -102,14 +104,14 @@ public class GetLatLong {
                 }
                 return null;
         }
-        public static void main(String[] args) throws ParseException, MalformedURLException {
-                GetLatLong googleClient = new GetLatLong();
-                Address address = new Address();
-                address.setStreet1("1600 Amphitheatre Parkway");
-                address.setCity("Mountain View");
-                System.out.println(address);//format the address
-
-        }
+//        public static void main(String[] args) throws ParseException, MalformedURLException {
+//                GetLatLong googleClient = new GetLatLong();
+//                Address address = new Address();
+//                address.setStreet1("1600 Amphitheatre Parkway");
+//                address.setCity("Mountain View");
+//                System.out.println(address);//format the address
+//
+//        }
 }
 
 

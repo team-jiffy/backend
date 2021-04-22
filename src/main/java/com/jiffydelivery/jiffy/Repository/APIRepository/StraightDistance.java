@@ -1,12 +1,13 @@
 package com.jiffydelivery.jiffy.Repository.APIRepository;
 import com.jiffydelivery.jiffy.Entity.DAO.PositionCoordinates;
 import com.jiffydelivery.jiffy.Entity.FrontModelEntities.Coordinates;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 import java.lang.*;
 import java.io.*;
 
-
+@Repository
 public class StraightDistance {
 
 //    get Straight distance of two addresses for Drone;

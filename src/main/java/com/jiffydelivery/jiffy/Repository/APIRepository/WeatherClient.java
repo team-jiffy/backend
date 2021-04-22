@@ -26,7 +26,7 @@ public class WeatherClient {
 //    get Weather of a zip code.
 //    https://openweathermap.org/weather-conditions
 
-    public static int getWeather(String zipcode) throws IOException {
+    public int getWeather(String zipcode) throws IOException {
         zipcode += ",us";
         CloseableHttpClient httpclient = HttpClients.createDefault();
         String url = baseUrl + String.format(location, zipcode, APIKey);
@@ -52,9 +52,9 @@ public class WeatherClient {
         return 0;
     }
 
-    public static void main(String[] args) throws IOException {
-        WeatherClient weatherClient = new WeatherClient();
-        System.out.println(WeatherClient.getWeather("94579"));
-    }
+//    public static void main(String[] args) throws IOException {
+//        WeatherClient weatherClient = new WeatherClient();
+//        System.out.println(WeatherClient.getWeather("94579"));
+//    }
 }
 
