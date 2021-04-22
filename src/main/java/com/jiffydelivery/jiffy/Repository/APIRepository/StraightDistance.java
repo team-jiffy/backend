@@ -12,28 +12,22 @@ public class StraightDistance {
 //    get Straight distance of two addresses for Drone;
 
     public double distance(PositionCoordinates coord1, PositionCoordinates coord2) {
-        String unit="M";
-        if ((coord1.getLatitude()==coord2.getLatitude())
-                && coord1.getLongitude()==coord1.getLongitude()) {
+        double lat1 = coord1.getLatitude(), lat2 = coord2.getLatitude(),
+                lon1 = coord1.getLongitude(), lon2=coord2.getLongitude(),
+                ele1 = coord1.getElevation(), ele2 = coord2.getElevation();
+        if ((lat1 == lat2) && (lon1 == lon2)) {
             return 0;
         }
         else {
-            double theta = coord1.getLongitude() - coord2.getLongitude();
-            double dist = Math.sin(Math.toRadians(coord1.getLatitude()))
-                    * Math.sin(Math.toRadians(coord2.getLatitude()))
-                    + Math.cos(Math.toRadians(coord1.getLatitude()))
-                    * Math.cos(Math.toRadians(coord2.getLatitude()))
-                    * Math.cos(Math.toRadians(theta));
+            double theta = lon1 - lon2;
+            double dist = Math.sin(Math.toRadians(lat1)) * Math.sin(Math.toRadians(lat2)) + Math.cos(Math.toRadians(lat1)) * Math.cos(Math.toRadians(lat2)) * Math.cos(Math.toRadians(theta));
             dist = Math.acos(dist);
             dist = Math.toDegrees(dist);
             dist = dist * 60 * 1.1515;
-//            if (unit.equals("K")) {
-//                dist = dist * 1.609344;
-//            } else if (unit.equals("N")) {
-//                dist = dist * 0.8684;
-//            }
-            double ele = Math.abs(coord1.getElevation() - coord2.getElevation());
-            return (Math.sqrt(ele * ele + dist * dist));
+
+            dist = Math.sqrt(dist*dist + Math.pow((ele2-ele2)/1.6/1000,2));
+
+            return (dist);
         }
     }
     public static void main (String[] args) throws java.lang.Exception
@@ -41,11 +35,11 @@ public class StraightDistance {
         StraightDistance straightDistance = new StraightDistance();
         PositionCoordinates coor1 = new PositionCoordinates();
         PositionCoordinates coor2 = new PositionCoordinates();
-        coor1.setLatitude(36.5785810);
-        coor1.setLongitude(-118.2919940);
+        coor1.setLatitude(37.777932499472485);
+        coor1.setLongitude(-122.44752128696365);
         coor1.setElevation(4411.94189453125);
-        coor2.setLatitude(39.73915360);
-        coor2.setLongitude(-104.98470340);
+        coor2.setLatitude(37.743231072877926);
+        coor2.setLongitude(-122.47482151074911);
         coor2.setElevation(1608.637939453125);
         System.out.println(straightDistance.distance(coor1, coor2));
 

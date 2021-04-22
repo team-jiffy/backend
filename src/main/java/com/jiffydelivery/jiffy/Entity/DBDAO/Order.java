@@ -62,23 +62,24 @@ public class Order implements Serializable {
     private long tripId;
 
     @ManyToOne
+    @JsonIgnore
     private WareHouse closestWarehouse;
 
     @OneToOne
     private CreditCard creditCard;
 
+
     @OneToOne(cascade = CascadeType.ALL)
     private Contact senderContact;
+
 
     @OneToOne(cascade = CascadeType.ALL)
     private Contact recipientContact;
 
     @ManyToOne
-    @JsonIgnore
     private Customer customer;
 
-    @OneToOne(mappedBy = "order", cascade = CascadeType.ALL)
-    @JoinColumn
+    @OneToOne(mappedBy = "order")
     @JsonIgnore
     private Trip trip;
 

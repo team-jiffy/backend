@@ -27,31 +27,31 @@ public class OrderController {
     @PutMapping("/order/createOrder")
     public NewOrderResponse createOrder(@RequestBody NewOrderRequest newOrderRequest ,
                                         HttpServletRequest req, HttpServletResponse res) throws MalformedURLException {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            NewOrderResponse response = new NewOrderResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            NewOrderResponse response = new NewOrderResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
         System.out.println(newOrderRequest.toString());
         NewOrderResponse newOrderResponse = orderService.createOrder(newOrderRequest);
-        robotService.assignNewOrderToRobot(newOrderResponse.getOrder().toDAO());
+        //robotService.assignNewOrderToRobot(newOrderResponse.getOrder().toDAO());
         return newOrderResponse;
     }
 
     @GetMapping("/order/getAllOrders")
     public AllOrdersResponse getAllOrders(@RequestParam(value="UID", required = true, defaultValue = "unknown") String UID,
                                         HttpServletRequest req, HttpServletResponse res) {
-        HttpSession session = req.getSession(false);
-        if (session==null){
-            AllOrdersResponse response = new AllOrdersResponse();
-            response.setStatus("Failed");
-            response.setMessage("You should login first");
-            res.setStatus(404);
-            return response;
-        }
+//        HttpSession session = req.getSession(false);
+//        if (session==null){
+//            AllOrdersResponse response = new AllOrdersResponse();
+//            response.setStatus("Failed");
+//            response.setMessage("You should login first");
+//            res.setStatus(404);
+//            return response;
+//        }
         System.out.println("testRequestParam: " + UID);
         // TODO: return related service API with allOrdersRequest as param
         return orderService.GetAllOrders(UID);
