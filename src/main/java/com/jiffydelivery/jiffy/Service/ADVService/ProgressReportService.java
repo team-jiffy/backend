@@ -24,7 +24,7 @@ public class ProgressReportService {
         int id = (int)adv.getId();
         ADVType advType = adv.getADVSpec().getADVType();
         Queue<Trip> advQueue = ADVFamily.values()[id].getQueue();
-        Queue<Order> orderQ = advType.equals(ADVType.drone) ? orderQueue.getDroneOrderQueue() : orderQueue.getRobotOrderQueue();
+        Queue<Order> orderQ = advType.equals(ADVType.Drone) ? orderQueue.getDroneOrderQueue() : orderQueue.getRobotOrderQueue();
 
         // step1: pull the last trip ADV just completed from the queue
         Trip lastTrip = advQueue.poll();
@@ -32,7 +32,7 @@ public class ProgressReportService {
         Order order = lastTrip.getOrder();
 
         // revise current order status + update db
-        if (lastTrip.getTripType().equals(TripType.outside)) {
+        if (lastTrip.getTripType().equals(TripType.Outside)) {
             updateOrderStatus(order);
             // TODO: update db if status needs to be updated
         }
@@ -54,12 +54,12 @@ public class ProgressReportService {
 
     private void updateOrderStatus(Order order) {
         OrderStatus orderStatus = order.getOrderStatus();
-        if (orderStatus.equals(OrderStatus.placed)) {
-            order.setOrderStatus(OrderStatus.onTheWay);
-        } else if (orderStatus.equals(OrderStatus.onTheWay)) {
-            order.setOrderStatus(OrderStatus.onDeliver);
-        } else if (orderStatus.equals(OrderStatus.onDeliver)) {
-            order.setOrderStatus(OrderStatus.delivered);
+        if (orderStatus.equals(OrderStatus.Placed)) {
+            order.setOrderStatus(OrderStatus.OnTheWay);
+        } else if (orderStatus.equals(OrderStatus.OnTheWay)) {
+            order.setOrderStatus(OrderStatus.OnDeliver);
+        } else if (orderStatus.equals(OrderStatus.OnDeliver)) {
+            order.setOrderStatus(OrderStatus.Delivered);
         }
     }
 

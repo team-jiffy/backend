@@ -34,7 +34,7 @@ public class RobotController {
     public ProgressReportResponse progressReportResponse(
             @RequestBody ProgressReportRequest request) {
         System.out.println(request.toString());
-        return new ProgressReportResponse(new Trip(TripType.outside,
+        return new ProgressReportResponse(new Trip(TripType.Outside,
                 new Coordinates("32","65","75"),
                 "343"));
     }
